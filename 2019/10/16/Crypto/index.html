@@ -1,0 +1,1280 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="常见编码 ASCII编码    ASCII值(10) ASCII值(16) 控制字符 ASCII值(10) ASCII值(16) 控制字符 ASCII值(10) ASCII值(16) 控制字符 ASCII值(10) ASCII值(16) 控制字符    0 0 NUT 32 20 (space) 64 40 @ 96 60 、   1 1 SOH 33 21 ! 65 41 A 97 61">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Crypto">
+<meta property="og:url" content="http://yoursite.com/2019/10/16/Crypto/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="常见编码 ASCII编码    ASCII值(10) ASCII值(16) 控制字符 ASCII值(10) ASCII值(16) 控制字符 ASCII值(10) ASCII值(16) 控制字符 ASCII值(10) ASCII值(16) 控制字符    0 0 NUT 32 20 (space) 64 40 @ 96 60 、   1 1 SOH 33 21 ! 65 41 A 97 61">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://i.loli.net/2019/10/16/ivKNlmDpyVM2OXI.png">
+<meta property="og:image" content="https://i.loli.net/2019/10/16/LMTxwaCbHfsm23l.png">
+<meta property="og:updated_time" content="2019-10-16T10:15:35.550Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Crypto">
+<meta name="twitter:description" content="常见编码 ASCII编码    ASCII值(10) ASCII值(16) 控制字符 ASCII值(10) ASCII值(16) 控制字符 ASCII值(10) ASCII值(16) 控制字符 ASCII值(10) ASCII值(16) 控制字符    0 0 NUT 32 20 (space) 64 40 @ 96 60 、   1 1 SOH 33 21 ! 65 41 A 97 61">
+<meta name="twitter:image" content="https://i.loli.net/2019/10/16/ivKNlmDpyVM2OXI.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/10/16/Crypto/">
+
+
+
+
+
+  <title>Crypto | Hexo</title>
+  
+
+
+
+
+
+
+
+
+  
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Hexo</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/10/16/Crypto/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Crypto</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-10-16T12:30:29+08:00">
+                2019-10-16
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2019-10-16T18:15:35+08:00">
+                2019-10-16
+              </time>
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <font face="微软雅黑"> 
+
+<h1 id="常见编码"><a href="#常见编码" class="headerlink" title="常见编码"></a>常见编码</h1><p> <strong>ASCII编码</strong></p>
+<table>
+<thead>
+<tr>
+<th><strong>ASCII值(10)</strong></th>
+<th><strong>ASCII值(16)</strong></th>
+<th><strong>控制字符</strong></th>
+<th><strong>ASCII值(10)</strong></th>
+<th><strong>ASCII值(16)</strong></th>
+<th><strong>控制字符</strong></th>
+<th><strong>ASCII值(10)</strong></th>
+<th><strong>ASCII值(16)</strong></th>
+<th><strong>控制字符</strong></th>
+<th><strong>ASCII值(10)</strong></th>
+<th><strong>ASCII值(16)</strong></th>
+<th><strong>控制字符</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>0</td>
+<td>0</td>
+<td>NUT</td>
+<td>32</td>
+<td>20</td>
+<td>(space)</td>
+<td>64</td>
+<td>40</td>
+<td>@</td>
+<td>96</td>
+<td>60</td>
+<td>、</td>
+</tr>
+<tr>
+<td>1</td>
+<td>1</td>
+<td>SOH</td>
+<td>33</td>
+<td>21</td>
+<td>!</td>
+<td>65</td>
+<td>41</td>
+<td>A</td>
+<td>97</td>
+<td>61</td>
+<td>a</td>
+</tr>
+<tr>
+<td>2</td>
+<td>2</td>
+<td>STX</td>
+<td>34</td>
+<td>22</td>
+<td>“</td>
+<td>66</td>
+<td>42</td>
+<td>B</td>
+<td>98</td>
+<td>62</td>
+<td>b</td>
+</tr>
+<tr>
+<td>3</td>
+<td>3</td>
+<td>ETX</td>
+<td>35</td>
+<td>23</td>
+<td>#</td>
+<td>67</td>
+<td>43</td>
+<td>C</td>
+<td>99</td>
+<td>63</td>
+<td>c</td>
+</tr>
+<tr>
+<td>4</td>
+<td>4</td>
+<td>EOT</td>
+<td>36</td>
+<td>24</td>
+<td>$</td>
+<td>68</td>
+<td>44</td>
+<td>D</td>
+<td>100</td>
+<td>64</td>
+<td>d</td>
+</tr>
+<tr>
+<td>5</td>
+<td>5</td>
+<td>ENQ</td>
+<td>37</td>
+<td>25</td>
+<td>%</td>
+<td>69</td>
+<td>45</td>
+<td>E</td>
+<td>101</td>
+<td>65</td>
+<td>e</td>
+</tr>
+<tr>
+<td>6</td>
+<td>6</td>
+<td>ACK</td>
+<td>38</td>
+<td>26</td>
+<td>&amp;</td>
+<td>70</td>
+<td>46</td>
+<td>F</td>
+<td>102</td>
+<td>66</td>
+<td>f</td>
+</tr>
+<tr>
+<td>7</td>
+<td>7</td>
+<td>BEL</td>
+<td>39</td>
+<td>27</td>
+<td>,</td>
+<td>71</td>
+<td>47</td>
+<td>G</td>
+<td>103</td>
+<td>67</td>
+<td>g</td>
+</tr>
+<tr>
+<td>8</td>
+<td>8</td>
+<td>BS</td>
+<td>40</td>
+<td>28</td>
+<td>(</td>
+<td>72</td>
+<td>48</td>
+<td>H</td>
+<td>104</td>
+<td>68</td>
+<td>h</td>
+</tr>
+<tr>
+<td>9</td>
+<td>9</td>
+<td>HT</td>
+<td>41</td>
+<td>29</td>
+<td>)</td>
+<td>73</td>
+<td>49</td>
+<td>I</td>
+<td>105</td>
+<td>69</td>
+<td>i</td>
+</tr>
+<tr>
+<td>10</td>
+<td>A</td>
+<td>LF</td>
+<td>42</td>
+<td>2A</td>
+<td>*</td>
+<td>74</td>
+<td>4A</td>
+<td>J</td>
+<td>106</td>
+<td>6A</td>
+<td>j</td>
+</tr>
+<tr>
+<td>11</td>
+<td>B</td>
+<td>VT</td>
+<td>43</td>
+<td>2B</td>
+<td>+</td>
+<td>75</td>
+<td>4B</td>
+<td>K</td>
+<td>107</td>
+<td>6B</td>
+<td>k</td>
+</tr>
+<tr>
+<td>12</td>
+<td>C</td>
+<td>FF</td>
+<td>44</td>
+<td>2C</td>
+<td>,</td>
+<td>76</td>
+<td>4C</td>
+<td>L</td>
+<td>108</td>
+<td>6C</td>
+<td>l</td>
+</tr>
+<tr>
+<td>13</td>
+<td>D</td>
+<td>CR</td>
+<td>45</td>
+<td>2D</td>
+<td>-</td>
+<td>77</td>
+<td>4D</td>
+<td>M</td>
+<td>109</td>
+<td>6D</td>
+<td>m</td>
+</tr>
+<tr>
+<td>14</td>
+<td>E</td>
+<td>SO</td>
+<td>46</td>
+<td>2E</td>
+<td>.</td>
+<td>78</td>
+<td>4E</td>
+<td>N</td>
+<td>110</td>
+<td>6E</td>
+<td>n</td>
+</tr>
+<tr>
+<td>15</td>
+<td>F</td>
+<td>SI</td>
+<td>47</td>
+<td>2F</td>
+<td>/</td>
+<td>79</td>
+<td>4F</td>
+<td>O</td>
+<td>111</td>
+<td>6F</td>
+<td>o</td>
+</tr>
+<tr>
+<td>16</td>
+<td>10</td>
+<td>DLE</td>
+<td>48</td>
+<td>30</td>
+<td>0</td>
+<td>80</td>
+<td>50</td>
+<td>P</td>
+<td>112</td>
+<td>70</td>
+<td>p</td>
+</tr>
+<tr>
+<td>17</td>
+<td>11</td>
+<td>DCI</td>
+<td>49</td>
+<td>31</td>
+<td>1</td>
+<td>81</td>
+<td>51</td>
+<td>Q</td>
+<td>113</td>
+<td>71</td>
+<td>q</td>
+</tr>
+<tr>
+<td>18</td>
+<td>12</td>
+<td>DC2</td>
+<td>50</td>
+<td>32</td>
+<td>2</td>
+<td>82</td>
+<td>52</td>
+<td>R</td>
+<td>114</td>
+<td>72</td>
+<td>r</td>
+</tr>
+<tr>
+<td>19</td>
+<td>13</td>
+<td>DC3</td>
+<td>51</td>
+<td>33</td>
+<td>3</td>
+<td>83</td>
+<td>53</td>
+<td>S</td>
+<td>115</td>
+<td>73</td>
+<td>s</td>
+</tr>
+<tr>
+<td>20</td>
+<td>14</td>
+<td>DC4</td>
+<td>52</td>
+<td>34</td>
+<td>4</td>
+<td>84</td>
+<td>54</td>
+<td>T</td>
+<td>116</td>
+<td>74</td>
+<td>t</td>
+</tr>
+<tr>
+<td>21</td>
+<td>15</td>
+<td>NAK</td>
+<td>53</td>
+<td>35</td>
+<td>5</td>
+<td>85</td>
+<td>55</td>
+<td>U</td>
+<td>117</td>
+<td>75</td>
+<td>u</td>
+</tr>
+<tr>
+<td>22</td>
+<td>16</td>
+<td>SYN</td>
+<td>54</td>
+<td>36</td>
+<td>6</td>
+<td>86</td>
+<td>56</td>
+<td>V</td>
+<td>118</td>
+<td>76</td>
+<td>v</td>
+</tr>
+<tr>
+<td>23</td>
+<td>17</td>
+<td>TB</td>
+<td>55</td>
+<td>37</td>
+<td>7</td>
+<td>87</td>
+<td>57</td>
+<td>W</td>
+<td>119</td>
+<td>77</td>
+<td>w</td>
+</tr>
+<tr>
+<td>24</td>
+<td>18</td>
+<td>CAN</td>
+<td>56</td>
+<td>38</td>
+<td>8</td>
+<td>88</td>
+<td>58</td>
+<td>X</td>
+<td>120</td>
+<td>78</td>
+<td>x</td>
+</tr>
+<tr>
+<td>25</td>
+<td>19</td>
+<td>EM</td>
+<td>57</td>
+<td>39</td>
+<td>9</td>
+<td>89</td>
+<td>59</td>
+<td>Y</td>
+<td>121</td>
+<td>79</td>
+<td>y</td>
+</tr>
+<tr>
+<td>26</td>
+<td>1A</td>
+<td>SUB</td>
+<td>58</td>
+<td>3A</td>
+<td>:</td>
+<td>90</td>
+<td>5A</td>
+<td>Z</td>
+<td>122</td>
+<td>7A</td>
+<td>z</td>
+</tr>
+<tr>
+<td>27</td>
+<td>1B</td>
+<td>ESC</td>
+<td>59</td>
+<td>3B</td>
+<td>;</td>
+<td>91</td>
+<td>5B</td>
+<td>[</td>
+<td>123</td>
+<td>7B</td>
+<td>{</td>
+</tr>
+<tr>
+<td>28</td>
+<td>1C</td>
+<td>FS</td>
+<td>60</td>
+<td>3C</td>
+<td>&lt;</td>
+<td>92</td>
+<td>5C</td>
+<td>/</td>
+<td>124</td>
+<td>7C</td>
+<td>|</td>
+</tr>
+<tr>
+<td>29</td>
+<td>1D</td>
+<td>GS</td>
+<td>61</td>
+<td>3D</td>
+<td>=</td>
+<td>93</td>
+<td>5D</td>
+<td>]</td>
+<td>125</td>
+<td>7D</td>
+<td>}</td>
+</tr>
+<tr>
+<td>30</td>
+<td>1E</td>
+<td>RS</td>
+<td>62</td>
+<td>3E</td>
+<td>&gt;</td>
+<td>94</td>
+<td>5E</td>
+<td>^</td>
+<td>126</td>
+<td>7E</td>
+<td>`</td>
+</tr>
+<tr>
+<td>31</td>
+<td>1F</td>
+<td>US</td>
+<td>63</td>
+<td>3F</td>
+<td>?</td>
+<td>95</td>
+<td>5F</td>
+<td>_</td>
+<td>127</td>
+<td>7F</td>
+<td>DEL</td>
+</tr>
+</tbody></table>
+<p>还有扩展字符。ASCII码一共从0~255个字符。 </p>
+<p><strong>Base64编码</strong></p>
+<p>简述: 将任意字节数据 通过Base64编码 生成可见的字符串(A-Z,a-z,0-9,+,/)。</p>
+<p>算法:</p>
+<ul>
+<li><p>将非二进制数据转换为二进制数据</p>
+</li>
+<li><p>按 <strong>6bit</strong> 为一组划分</p>
+</li>
+<li><p>将 <strong>6bit</strong> 扩展成 <strong>8bit</strong> </p>
+</li>
+<li><p>对照Base64编码索引表 得出编码后的 可见字符串</p>
+</li>
+<li><p>若出现最后一组不足 <strong>8bit</strong> 则补0。每补 <strong>2bit</strong> 个 0 则在可见字符串结尾添加一个 ‘ = ‘ </p>
+<p><img src="https://i.loli.net/2019/10/16/ivKNlmDpyVM2OXI.png" alt="Search"></p>
+<p>例如</p>
+<p>编码前字符串: abcd</p>
+<ul>
+<li><p>转换为二进制    00111101 00111110 00111111 01000000</p>
+</li>
+<li><p>6bit为一组划分 001111 010011 111000 111111 010000 00</p>
+</li>
+</ul>
+<ul>
+<li><p>扩展到 8 bit       00001111 00010011 00111000 00111111 00010000 0000</p>
+</li>
+<li><p>补齐完整            00001111 00010011 00111000 00111111 00010000 00000000</p>
+</li>
+</ul>
+<ul>
+<li><p>编码后字符串     YWJjZA==</p>
+<ul>
+<li>验证 <img src="https://i.loli.net/2019/10/16/LMTxwaCbHfsm23l.png" alt="Check base64.jpg"></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h1 id="非对称加密"><a href="#非对称加密" class="headerlink" title="非对称加密"></a>非对称加密</h1><p>简述: 使用两个不同的密钥进行加解密—-公开密钥和私有密钥。</p>
+<p>典型非对称加密算法:RSA、ECC、ElGamal</p>
+<h1 id="对称加密"><a href="#对称加密" class="headerlink" title="对称加密"></a>对称加密</h1><p>简述: 使用相同密钥进行加解密。</p>
+<p>典型对称加密算法: DES、3DES、IDEA、AES</p>
+<p>DES 特征: 64位密钥</p>
+<h1 id="摘要算法"><a href="#摘要算法" class="headerlink" title="摘要算法"></a>摘要算法</h1><p>简述: 对所有数据提取指纹信息加密，具有不可逆性。</p>
+<p>典型摘要算法: MD5、SHA</p>
+<p>MD5 特征: 长度分为16位和32位。最大值为 F 。由 数字和字母 组成</p>
+</font>
+      
+    </div>
+    
+    
+    
+	
+	<div>
+      
+        
+<div class="my_post_copyright">
+  <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+  
+  <!-- JS库 sweetalert 可修改路径 -->
+  <script src="https://cdn.bootcss.com/jquery/2.0.0/jquery.min.js"></script>
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+  <p><span>本文标题:</span><a href="/2019/10/16/Crypto/">Crypto</a></p>
+  <p><span>文章作者:</span><a href="/" title="访问 John Doe 的个人博客">John Doe</a></p>
+  <p><span>发布时间:</span>2019年10月16日 - 12:30</p>
+  <p><span>最后更新:</span>2019年10月16日 - 18:15</p>
+  <p><span>原始链接:</span><a href="/2019/10/16/Crypto/" title="Crypto">http://yoursite.com/2019/10/16/Crypto/</a>
+    <span class="copy-path" title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="http://yoursite.com/2019/10/16/Crypto/" aria-label="复制成功！"></i></span>
+  </p>
+  <p><span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" title="Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)">署名-非商业性使用-禁止演绎 4.0 国际</a> 转载请保留原文链接及作者。</p>  
+</div>
+<script> 
+    var clipboard = new Clipboard('.fa-clipboard');
+    $(".fa-clipboard").click(function(){
+      clipboard.on('success', function(){
+        swal({   
+          title: "",   
+          text: '复制成功',
+          icon: "success", 
+          showConfirmButton: true
+          });
+    });
+    });  
+</script>
+
+      
+	</div>
+	
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/10/13/hello-world/" rel="next" title="Hello World">
+                <i class="fa fa-chevron-left"></i> Hello World
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">John Doe</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://baidu.com/" title="Baidu" target="_blank">Baidu</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#常见编码"><span class="nav-number">1.</span> <span class="nav-text">常见编码</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#非对称加密"><span class="nav-number">2.</span> <span class="nav-text">非对称加密</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#对称加密"><span class="nav-number">3.</span> <span class="nav-text">对称加密</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#摘要算法"><span class="nav-number">4.</span> <span class="nav-text">摘要算法</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">John Doe</span>
+
+  
+</div>
+
+<!-- 
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+ 
+-->
+
+
+
+<div class="theme-info">
+  <div class="powered-by"></div>
+  <span class="post-count">博客全站共798字</span>
+</div>
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+  <script type="text/javascript" src="/js/src/clipboard.min.js"></script> 
+  <script type="text/javascript" src="/js/src/clipboard-use.js"></script>
+  <script type="text/javascript" src="/js/click.js"></script>
+  
+</body>
+</html>
