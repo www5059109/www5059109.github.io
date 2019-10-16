@@ -565,27 +565,26 @@
 <li><p>对照Base64编码索引表 得出编码后的 可见字符串</p>
 </li>
 <li><p>若出现最后一组不足 <strong>8bit</strong> 则补0。每补 <strong>2bit</strong> 个 0 则在可见字符串结尾添加一个 ‘ = ‘ </p>
-<p><img src="/2019/10/16/Crypto/E:%5CCTF%5CBlog%5Csource_posts%5CCrypto%5C1.jpg" alt="Search_table"></p>
-<p>例如</p>
-<p>编码前字符串: abcd</p>
-<ol>
-<li><p>转换为二进制    00111101 00111110 00111111 01000000</p>
-</li>
-<li><p>6bit为一组划分 001111 010011 111000 111111 010000 00</p>
-</li>
-<li><p>扩展到 8 bit       00001111 00010011 00111000 00111111 00010000 0000</p>
-</li>
-<li><p>补齐完整            00001111 00010011 00111000 00111111 00010000 00000000</p>
-</li>
-<li><p>编码后字符串     YWJjZA==</p>
-</li>
-<li><p>验证</p>
-<p>![](Crypto/Check base64.jpg)</p>
-</li>
-</ol>
+<p><img src="https://i.loli.net/2019/10/16/ivKNlmDpyVM2OXI.png" alt="Search"></p>
 </li>
 </ul>
-<h1 id="非对称加密"><a href="#非对称加密" class="headerlink" title="非对称加密"></a>非对称加密</h1><p>简述: 使用两个不同的密钥进行加解密—-公开密钥和私有密钥。</p>
+<pre><code>例如
+
+编码前字符串: abcd
+
+1. 转换为二进制    00111101 00111110 00111111 01000000
+
+2. 6bit为一组划分 001111 010011 111000 111111 010000 00
+
+3. 扩展到 8 bit       00001111 00010011 00111000 00111111 00010000 0000
+
+4. 补齐完整            00001111 00010011 00111000 00111111 00010000 00000000
+
+5. 编码后字符串     YWJjZA==
+
+6. 验证
+
+   ![Check base64.jpg](https://i.loli.net/2019/10/16/LMTxwaCbHfsm23l.png)</code></pre><h1 id="非对称加密"><a href="#非对称加密" class="headerlink" title="非对称加密"></a>非对称加密</h1><p>简述: 使用两个不同的密钥进行加解密—-公开密钥和私有密钥。</p>
 <p>典型非对称加密算法:RSA、ECC、ElGamal</p>
 <h1 id="对称加密"><a href="#对称加密" class="headerlink" title="对称加密"></a>对称加密</h1><p>简述: 使用相同密钥进行加解密。</p>
 <p>典型对称加密算法: DES、3DES、IDEA、AES</p>
@@ -597,7 +596,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/10/16/Crypto/" data-id="ck1sszoyc00012ow88px6y02b" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/10/16/Crypto/" data-id="ck1st3wwy0001rcw8mdenamwd" class="article-share-link">Share</a>
       
       
     </footer>
@@ -646,7 +645,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/10/13/hello-world/" data-id="ck1sszoy800002ow8rro4ax0j" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/10/13/hello-world/" data-id="ck1st3wwt0000rcw8d2lltvgk" class="article-share-link">Share</a>
       
       
     </footer>
