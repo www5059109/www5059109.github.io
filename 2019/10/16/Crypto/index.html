@@ -135,7 +135,7 @@
 <meta property="og:image" content="https://www5059109.github.io/2019/10/16/Crypto/checkutf-8.png">
 <meta property="og:image" content="https://www5059109.github.io/2019/10/16/Crypto/wigtable.png">
 <meta property="og:image" content="https://www5059109.github.io/2019/10/16/Crypto/morsecode.png">
-<meta property="og:updated_time" content="2019-10-17T07:22:43.891Z">
+<meta property="og:updated_time" content="2019-10-17T09:02:20.268Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Crypto">
 <meta name="twitter:description" content="1、常见编码ASCII编码   ASCII值(10) ASCII值(16) 控制字符 ASCII值(10) ASCII值(16) 控制字符 ASCII值(10) ASCII值(16) 控制字符 ASCII值(10) ASCII值(16) 控制字符    0 0 NUT 32 20 (space) 64 40 @ 96 60 、   1 1 SOH 33 21 ! 65 41 A 97 61 a">
@@ -328,7 +328,7 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2019-10-17T15:22:43+08:00">
+              <time title="更新于" itemprop="dateModified" datetime="2019-10-17T17:02:20+08:00">
                 2019-10-17
               </time>
             
@@ -1085,8 +1085,144 @@
 <p>算法: </p>
 <ul>
 <li>第一种方式</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>A</th>
+<th>aaaaa</th>
+<th>B</th>
+<th>aaaab</th>
+<th>C</th>
+<th>aaaba</th>
+<th>D</th>
+<th>aaabb</th>
+<th>E</th>
+<th>aabaa</th>
+<th>F</th>
+<th>aabab</th>
+<th>G</th>
+<th>aabba</th>
+<th>H</th>
+<th>aabbb</th>
+<th>I</th>
+<th>abaaa</th>
+<th>J</th>
+<th>abaab</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>K</td>
+<td>ababa</td>
+<td>L</td>
+<td>ababb</td>
+<td>M</td>
+<td>abbaa</td>
+<td>N</td>
+<td>abbab</td>
+<td>O</td>
+<td>abbba</td>
+<td>P</td>
+<td>abbbb</td>
+<td>Q</td>
+<td>baaaa</td>
+<td>R</td>
+<td>baaab</td>
+<td>S</td>
+<td>baaba</td>
+<td>T</td>
+<td>baabb</td>
+</tr>
+<tr>
+<td>U</td>
+<td>babaa</td>
+<td>V</td>
+<td>babab</td>
+<td>W</td>
+<td>babba</td>
+<td>X</td>
+<td>babbb</td>
+<td>Y</td>
+<td>bbaaa</td>
+<td>Z</td>
+<td>bbaab</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+<ul>
 <li>第二种方式</li>
 </ul>
+<table>
+<thead>
+<tr>
+<th>a</th>
+<th>AAAAA</th>
+<th>g</th>
+<th>AABBA</th>
+<th>n</th>
+<th>ABBAA</th>
+<th>t</th>
+<th>BAABA</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>b</td>
+<td>AAAAB</td>
+<td>h</td>
+<td>AABBB</td>
+<td>o</td>
+<td>ABBAB</td>
+<td>u-v</td>
+<td>BAABB</td>
+</tr>
+<tr>
+<td>c</td>
+<td>AAABA</td>
+<td>i-j</td>
+<td>ABAAA</td>
+<td>p</td>
+<td>ABBBA</td>
+<td>w</td>
+<td>BABAA</td>
+</tr>
+<tr>
+<td>d</td>
+<td>AAABB</td>
+<td>k</td>
+<td>ABAAB</td>
+<td>q</td>
+<td>ABBBB</td>
+<td>x</td>
+<td>BABAB</td>
+</tr>
+<tr>
+<td>e</td>
+<td>AABAA</td>
+<td>l</td>
+<td>ABABA</td>
+<td>r</td>
+<td>BAAAA</td>
+<td>y</td>
+<td>BABBA</td>
+</tr>
+<tr>
+<td>f</td>
+<td>AABAB</td>
+<td>m</td>
+<td>ABABB</td>
+<td>s</td>
+<td>BAAAB</td>
+<td>z</td>
+<td>BABBB</td>
+</tr>
+</tbody></table>
 <p>例子:  ABABAAABAABBAAA  –&gt; 培根密码 –&gt;  KEY</p>
 <h3 id="摩斯密码"><a href="#摩斯密码" class="headerlink" title="摩斯密码"></a>摩斯密码</h3><p>简述: 通过不同的排列顺序和间隔停顿表达不同的字母、数字、符号。</p>
 <p><img src="/2019/10/16/Crypto/morsecode.png" alt="对照表"></p>
@@ -1123,7 +1259,7 @@
   <p><span>本文标题:</span><a href="/2019/10/16/Crypto/">Crypto</a></p>
   <p><span>文章作者:</span><a href="/" title="访问 Tanker 的个人博客">Tanker</a></p>
   <p><span>发布时间:</span>2019年10月16日 - 12:30</p>
-  <p><span>最后更新:</span>2019年10月17日 - 15:22</p>
+  <p><span>最后更新:</span>2019年10月17日 - 17:02</p>
   <p><span>原始链接:</span><a href="/2019/10/16/Crypto/" title="Crypto">https://www5059109.github.io/2019/10/16/Crypto/</a>
     <span class="copy-path" title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="https://www5059109.github.io/2019/10/16/Crypto/" aria-label="复制成功！"></i></span>
   </p>
@@ -1345,7 +1481,7 @@
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共2k字</span>
+  <span class="post-count">博客全站共2.1k字</span>
 </div>
 
 
