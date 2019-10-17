@@ -132,7 +132,10 @@
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://www5059109.github.io/2019/10/16/Crypto/Search.jpg">
 <meta property="og:image" content="https://www5059109.github.io/2019/10/16/Crypto/check.jpg">
-<meta property="og:updated_time" content="2019-10-17T03:06:19.815Z">
+<meta property="og:image" content="https://www5059109.github.io/2019/10/16/Crypto/checkutf-8.png">
+<meta property="og:image" content="https://www5059109.github.io/2019/10/16/Crypto/wigtable.png">
+<meta property="og:image" content="https://www5059109.github.io/2019/10/16/Crypto/morsecode.png">
+<meta property="og:updated_time" content="2019-10-17T07:15:51.086Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Crypto">
 <meta name="twitter:description" content="1、常见编码ASCII编码   ASCII值(10) ASCII值(16) 控制字符 ASCII值(10) ASCII值(16) 控制字符 ASCII值(10) ASCII值(16) 控制字符 ASCII值(10) ASCII值(16) 控制字符    0 0 NUT 32 20 (space) 64 40 @ 96 60 、   1 1 SOH 33 21 ! 65 41 A 97 61 a">
@@ -325,7 +328,7 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2019-10-17T11:06:19+08:00">
+              <time title="更新于" itemprop="dateModified" datetime="2019-10-17T15:15:51+08:00">
                 2019-10-17
               </time>
             
@@ -853,8 +856,67 @@
 <li><p>验证 <img src="/2019/10/16/Crypto/check.jpg" alt></p>
 </li>
 </ul>
-<h2 id="Unicode编码"><a href="#Unicode编码" class="headerlink" title="Unicode编码"></a>Unicode编码</h2><p>简述: 字符集，为每种语言中的所有字符设定统一且唯一的编码。相当于一本很厚的字典。使用4个字节表示所有字符。</p>
-<p>例如: 国 –&gt; Unicode编码 –&gt; 000056FD</p>
+<h2 id="Unicode"><a href="#Unicode" class="headerlink" title="Unicode"></a>Unicode</h2><p>简述: 字符集，为每种语言中的所有字符设定统一且唯一的编码。相当于一本很厚的字典。使用4个字节表示所有字符。</p>
+<p>例如: 国 –&gt; Unicode编码 –&gt; \u000056FD</p>
+<h3 id="UTF-8编码"><a href="#UTF-8编码" class="headerlink" title="UTF-8编码"></a>UTF-8编码</h3><p>简述: 实现了对ASCII码的兼容。能够灵活的变换长度</p>
+<p>编码规则: </p>
+<ul>
+<li><p>单个字节的字符，二进制最高位为0，其余对应为Unicode码点[PS:字符对应编码后的数字]</p>
+<table>
+<thead>
+<tr>
+<th>UTF-8</th>
+<th>Unicode码点范围</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>00xxxxxx</td>
+<td>0000 0000 - 0000 007F</td>
+</tr>
+</tbody></table>
+</li>
+<li><p>N个字节的字符，高字节高N位为1(判断字节数)，第N-1位为0，剩余字节高2位为10，剩下二进制位对应Unicode码点。</p>
+<table>
+<thead>
+<tr>
+<th>UTF-8</th>
+<th>字节数</th>
+<th>Unicode码点范围</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>110xxxxxx 10xxxxxx</td>
+<td>2</td>
+<td>0000 0080 - 0000 07FF</td>
+</tr>
+<tr>
+<td>1110xxxxx 10xxxxxx 10xxxxxx</td>
+<td>3</td>
+<td>0000 0800 - 0000 FFFF</td>
+</tr>
+<tr>
+<td>11110xxxx 10xxxxxx 10xxxxxx 10xxxxxx</td>
+<td>4</td>
+<td>0001 0000 - 0010 FFFF</td>
+</tr>
+</tbody></table>
+</li>
+</ul>
+<p>例子: “国” —&gt; UTF-8编码 –&gt; 0xE5 0x9B 0xBD</p>
+<ul>
+<li><p>“国”对应Unicode码点 0x56FD (‭0101 0110 1111 1101)</p>
+</li>
+<li><p>得出“国”对应UTF-8 格式为 ‬1110xxxx 10xxxxxx 10xxxxxx</p>
+</li>
+<li><p>将Unicode码点从低位开始填充，不足补零 </p>
+<p>11100101 10011011 10111101</p>
+</li>
+<li><p>转换为16进制  0xE5 0x9B 0xBD</p>
+</li>
+<li><p>验证  <img src="/2019/10/16/Crypto/checkutf-8.png" alt></p>
+</li>
+</ul>
+<p><a href="https://blog.csdn.net/hezh1994/article/details/78899683" target="_blank" rel="noopener">参考文献:彻底弄懂 Unicode 编码—hezh1994</a></p>
 <h2 id="URL编码"><a href="#URL编码" class="headerlink" title="URL编码"></a>URL编码</h2><p>简述: URL编码格式采用 <kbd>百分号</kbd>+<kbd>十六进制形式的ASCII码</kbd>，解决在URL解析中出现字符解析歧义的问题。</p>
 <p>对非法字符编码:对于非ASCII字符，官方RFC文档建议使用UTF-8进行编码得到相应字节。</p>
 <p>编码过程例如:</p>
@@ -871,12 +933,175 @@
 <li><p>加上百分号 %E4%BD%A0 %E5%A5%BD </p>
 </li>
 </ul>
-<h1 id="非对称加密"><a href="#非对称加密" class="headerlink" title="非对称加密"></a>非对称加密</h1><p>简述: 使用两个不同的密钥进行加解密—-公开密钥和私有密钥。</p>
+<h1 id="2、常见加密算法"><a href="#2、常见加密算法" class="headerlink" title="2、常见加密算法"></a>2、常见加密算法</h1><h2 id="换位加密"><a href="#换位加密" class="headerlink" title="换位加密"></a>换位加密</h2><h3 id="栅栏加密"><a href="#栅栏加密" class="headerlink" title="栅栏加密"></a>栅栏加密</h3><p>算法:</p>
+<ul>
+<li>去空格后，将明文分割成N个/组</li>
+<li>将每组的第i个组合在一起</li>
+<li>将分割的字符串重新连接即得到密文。</li>
+</ul>
+<p>例子: 明文 username password —&gt; upsaesrsnwaomred</p>
+<ul>
+<li>分割 第一组 username 第二组 password</li>
+<li>组合 up sa es rs nw ao mr ed</li>
+<li>连接 upsaesrsnwaomred</li>
+</ul>
+<h3 id="曲路密码"><a href="#曲路密码" class="headerlink" title="曲路密码"></a>曲路密码</h3><p>算法:</p>
+<ul>
+<li>双方约定填充行列数、曲路路径(密钥)</li>
+<li>根据路径解密</li>
+</ul>
+<p>例子: 明文 congratulationtoyougetthekey —&gt; yentaogekuirgtoehyanolotttuc</p>
+<ul>
+<li><table>
+<thead>
+<tr>
+<th>c</th>
+<th>o</th>
+<th>n</th>
+<th>g</th>
+<th>r</th>
+<th>a</th>
+<th>t</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>u</td>
+<td>l</td>
+<td>a</td>
+<td>t</td>
+<td>i</td>
+<td>o</td>
+<td>n</td>
+</tr>
+<tr>
+<td>t</td>
+<td>o</td>
+<td>y</td>
+<td>o</td>
+<td>u</td>
+<td>g</td>
+<td>e</td>
+</tr>
+<tr>
+<td>t</td>
+<td>t</td>
+<td>h</td>
+<td>e</td>
+<td>k</td>
+<td>e</td>
+<td>y</td>
+</tr>
+</tbody></table>
+</li>
+<li><p>规定从右下角方向向上为起点，左上角方向向上为终点。</p>
+</li>
+<li><p>加密后的数据 yentaogekuirgtoehyanolotttuc</p>
+</li>
+</ul>
+<h3 id="列位移"><a href="#列位移" class="headerlink" title="列位移"></a>列位移</h3><p>算法:</p>
+<ul>
+<li>双方约定填充行列数、字符串密钥。</li>
+<li>根据字符在字母表中的顺序取加密后的数据。</li>
+</ul>
+<p>例子: 明文</p>
+<ul>
+<li><table>
+<thead>
+<tr>
+<th>1</th>
+<th>2</th>
+<th>3</th>
+<th>4</th>
+<th>5</th>
+<th>6</th>
+<th>7</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>c</td>
+<td>o</td>
+<td>n</td>
+<td>g</td>
+<td>r</td>
+<td>a</td>
+<td>t</td>
+</tr>
+<tr>
+<td>u</td>
+<td>l</td>
+<td>a</td>
+<td>t</td>
+<td>i</td>
+<td>o</td>
+<td>n</td>
+</tr>
+<tr>
+<td>t</td>
+<td>o</td>
+<td>y</td>
+<td>o</td>
+<td>u</td>
+<td>g</td>
+<td>e</td>
+</tr>
+<tr>
+<td>t</td>
+<td>t</td>
+<td>h</td>
+<td>e</td>
+<td>k</td>
+<td>e</td>
+<td>y</td>
+</tr>
+</tbody></table>
+</li>
+<li><p>规定密钥为 how are u ，分别对应顺序为 3471526</p>
+</li>
+<li><p>第一个数字为3则到第3列取数据nayh </p>
+</li>
+<li><p>以此类推 gtoe tney cutt riuk olot aoge</p>
+</li>
+<li><p>最终加密得到密文 nayhgtoetneycuttriukolotaoge</p>
+</li>
+</ul>
+<h2 id="替换加密"><a href="#替换加密" class="headerlink" title="替换加密"></a>替换加密</h2><h3 id="凯撒密码"><a href="#凯撒密码" class="headerlink" title="凯撒密码"></a>凯撒密码</h3><p>算法: 明文中的所有字母都在字母表上向左(向右)按照一个 <strong>固定数字</strong>(正数为右移) 偏移(自身不计算次数)。</p>
+<p>例子: welcome —&gt; 偏移量1 —&gt; xfmdpnf</p>
+<ul>
+<li>将每个字母都左移1个位置，即可得到密文 xfmdpnf</li>
+</ul>
+<h4 id="ROT5-ROT13-ROT18-ROT47"><a href="#ROT5-ROT13-ROT18-ROT47" class="headerlink" title="ROT5/ROT13/ROT18/ROT47"></a>ROT5/ROT13/ROT18/ROT47</h4><p>ROT5: 对数字进行编码。偏移量为5。0-&gt;5</p>
+<p>ROT13: 对字母进行编码。偏移量为13。A-&gt;N</p>
+<p>ROT18: ROT5、ROT13组合</p>
+<p>ROT47: 对ASCII码中的字符进行编码。偏移量为47。A-&gt;p</p>
+<h3 id="维吉尼亚密码"><a href="#维吉尼亚密码" class="headerlink" title="维吉尼亚密码"></a>维吉尼亚密码</h3><p>简述: 根据密钥和密表进行加密解密。只能对字母进行加密。密文中同样的E可能对应不同的密钥，解决了字频统计破解密文。</p>
+<p>维吉尼亚密表:第一列为明文字母，第一行为密钥字母</p>
+<p><img src="/2019/10/16/Crypto/wigtable.png" alt></p>
+<p>例子: 明文  flag:jiflag{I_Hn0w_n0thfng} –&gt; 密钥 snbmos –&gt; xybs:xaxybs{W_Zf0j_o0fvxft}</p>
+<ul>
+<li>从维吉尼亚密码表中查找 (f行,s列)为x，依次列推，行列相交取密文。</li>
+<li>忽视标点符号和数字</li>
+</ul>
+<h3 id="培根密码"><a href="#培根密码" class="headerlink" title="培根密码"></a>培根密码</h3><p>简述: 使用AB、ab进行替代。本质上为二进制数。</p>
+<p>算法: </p>
+<ul>
+<li>第一种方式</li>
+<li>第二种方式</li>
+</ul>
+<p>例子:  ABABAAABAABBAAA  –&gt; 培根密码 –&gt;  KEY</p>
+<h3 id="摩斯密码"><a href="#摩斯密码" class="headerlink" title="摩斯密码"></a>摩斯密码</h3><p>简述: 通过不同的排列顺序和间隔停顿表达不同的字母、数字、符号。</p>
+<p><img src="/2019/10/16/Crypto/morsecode.png" alt="对照表"></p>
+<h1 id="3、JS混淆"><a href="#3、JS混淆" class="headerlink" title="3、JS混淆"></a>3、JS混淆</h1><p>简述:通过对JS变量名称和过程名称进行编码，通常使用eval()、function()进行混淆处理，保护代码段不透明。</p>
+<p>常见混淆算法: JSFuck、Jother、aaencode</p>
+<p>特点:</p>
+<p>JSFcuk: 只存在 <kbd>()+[]!</kbd> 这六个字符。</p>
+<p>Jother: 使用少量字符进行编码。少量字符 <kbd>!+()[]{}</kbd> </p>
+<p>aaencode: 将js代码编码为颜文字。[ﾟεﾟ]+(ﾟｰﾟ)</p>
+<h1 id="4、非对称加密"><a href="#4、非对称加密" class="headerlink" title="4、非对称加密"></a>4、非对称加密</h1><p>简述: 使用两个不同的密钥进行加解密—-公开密钥和私有密钥。</p>
 <p>典型非对称加密算法:RSA、ECC、ElGamal</p>
-<h1 id="对称加密"><a href="#对称加密" class="headerlink" title="对称加密"></a>对称加密</h1><p>简述: 使用相同密钥进行加解密。</p>
+<h1 id="5、对称加密"><a href="#5、对称加密" class="headerlink" title="5、对称加密"></a>5、对称加密</h1><p>简述: 使用相同密钥进行加解密。</p>
 <p>典型对称加密算法: DES、3DES、IDEA、AES</p>
 <p>DES 特征: 64位密钥</p>
-<h1 id="摘要算法"><a href="#摘要算法" class="headerlink" title="摘要算法"></a>摘要算法</h1><p>简述: 对所有数据提取指纹信息加密，具有不可逆性。</p>
+<h1 id="6、摘要算法"><a href="#6、摘要算法" class="headerlink" title="6、摘要算法"></a>6、摘要算法</h1><p>简述: 对所有数据提取指纹信息加密，具有不可逆性。</p>
 <p>典型摘要算法: MD5、SHA</p>
 <p>MD5 特征: 长度分为16位和32位。最大值为 F 。由 数字和字母 组成</p>
 
@@ -898,7 +1123,7 @@
   <p><span>本文标题:</span><a href="/2019/10/16/Crypto/">Crypto</a></p>
   <p><span>文章作者:</span><a href="/" title="访问 Tanker 的个人博客">Tanker</a></p>
   <p><span>发布时间:</span>2019年10月16日 - 12:30</p>
-  <p><span>最后更新:</span>2019年10月17日 - 11:06</p>
+  <p><span>最后更新:</span>2019年10月17日 - 15:15</p>
   <p><span>原始链接:</span><a href="/2019/10/16/Crypto/" title="Crypto">https://www5059109.github.io/2019/10/16/Crypto/</a>
     <span class="copy-path" title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="https://www5059109.github.io/2019/10/16/Crypto/" aria-label="复制成功！"></i></span>
   </p>
@@ -1074,7 +1299,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1、常见编码"><span class="nav-number">1.</span> <span class="nav-text">1、常见编码</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#ASCII编码"><span class="nav-number">1.1.</span> <span class="nav-text">ASCII编码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Base64编码"><span class="nav-number">1.2.</span> <span class="nav-text">Base64编码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Unicode编码"><span class="nav-number">1.3.</span> <span class="nav-text">Unicode编码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#URL编码"><span class="nav-number">1.4.</span> <span class="nav-text">URL编码</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#非对称加密"><span class="nav-number">2.</span> <span class="nav-text">非对称加密</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#对称加密"><span class="nav-number">3.</span> <span class="nav-text">对称加密</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#摘要算法"><span class="nav-number">4.</span> <span class="nav-text">摘要算法</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1、常见编码"><span class="nav-number">1.</span> <span class="nav-text">1、常见编码</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#ASCII编码"><span class="nav-number">1.1.</span> <span class="nav-text">ASCII编码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Base64编码"><span class="nav-number">1.2.</span> <span class="nav-text">Base64编码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Unicode"><span class="nav-number">1.3.</span> <span class="nav-text">Unicode</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#UTF-8编码"><span class="nav-number">1.3.1.</span> <span class="nav-text">UTF-8编码</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#URL编码"><span class="nav-number">1.4.</span> <span class="nav-text">URL编码</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2、常见加密算法"><span class="nav-number">2.</span> <span class="nav-text">2、常见加密算法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#换位加密"><span class="nav-number">2.1.</span> <span class="nav-text">换位加密</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#栅栏加密"><span class="nav-number">2.1.1.</span> <span class="nav-text">栅栏加密</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#曲路密码"><span class="nav-number">2.1.2.</span> <span class="nav-text">曲路密码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#列位移"><span class="nav-number">2.1.3.</span> <span class="nav-text">列位移</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#替换加密"><span class="nav-number">2.2.</span> <span class="nav-text">替换加密</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#凯撒密码"><span class="nav-number">2.2.1.</span> <span class="nav-text">凯撒密码</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#ROT5-ROT13-ROT18-ROT47"><span class="nav-number">2.2.1.1.</span> <span class="nav-text">ROT5/ROT13/ROT18/ROT47</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#维吉尼亚密码"><span class="nav-number">2.2.2.</span> <span class="nav-text">维吉尼亚密码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#培根密码"><span class="nav-number">2.2.3.</span> <span class="nav-text">培根密码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#摩斯密码"><span class="nav-number">2.2.4.</span> <span class="nav-text">摩斯密码</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3、JS混淆"><span class="nav-number">3.</span> <span class="nav-text">3、JS混淆</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4、非对称加密"><span class="nav-number">4.</span> <span class="nav-text">4、非对称加密</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#5、对称加密"><span class="nav-number">5.</span> <span class="nav-text">5、对称加密</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#6、摘要算法"><span class="nav-number">6.</span> <span class="nav-text">6、摘要算法</span></a></li></ol></div>
             
 
           </div>
@@ -1120,7 +1345,7 @@
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共1k字</span>
+  <span class="post-count">博客全站共2k字</span>
 </div>
 
 
