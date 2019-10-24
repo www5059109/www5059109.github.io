@@ -148,9 +148,10 @@
 <meta property="og:image" content="https://www5059109.github.io/2019/10/18/misc/cat1.png">
 <meta property="og:image" content="https://www5059109.github.io/2019/10/18/misc/cat2.png">
 <meta property="og:image" content="https://www5059109.github.io/2019/10/18/misc/copy.png">
+<meta property="og:image" content="https://www5059109.github.io/2019/10/18/misc/stegdetect.png">
 <meta property="og:image" content="https://www5059109.github.io/2019/10/18/misc/firework1.png">
 <meta property="og:image" content="https://www5059109.github.io/2019/10/18/misc/firework2.png">
-<meta property="og:updated_time" content="2019-10-19T13:06:57.329Z">
+<meta property="og:updated_time" content="2019-10-24T03:04:08.444Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="misc">
 <meta name="twitter:description" content="文件类型识别File命令应用场景: 文件后缀名不可见，通过识别文件头判断文件类型，修改后缀名即可正常打开。 命令:  file unkonw 示例:  查看文件头应用场景: Windows下，查看文件头信息判断文件类型 常见类型的文件头:  使用Winhex查看文件头信息:  文件头残缺/错误发生现象: 文件无法打开。利用file命令查看后显示为 data。 解决方法:  windows下使用wi">
@@ -343,8 +344,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2019-10-19T21:06:57+08:00">
-                2019-10-19
+              <time title="更新于" itemprop="dateModified" datetime="2019-10-24T11:04:08+08:00">
+                2019-10-24
               </time>
             
           </span>
@@ -425,13 +426,7 @@
 <h1 id="文件隐写"><a href="#文件隐写" class="headerlink" title="文件隐写"></a>文件隐写</h1><h2 id="LSB隐写–最低有效位"><a href="#LSB隐写–最低有效位" class="headerlink" title="LSB隐写–最低有效位"></a>LSB隐写–最低有效位</h2><p>简介: 一个图片像素可以携带3字节，即R,G,B。每一种颜色有八位。由于改动某些位人眼无法分辨，则产生了LSB隐写技术。将每一种颜色的最低位用来隐藏信息。</p>
 <p>前提: PNG、BMP、WAV等无损压缩格式。</p>
 <p>利用工具: Stegsolve、zsteg、wbstego4、python脚本</p>
-<h2 id="Winhex-010Editor-notepad"><a href="#Winhex-010Editor-notepad" class="headerlink" title="Winhex/010Editor/notepad++"></a>Winhex/010Editor/notepad++</h2><p>应用场景: flag以16进制形式写入文件中。</p>
-<p>应用: 以16进制形式打开文件搜索关键字(key\flag等)</p>
-<h2 id="FIrework作图软件"><a href="#FIrework作图软件" class="headerlink" title="FIrework作图软件"></a>FIrework作图软件</h2><p>应用场景: 以16进制查看文件时发现 <kbd>firework</kbd>标识。</p>
-<p><img src="/2019/10/18/misc/firework1.png" alt="firework"></p>
-<p>应用: 使用firework工具打开之后查看对应图层。</p>
-<p><img src="/2019/10/18/misc/firework2.png" alt="firework2"></p>
-<h2 id="Stegsolve"><a href="#Stegsolve" class="headerlink" title="Stegsolve"></a>Stegsolve</h2><p>简介: 用于图片隐写分析的神器。</p>
+<h3 id="Stegsolve"><a href="#Stegsolve" class="headerlink" title="Stegsolve"></a>Stegsolve</h3><p>简介: 用于图片隐写分析的神器。</p>
 <p>功能介绍: </p>
 <p>①File Fromat : 文件类型查看</p>
 <p>②Data Extract : 数据提取。例如 LSB隐写 等将数据藏在</p>
@@ -439,6 +434,66 @@
 <p>④Frame Browser: 帧浏览器。能够将动图一帧一帧查看。</p>
 <p>⑤Image Combiner: 图片合成器。将两张图片放在一起一系列运算。一般将相似图片结合分析可得出flag。</p>
 <p>⑥open: 打开图片。能够查看各个位平面。进行一些运算。</p>
+<p>示例:</p>
+<p><img src="/2019/10/18/misc/stegdetect.png" alt="stegdetect"></p>
+<h3 id="Zsteg"><a href="#Zsteg" class="headerlink" title="Zsteg"></a>Zsteg</h3><h3 id="Wbstego4"><a href="#Wbstego4" class="headerlink" title="Wbstego4"></a>Wbstego4</h3><p>简介: 通过向导逐步操作进行 LSB加密解密。支持的文件格式: bmp、txt、htm、pdf。</p>
+<p>操作步骤:</p>
+<ul>
+<li>选择加密或者解密</li>
+<li>选择目标文件</li>
+<li>输入密钥，为空直接跳过</li>
+<li>保存文件</li>
+</ul>
+<h3 id="python脚本"><a href="#python脚本" class="headerlink" title="python脚本"></a>python脚本</h3><h2 id="CRC检验码出错"><a href="#CRC检验码出错" class="headerlink" title="CRC检验码出错"></a>CRC检验码出错</h2><h3 id="TweakPNG"><a href="#TweakPNG" class="headerlink" title="TweakPNG"></a>TweakPNG</h3><p>简介: PNG图像查看工具，自动计算正确的CRC，允许查看和修改PNG图像的元信息存储。</p>
+<p>应用场景: CRC检验码出错，文件头正常，图片无法打开。</p>
+<p>举例: </p>
+<h2 id="图片加密解密"><a href="#图片加密解密" class="headerlink" title="图片加密解密"></a>图片加密解密</h2><h3 id="Stegdetect工具–Linux"><a href="#Stegdetect工具–Linux" class="headerlink" title="Stegdetect工具–Linux"></a>Stegdetect工具–Linux</h3><p>简介: 探测分析<kbd>jpeg</kbd>图片格式的加密方式。可以检测到 Jsteg、JPhide、OutGuess、Invisible Secrect、F5、appendX 和 Camouflage 等工具的加密。</p>
+<p>使用方法:</p>
+<p>​    <code>stegdetect -s 10.0 hide.jpg</code></p>
+<p>​    <code>stegdetect hide.jpg</code></p>
+<h3 id="JPHide图片隐写–Windows"><a href="#JPHide图片隐写–Windows" class="headerlink" title="JPHide图片隐写–Windows"></a>JPHide图片隐写–Windows</h3><p>简介: 基于 LSB 的jpeg格式图像的隐写算法。需要密钥。</p>
+<p>应用场景: 通过stegdetect分析到图片使用JPHide隐写。</p>
+<p>使用方法: </p>
+<ul>
+<li>打开图片，点击seek</li>
+<li>输入密钥并确认密码</li>
+<li>保存成txt文件。</li>
+</ul>
+<p>例子:</p>
+<h3 id="OutGuess"><a href="#OutGuess" class="headerlink" title="OutGuess"></a>OutGuess</h3><p>简介: 使用outgues算法进行图片隐写。</p>
+<p>应用场景: 通过 stegdetect 分析到图片使用 OutGuess 加密。</p>
+<p>使用方法:</p>
+<p><code>outguess -r hide.jpeg key.txt</code></p>
+<h3 id="F5"><a href="#F5" class="headerlink" title="F5"></a>F5</h3><p>简介: 使用F5算法</p>
+<p>应用场景: 通过Stegdetect 分析到图片使用 F5 算法</p>
+<p>使用方法:</p>
+<p><code>java extract hide.jpg -p key</code> // 默认保存为当前目录下的 output.txt</p>
+<p>举例:</p>
+<h3 id="bftools"><a href="#bftools" class="headerlink" title="bftools"></a>bftools</h3><p>简介: 使用Brainfuck编写的程序。能够对各种程序加密解密(原理懵逼)，使用brainloller 和 braincopter 代码进行编码/解码</p>
+<p>使用方法:</p>
+<p>​    <code>bftools.exe decode braincopter source.png -output key.png</code></p>
+<p>​    <code>bftools.exe run</code> // 查看上一步输出文件</p>
+<p>举例:</p>
+<h3 id="SilentEye"><a href="#SilentEye" class="headerlink" title="SilentEye"></a>SilentEye</h3><p>简介: 能够将文字或者文件隐藏在图片中。使用AES 128、AES 256加密数据。LSB隐写(支持的格式 jpeg bmp wave)。</p>
+<p>使用方法: </p>
+<ul>
+<li>打开目标文件，选择解密</li>
+<li>将Decode File保存</li>
+<li>若有密钥 则点击encrypted data 输入密钥并确认，再解密。</li>
+</ul>
+<h2 id="FIrework作图软件"><a href="#FIrework作图软件" class="headerlink" title="FIrework作图软件"></a>FIrework作图软件</h2><p>应用场景: 以16进制查看文件时发现 <kbd>firework</kbd>标识。</p>
+<p><img src="/2019/10/18/misc/firework1.png" alt="firework"></p>
+<p>应用: 使用firework工具打开之后查看对应图层。</p>
+<p><img src="/2019/10/18/misc/firework2.png" alt="firework2"></p>
+<h2 id="Winhex-010Editor-notepad"><a href="#Winhex-010Editor-notepad" class="headerlink" title="Winhex/010Editor/notepad++"></a>Winhex/010Editor/notepad++</h2><p>应用场景: flag以16进制形式写入文件中。</p>
+<p>应用: 以16进制形式打开文件搜索关键字(key\flag等)</p>
+<h1 id="二维码处理"><a href="#二维码处理" class="headerlink" title="二维码处理"></a>二维码处理</h1><h2 id="CRQ二维码扫描工具"><a href="#CRQ二维码扫描工具" class="headerlink" title="CRQ二维码扫描工具"></a>CRQ二维码扫描工具</h2><p>简介:  扫描二维码的工具。</p>
+<p>使用:</p>
+<ul>
+<li>当某个定位角缺漏或者被覆盖，也可以自动识别，若失败则需要使用作图工具手动恢复定位角。</li>
+<li>定位角中间为白色，则需要使用作图工具进行反色处理。</li>
+</ul>
+<p>例子:</p>
 
       
     </div>
@@ -458,7 +513,7 @@
   <p><span>本文标题:</span><a href="/2019/10/18/misc/">misc</a></p>
   <p><span>文章作者:</span><a href="/" title="访问 Tanker 的个人博客">Tanker</a></p>
   <p><span>发布时间:</span>2019年10月18日 - 19:20</p>
-  <p><span>最后更新:</span>2019年10月19日 - 21:06</p>
+  <p><span>最后更新:</span>2019年10月24日 - 11:04</p>
   <p><span>原始链接:</span><a href="/2019/10/18/misc/" title="misc">https://www5059109.github.io/2019/10/18/misc/</a>
     <span class="copy-path" title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="https://www5059109.github.io/2019/10/18/misc/" aria-label="复制成功！"></i></span>
   </p>
@@ -634,7 +689,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#文件类型识别"><span class="nav-number">1.</span> <span class="nav-text">文件类型识别</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#File命令"><span class="nav-number">1.1.</span> <span class="nav-text">File命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#查看文件头"><span class="nav-number">1.2.</span> <span class="nav-text">查看文件头</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#文件头残缺-错误"><span class="nav-number">1.3.</span> <span class="nav-text">文件头残缺/错误</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#文件完整性检测"><span class="nav-number">1.4.</span> <span class="nav-text">文件完整性检测</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#md5sum命令-–-Linux"><span class="nav-number">1.4.1.</span> <span class="nav-text">md5sum命令 – Linux</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#certutil命令-–-Windows"><span class="nav-number">1.4.2.</span> <span class="nav-text">certutil命令 – Windows</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#文件分离"><span class="nav-number">2.</span> <span class="nav-text">文件分离</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Binwalk工具-–-Linux"><span class="nav-number">2.1.</span> <span class="nav-text">Binwalk工具 – Linux</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Formost工具-–-Linux"><span class="nav-number">2.2.</span> <span class="nav-text">Formost工具 – Linux</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#dd命令-–-Linux"><span class="nav-number">2.3.</span> <span class="nav-text">dd命令 – Linux</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Winhex工具-–-Windows"><span class="nav-number">2.4.</span> <span class="nav-text">Winhex工具 – Windows</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#010Editor工具-–-Windows"><span class="nav-number">2.5.</span> <span class="nav-text">010Editor工具 – Windows</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#文件合并"><span class="nav-number">3.</span> <span class="nav-text">文件合并</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#cat命令-–-Linux"><span class="nav-number">3.1.</span> <span class="nav-text">cat命令 – Linux</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#copy命令-–-Windows"><span class="nav-number">3.2.</span> <span class="nav-text">copy命令 – Windows</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#文件隐写"><span class="nav-number">4.</span> <span class="nav-text">文件隐写</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#LSB隐写–最低有效位"><span class="nav-number">4.1.</span> <span class="nav-text">LSB隐写–最低有效位</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Winhex-010Editor-notepad"><span class="nav-number">4.2.</span> <span class="nav-text">Winhex/010Editor/notepad++</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#FIrework作图软件"><span class="nav-number">4.3.</span> <span class="nav-text">FIrework作图软件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Stegsolve"><span class="nav-number">4.4.</span> <span class="nav-text">Stegsolve</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#文件类型识别"><span class="nav-number">1.</span> <span class="nav-text">文件类型识别</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#File命令"><span class="nav-number">1.1.</span> <span class="nav-text">File命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#查看文件头"><span class="nav-number">1.2.</span> <span class="nav-text">查看文件头</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#文件头残缺-错误"><span class="nav-number">1.3.</span> <span class="nav-text">文件头残缺/错误</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#文件完整性检测"><span class="nav-number">1.4.</span> <span class="nav-text">文件完整性检测</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#md5sum命令-–-Linux"><span class="nav-number">1.4.1.</span> <span class="nav-text">md5sum命令 – Linux</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#certutil命令-–-Windows"><span class="nav-number">1.4.2.</span> <span class="nav-text">certutil命令 – Windows</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#文件分离"><span class="nav-number">2.</span> <span class="nav-text">文件分离</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Binwalk工具-–-Linux"><span class="nav-number">2.1.</span> <span class="nav-text">Binwalk工具 – Linux</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Formost工具-–-Linux"><span class="nav-number">2.2.</span> <span class="nav-text">Formost工具 – Linux</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#dd命令-–-Linux"><span class="nav-number">2.3.</span> <span class="nav-text">dd命令 – Linux</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Winhex工具-–-Windows"><span class="nav-number">2.4.</span> <span class="nav-text">Winhex工具 – Windows</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#010Editor工具-–-Windows"><span class="nav-number">2.5.</span> <span class="nav-text">010Editor工具 – Windows</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#文件合并"><span class="nav-number">3.</span> <span class="nav-text">文件合并</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#cat命令-–-Linux"><span class="nav-number">3.1.</span> <span class="nav-text">cat命令 – Linux</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#copy命令-–-Windows"><span class="nav-number">3.2.</span> <span class="nav-text">copy命令 – Windows</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#文件隐写"><span class="nav-number">4.</span> <span class="nav-text">文件隐写</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#LSB隐写–最低有效位"><span class="nav-number">4.1.</span> <span class="nav-text">LSB隐写–最低有效位</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Stegsolve"><span class="nav-number">4.1.1.</span> <span class="nav-text">Stegsolve</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Zsteg"><span class="nav-number">4.1.2.</span> <span class="nav-text">Zsteg</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Wbstego4"><span class="nav-number">4.1.3.</span> <span class="nav-text">Wbstego4</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#python脚本"><span class="nav-number">4.1.4.</span> <span class="nav-text">python脚本</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#CRC检验码出错"><span class="nav-number">4.2.</span> <span class="nav-text">CRC检验码出错</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#TweakPNG"><span class="nav-number">4.2.1.</span> <span class="nav-text">TweakPNG</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#图片加密解密"><span class="nav-number">4.3.</span> <span class="nav-text">图片加密解密</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Stegdetect工具–Linux"><span class="nav-number">4.3.1.</span> <span class="nav-text">Stegdetect工具–Linux</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#JPHide图片隐写–Windows"><span class="nav-number">4.3.2.</span> <span class="nav-text">JPHide图片隐写–Windows</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#OutGuess"><span class="nav-number">4.3.3.</span> <span class="nav-text">OutGuess</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#F5"><span class="nav-number">4.3.4.</span> <span class="nav-text">F5</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#bftools"><span class="nav-number">4.3.5.</span> <span class="nav-text">bftools</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SilentEye"><span class="nav-number">4.3.6.</span> <span class="nav-text">SilentEye</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#FIrework作图软件"><span class="nav-number">4.4.</span> <span class="nav-text">FIrework作图软件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Winhex-010Editor-notepad"><span class="nav-number">4.5.</span> <span class="nav-text">Winhex/010Editor/notepad++</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#二维码处理"><span class="nav-number">5.</span> <span class="nav-text">二维码处理</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#CRQ二维码扫描工具"><span class="nav-number">5.1.</span> <span class="nav-text">CRQ二维码扫描工具</span></a></li></ol></li></ol></div>
             
 
           </div>
@@ -680,7 +735,7 @@
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共2.9k字</span>
+  <span class="post-count">博客全站共3.5k字</span>
 </div>
 
 
