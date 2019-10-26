@@ -135,7 +135,7 @@
 <meta property="og:image" content="https://www5059109.github.io/2019/10/16/Crypto/checkutf-8.png">
 <meta property="og:image" content="https://www5059109.github.io/2019/10/16/Crypto/wigtable.png">
 <meta property="og:image" content="https://www5059109.github.io/2019/10/16/Crypto/morsecode.png">
-<meta property="og:updated_time" content="2019-10-24T05:50:59.039Z">
+<meta property="og:updated_time" content="2019-10-26T10:38:26.687Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Crypto">
 <meta name="twitter:description" content="1、常见编码ASCII编码   ASCII值(10) ASCII值(16) 控制字符 ASCII值(10) ASCII值(16) 控制字符 ASCII值(10) ASCII值(16) 控制字符 ASCII值(10) ASCII值(16) 控制字符    0 0 NUT 32 20 (space) 64 40 @ 96 60 、   1 1 SOH 33 21 ! 65 41 A 97 61 a">
@@ -328,8 +328,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2019-10-24T13:50:59+08:00">
-                2019-10-24
+              <time title="更新于" itemprop="dateModified" datetime="2019-10-26T18:38:26+08:00">
+                2019-10-26
               </time>
             
           </span>
@@ -1244,7 +1244,9 @@
 <p>典型非对称加密算法:RSA、ECC、ElGamal</p>
 <h1 id="5、对称加密"><a href="#5、对称加密" class="headerlink" title="5、对称加密"></a>5、对称加密</h1><p>简述: 使用相同密钥进行加解密。</p>
 <p>典型对称加密算法: DES、3DES、IDEA、AES</p>
-<p>DES 特征: 64位密钥</p>
+<p>DES 特征: 64位密钥。因为其加密结果转换为Base64所以很容易误以为是Base64加密。除了ECB模式以外，都需要IV(偏移量)，经常偏移量即密钥。</p>
+<p>AES 特征: 分为AES-128 AES-192 AES-256 分别对应密钥长度为16B 24B 32B。因为其加密结果转换为Base64所以很容易误以为是Base64加密。除了ECB模式以外，都需要IV(偏移量)，经常偏移量即密钥。</p>
+<p><a href="http://tool.chacuo.net/cryptdes" target="_blank" rel="noopener">AES/DES加解密</a></p>
 <h1 id="6、摘要算法"><a href="#6、摘要算法" class="headerlink" title="6、摘要算法"></a>6、摘要算法</h1><p>简述: 对所有数据提取指纹信息加密，具有不可逆性。</p>
 <p>典型摘要算法: MD5、SHA</p>
 <p>MD5 特征: 长度分为16位和32位。最大值为 F 。由 数字和字母 组成</p>
@@ -1267,7 +1269,7 @@
   <p><span>本文标题:</span><a href="/2019/10/16/Crypto/">Crypto</a></p>
   <p><span>文章作者:</span><a href="/" title="访问 Tanker 的个人博客">Tanker</a></p>
   <p><span>发布时间:</span>2019年10月16日 - 12:30</p>
-  <p><span>最后更新:</span>2019年10月24日 - 13:50</p>
+  <p><span>最后更新:</span>2019年10月26日 - 18:38</p>
   <p><span>原始链接:</span><a href="/2019/10/16/Crypto/" title="Crypto">https://www5059109.github.io/2019/10/16/Crypto/</a>
     <span class="copy-path" title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="https://www5059109.github.io/2019/10/16/Crypto/" aria-label="复制成功！"></i></span>
   </p>
@@ -1396,7 +1398,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-count">4</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -1493,7 +1495,7 @@
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共4.9k字</span>
+  <span class="post-count">博客全站共5.4k字</span>
 </div>
 
 

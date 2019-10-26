@@ -1,0 +1,815 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Lobster Two:300,300italic,400,400italic,700,700italic|Roboto Mono:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="MISC–gzcompress压缩流量包题目: 提示PHP的gzcompress压缩算法，提供一个可下载数据包。 初步思路: 数据提取可用文件，利用PHP的gzuncompress解压缩。  1、从数据中提取可用文件 ①过滤数据包一大堆混乱的数据包，通过使用过滤器过滤掉没价值的。因为是题目提示了PHP，所以可以先尝试一下过滤出HTTP协议。  可以明显的看出大量的HEAD方法。[HEAD: 用来获">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Misc取证分析--gzcompress压缩流量包">
+<meta property="og:url" content="https://www5059109.github.io/2019/10/26/Misc取证分析-gzcompress压缩流量包/index.html">
+<meta property="og:site_name" content="筑梦千里">
+<meta property="og:description" content="MISC–gzcompress压缩流量包题目: 提示PHP的gzcompress压缩算法，提供一个可下载数据包。 初步思路: 数据提取可用文件，利用PHP的gzuncompress解压缩。  1、从数据中提取可用文件 ①过滤数据包一大堆混乱的数据包，通过使用过滤器过滤掉没价值的。因为是题目提示了PHP，所以可以先尝试一下过滤出HTTP协议。  可以明显的看出大量的HEAD方法。[HEAD: 用来获">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://www5059109.github.io/2019/10/26/Misc取证分析-gzcompress压缩流量包/title.png">
+<meta property="og:image" content="https://www5059109.github.io/2019/10/26/Misc取证分析-gzcompress压缩流量包/wireshark.png">
+<meta property="og:image" content="https://www5059109.github.io/2019/10/26/Misc取证分析-gzcompress压缩流量包/wireshark1.png">
+<meta property="og:image" content="https://www5059109.github.io/2019/10/26/Misc取证分析-gzcompress压缩流量包/wireshark2.png">
+<meta property="og:image" content="https://www5059109.github.io/2019/10/26/Misc取证分析-gzcompress压缩流量包/wireshark3.png">
+<meta property="og:image" content="https://www5059109.github.io/2019/10/26/Misc取证分析-gzcompress压缩流量包/base64.png">
+<meta property="og:image" content="https://www5059109.github.io/2019/10/26/Misc取证分析-gzcompress压缩流量包/notepad.png">
+<meta property="og:image" content="https://www5059109.github.io/2019/10/26/Misc取证分析-gzcompress压缩流量包/base641.png">
+<meta property="og:image" content="https://www5059109.github.io/2019/10/26/Misc取证分析-gzcompress压缩流量包/notepad1.png">
+<meta property="og:image" content="https://www5059109.github.io/2019/10/26/Misc取证分析-gzcompress压缩流量包/phpstudy.png">
+<meta property="og:updated_time" content="2019-10-26T14:19:42.721Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Misc取证分析--gzcompress压缩流量包">
+<meta name="twitter:description" content="MISC–gzcompress压缩流量包题目: 提示PHP的gzcompress压缩算法，提供一个可下载数据包。 初步思路: 数据提取可用文件，利用PHP的gzuncompress解压缩。  1、从数据中提取可用文件 ①过滤数据包一大堆混乱的数据包，通过使用过滤器过滤掉没价值的。因为是题目提示了PHP，所以可以先尝试一下过滤出HTTP协议。  可以明显的看出大量的HEAD方法。[HEAD: 用来获">
+<meta name="twitter:image" content="https://www5059109.github.io/2019/10/26/Misc取证分析-gzcompress压缩流量包/title.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://www5059109.github.io/2019/10/26/Misc取证分析-gzcompress压缩流量包/">
+
+
+
+
+
+  <title>Misc取证分析--gzcompress压缩流量包 | 筑梦千里</title>
+  
+
+
+
+
+
+
+
+
+  <script type="text/javascript" src="/js/src/copy.js"></script>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">筑梦千里</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://www5059109.github.io/2019/10/26/Misc取证分析-gzcompress压缩流量包/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Tanker">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="筑梦千里">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Misc取证分析--gzcompress压缩流量包</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-10-26T21:40:36+08:00">
+                2019-10-26
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2019-10-26T22:19:42+08:00">
+                2019-10-26
+              </time>
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="MISC–gzcompress压缩流量包"><a href="#MISC–gzcompress压缩流量包" class="headerlink" title="MISC–gzcompress压缩流量包"></a>MISC–gzcompress压缩流量包</h1><p>题目: 提示PHP的gzcompress压缩算法，提供一个可下载数据包。</p>
+<p>初步思路: 数据提取可用文件，利用PHP的gzuncompress解压缩。</p>
+<p><img src="/2019/10/26/Misc取证分析-gzcompress压缩流量包/title.png" alt="title"></p>
+<h2 id="1、从数据中提取可用文件"><a href="#1、从数据中提取可用文件" class="headerlink" title="1、从数据中提取可用文件"></a>1、从数据中提取可用文件</h2><p><img src="/2019/10/26/Misc取证分析-gzcompress压缩流量包/wireshark.png" alt="wireshark"></p>
+<h3 id="①过滤数据包"><a href="#①过滤数据包" class="headerlink" title="①过滤数据包"></a>①过滤数据包</h3><p>一大堆混乱的数据包，通过使用过滤器过滤掉没价值的。因为是题目提示了<kbd>PHP</kbd>，所以可以先尝试一下过滤出<kbd>HTTP</kbd>协议。</p>
+<p><img src="/2019/10/26/Misc取证分析-gzcompress压缩流量包/wireshark1.png" alt="wireshark1"></p>
+<p>可以明显的看出大量的HEAD方法。[HEAD: 用来获取请求实体的信息而不需要传输实体主体。个人见解: 用来判断服务器是否存在请求的文件]</p>
+<p>初步判断是在进行扫描目录的操作。</p>
+<p>拉到最后发现两个200回显，说明请求的文件存在。</p>
+<p><img src="/2019/10/26/Misc取证分析-gzcompress压缩流量包/wireshark2.png" alt="wireshark2"></p>
+<h3 id="②文件提取"><a href="#②文件提取" class="headerlink" title="②文件提取"></a>②文件提取</h3><p><img src="/2019/10/26/Misc取证分析-gzcompress压缩流量包/wireshark3.png" alt="wireshark3"></p>
+<p>可以看到文件名中有base64_decode()。所以先将里面的内容base64解码。这使用python的base64库解码。</p>
+<p><img src="/2019/10/26/Misc取证分析-gzcompress压缩流量包/base64.png" alt="base64"></p>
+<p>需要注意的是，输入的字符串必须符合base64的padding规则(当原数据长度不是3的整倍数时，在结果后面加‘=’。)</p>
+<h2 id="2、gzuncompress解码"><a href="#2、gzuncompress解码" class="headerlink" title="2、gzuncompress解码"></a>2、gzuncompress解码</h2><h3 id="①使用notepad-打开，发现一大堆的乱码。其实是压缩后的字符串。"><a href="#①使用notepad-打开，发现一大堆的乱码。其实是压缩后的字符串。" class="headerlink" title="①使用notepad++打开，发现一大堆的乱码。其实是压缩后的字符串。"></a>①使用notepad++打开，发现一大堆的乱码。其实是压缩后的字符串。</h3><p><img src="/2019/10/26/Misc取证分析-gzcompress压缩流量包/notepad.png" alt="notepad"></p>
+<h3 id="②解压缩需要先将乱码转为base64编码。"><a href="#②解压缩需要先将乱码转为base64编码。" class="headerlink" title="②解压缩需要先将乱码转为base64编码。"></a>②解压缩需要先将乱码转为base64编码。</h3><p><img src="/2019/10/26/Misc取证分析-gzcompress压缩流量包/base641.png" alt="base641"></p>
+<p>这里使用python的<kbd>文件打开</kbd>配合<kbd>base64库</kbd>。直接将乱码进行base64编码得到的值是错的。</p>
+<p>这里也可以直接使用Notepad++的base64插件</p>
+<p><img src="/2019/10/26/Misc取证分析-gzcompress压缩流量包/notepad1.png" alt="notepad1"></p>
+<h3 id="③再利用PHP的gzuncompress函数解压缩"><a href="#③再利用PHP的gzuncompress函数解压缩" class="headerlink" title="③再利用PHP的gzuncompress函数解压缩"></a>③再利用PHP的gzuncompress函数解压缩</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">function func_is_base64($str)</span><br><span class="line">&#123;</span><br><span class="line">	return $str == base64_encode(base64_decode($str)) ? true:false;</span><br><span class="line">&#125;</span><br><span class="line">function func_gzuncompress($str)</span><br><span class="line">&#123;</span><br><span class="line">	</span><br><span class="line">	if (func_is_base64($str))</span><br><span class="line">	&#123;</span><br><span class="line">		return gzuncompress(base64_decode($str));</span><br><span class="line">	&#125;</span><br><span class="line">	return $str;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">$str_1 = &quot;eJzLyCxJLkmrtjBNMkhMNU60SDQ3sEiyNDJPSjNMNDZISUszTjYzNTGo5QIAGMsMbA==&quot;;</span><br><span class="line">$str_2 = func_gzuncompress($str_1);</span><br><span class="line">echo $str_2;</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
+
+<p><a href="https://blog.csdn.net/weng_xianhu/article/details/79419551" target="_blank" rel="noopener">代码出处</a></p>
+<p>使用PHPstudy运行PHP脚本即可得到flag。</p>
+<p><img src="/2019/10/26/Misc取证分析-gzcompress压缩流量包/phpstudy.png" alt="phpstudy"></p>
+
+      
+    </div>
+    
+    
+    
+	
+	<div>
+      
+        
+<div class="my_post_copyright">
+  <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+  
+  <!-- JS库 sweetalert 可修改路径 -->
+  <script src="https://cdn.bootcss.com/jquery/2.0.0/jquery.min.js"></script>
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+  <p><span>本文标题:</span><a href="/2019/10/26/Misc取证分析-gzcompress压缩流量包/">Misc取证分析--gzcompress压缩流量包</a></p>
+  <p><span>文章作者:</span><a href="/" title="访问 Tanker 的个人博客">Tanker</a></p>
+  <p><span>发布时间:</span>2019年10月26日 - 21:40</p>
+  <p><span>最后更新:</span>2019年10月26日 - 22:19</p>
+  <p><span>原始链接:</span><a href="/2019/10/26/Misc取证分析-gzcompress压缩流量包/" title="Misc取证分析--gzcompress压缩流量包">https://www5059109.github.io/2019/10/26/Misc取证分析-gzcompress压缩流量包/</a>
+    <span class="copy-path" title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="https://www5059109.github.io/2019/10/26/Misc取证分析-gzcompress压缩流量包/" aria-label="复制成功！"></i></span>
+  </p>
+  <p><span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" title="Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)">署名-非商业性使用-禁止演绎 4.0 国际</a> 转载请保留原文链接及作者。</p>  
+</div>
+<script> 
+    var clipboard = new Clipboard('.fa-clipboard');
+    $(".fa-clipboard").click(function(){
+      clipboard.on('success', function(){
+        swal({   
+          title: "",   
+          text: '复制成功',
+          icon: "success", 
+          showConfirmButton: true
+          });
+    });
+    });  
+</script>
+
+      
+	</div>
+	
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/10/18/misc/" rel="next" title="misc">
+                <i class="fa fa-chevron-left"></i> misc
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Tanker</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://baidu.com/" title="Baidu" target="_blank">Baidu</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#MISC–gzcompress压缩流量包"><span class="nav-number">1.</span> <span class="nav-text">MISC–gzcompress压缩流量包</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1、从数据中提取可用文件"><span class="nav-number">1.1.</span> <span class="nav-text">1、从数据中提取可用文件</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#①过滤数据包"><span class="nav-number">1.1.1.</span> <span class="nav-text">①过滤数据包</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#②文件提取"><span class="nav-number">1.1.2.</span> <span class="nav-text">②文件提取</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2、gzuncompress解码"><span class="nav-number">1.2.</span> <span class="nav-text">2、gzuncompress解码</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#①使用notepad-打开，发现一大堆的乱码。其实是压缩后的字符串。"><span class="nav-number">1.2.1.</span> <span class="nav-text">①使用notepad++打开，发现一大堆的乱码。其实是压缩后的字符串。</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#②解压缩需要先将乱码转为base64编码。"><span class="nav-number">1.2.2.</span> <span class="nav-text">②解压缩需要先将乱码转为base64编码。</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#③再利用PHP的gzuncompress函数解压缩"><span class="nav-number">1.2.3.</span> <span class="nav-text">③再利用PHP的gzuncompress函数解压缩</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Tanker</span>
+
+  
+</div>
+
+<!-- 
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+ 
+-->
+
+
+
+<div class="theme-info">
+  <div class="powered-by"></div>
+  <span class="post-count">博客全站共5.4k字</span>
+</div>
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+  <script type="text/javascript" src="/js/src/clipboard.min.js"></script> 
+  <script type="text/javascript" src="/js/src/clipboard-use.js"></script>
+  <script type="text/javascript" src="/js/click.js"></script>
+  
+</body>
+</html>
