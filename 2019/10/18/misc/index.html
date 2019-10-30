@@ -167,6 +167,10 @@
 <meta property="og:image" content="https://www5059109.github.io/2019/10/18/misc/silenteye1.png">
 <meta property="og:image" content="https://www5059109.github.io/2019/10/18/misc/firework1.png">
 <meta property="og:image" content="https://www5059109.github.io/2019/10/18/misc/firework2.png">
+<meta property="og:image" content="https://www5059109.github.io/2019/10/18/misc/rartype.png">
+<meta property="og:image" content="https://www5059109.github.io/2019/10/18/misc/rartype1.png">
+<meta property="og:image" content="https://www5059109.github.io/2019/10/18/misc/rartype2.png">
+<meta property="og:image" content="https://www5059109.github.io/2019/10/18/misc/rartype3.png">
 <meta property="og:image" content="https://www5059109.github.io/2019/10/18/misc/rar1.png">
 <meta property="og:image" content="https://www5059109.github.io/2019/10/18/misc/rar2.png">
 <meta property="og:image" content="https://www5059109.github.io/2019/10/18/misc/rar3.png">
@@ -187,7 +191,7 @@
 <meta property="og:image" content="https://www5059109.github.io/2019/10/18/misc/tls.png">
 <meta property="og:image" content="https://www5059109.github.io/2019/10/18/misc/tls1.png">
 <meta property="og:image" content="https://www5059109.github.io/2019/10/18/misc/tls2.png">
-<meta property="og:updated_time" content="2019-10-26T01:59:23.651Z">
+<meta property="og:updated_time" content="2019-10-30T14:43:47.349Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="misc">
 <meta name="twitter:description" content="文件类型识别File命令应用场景: 文件后缀名不可见，通过识别文件头判断文件类型，修改后缀名即可正常打开。 命令:  file unkonw 示例:  查看文件头应用场景: Windows下，查看文件头信息判断文件类型 常见类型的文件头:  使用Winhex查看文件头信息:  文件头残缺/错误发生现象: 文件无法打开。利用file命令查看后显示为 data。 解决方法:  windows下使用wi">
@@ -380,8 +384,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2019-10-26T09:59:23+08:00">
-                2019-10-26
+              <time title="更新于" itemprop="dateModified" datetime="2019-10-30T22:43:47+08:00">
+                2019-10-30
               </time>
             
           </span>
@@ -541,7 +545,7 @@
 <h3 id="F5"><a href="#F5" class="headerlink" title="F5"></a>F5</h3><p>简介: 使用F5算法</p>
 <p>应用场景: 通过Stegdetect 分析到图片使用 F5 算法</p>
 <p>使用方法:</p>
-<p><code>java extract hide.jpg -p key</code> // 默认保存为当前目录下的 output.txt</p>
+<p><code>java Extract hide.jpg -p key</code> // 默认保存为当前目录下的 output.txt</p>
 <p>举例:</p>
 <p>遇到再来。</p>
 <h3 id="bftools"><a href="#bftools" class="headerlink" title="bftools"></a>bftools</h3><p>简介: 使用Brainfuck编写的程序。能够对各种程序加密解密(原理懵逼)，使用brainloller 和 braincopter 代码进行编码/解码</p>
@@ -572,7 +576,52 @@
 <li>当某个定位角缺漏或者被覆盖，也可以自动识别，若失败则需要使用作图工具手动恢复定位角。</li>
 <li>定位角中间为白色，则需要使用作图工具进行反色处理。</li>
 </ul>
-<h1 id="压缩文件"><a href="#压缩文件" class="headerlink" title="压缩文件"></a>压缩文件</h1><h2 id="伪加密"><a href="#伪加密" class="headerlink" title="伪加密"></a>伪加密</h2><p>导读: 一个Zip文件由三部分组成: 压缩源文件数据区+压缩源文件目录区+压缩源文件目录结束标志 。</p>
+<h1 id="压缩文件"><a href="#压缩文件" class="headerlink" title="压缩文件"></a>压缩文件</h1><h2 id="RAR文件格式"><a href="#RAR文件格式" class="headerlink" title="RAR文件格式"></a>RAR文件格式</h2><p>简介:RAR分别由标记块(第一块)、压缩文件头(第二块)、文件头(不固定)、结尾块(不固定)组成。</p>
+<h3 id="标记块"><a href="#标记块" class="headerlink" title="标记块"></a>标记块</h3><p><img src="/2019/10/18/misc/rartype.png" alt="rartype"></p>
+<ul>
+<li><p>HEAD_CRC: 占用2B ，固定为 0x6152</p>
+</li>
+<li><p>HEAD_TYPE: 占用1B ，标记块为 0x72</p>
+</li>
+<li><p>HEAD_FLAGS: 占用2B，固定为 0x1A21</p>
+</li>
+<li><p>HEAD_SIZE: 占用2B，块大小。</p>
+</li>
+<li><p>总共7B，为固定序列。</p>
+</li>
+</ul>
+<h3 id="压缩文件头"><a href="#压缩文件头" class="headerlink" title="压缩文件头"></a>压缩文件头</h3><p><img src="/2019/10/18/misc/rartype1.png" alt="rartype1"></p>
+<ul>
+<li><p>HEAD_CRC: 占用2B,压缩包的CRC。</p>
+</li>
+<li><p>HEAD_TYPE: 占用1B，压缩文件头为 0x73</p>
+</li>
+<li><p>HEAD_FLAGS: 占用2B，位标记，加密时置为 0x0080。(打开压缩包需要输入密匙)。</p>
+</li>
+<li><p>HEAD_SIZE: 占用2B，压缩文件头大小(包括压缩文件注释)</p>
+</li>
+<li><p>RESERVED1、RESERVED2: 占用6B，保留位。</p>
+</li>
+</ul>
+<h3 id="文件头"><a href="#文件头" class="headerlink" title="文件头"></a>文件头</h3><p><img src="/2019/10/18/misc/rartype2.png" alt="rartype2"></p>
+<ul>
+<li><p>HEAD_CRC: 占用2B，文件头块的CRC。</p>
+</li>
+<li><p>HEAD_TYPE: 占用1B，文件头为 0x74。</p>
+</li>
+<li><p>HEAD_FLAGS: 占用2B，位标记</p>
+</li>
+<li><p>HEAD_SIZE: 占用2B 文件头大小(包括文件名和注释)</p>
+</li>
+<li><p>OTHER: 占用9B。</p>
+</li>
+<li><p>FILE_CRC: 占用4B，文件的CRC。</p>
+</li>
+<li><p>OTHER: 其余的压缩文件属性。</p>
+</li>
+</ul>
+<h3 id="结尾块"><a href="#结尾块" class="headerlink" title="结尾块"></a>结尾块</h3><p><img src="/2019/10/18/misc/rartype3.png" alt="rartype3"></p>
+<h2 id="ZIP伪加密"><a href="#ZIP伪加密" class="headerlink" title="ZIP伪加密"></a>ZIP伪加密</h2><p>导读: 一个Zip文件由三部分组成: 压缩源文件数据区+压缩源文件目录区+压缩源文件目录结束标志 。</p>
 <p>主要注意 </p>
 <ul>
 <li><p>504B0304 — ZIP文件头标识</p>
@@ -711,6 +760,7 @@
 </ul>
 <p>操作方法: 导入key解密后即可看到HTTP数据包。或者追踪TLS流。</p>
 <p><img src="/2019/10/18/misc/tls2.png" alt="tls2"></p>
+<p>PS: key导入的另外一种情形 <a href="https://blog.csdn.net/nimasike/article/details/80887436" target="_blank" rel="noopener">配置环境变量</a></p>
 
       
     </div>
@@ -730,7 +780,7 @@
   <p><span>本文标题:</span><a href="/2019/10/18/misc/">misc</a></p>
   <p><span>文章作者:</span><a href="/" title="访问 Tanker 的个人博客">Tanker</a></p>
   <p><span>发布时间:</span>2019年10月18日 - 19:20</p>
-  <p><span>最后更新:</span>2019年10月26日 - 09:59</p>
+  <p><span>最后更新:</span>2019年10月30日 - 22:43</p>
   <p><span>原始链接:</span><a href="/2019/10/18/misc/" title="misc">https://www5059109.github.io/2019/10/18/misc/</a>
     <span class="copy-path" title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="https://www5059109.github.io/2019/10/18/misc/" aria-label="复制成功！"></i></span>
   </p>
@@ -859,7 +909,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-count">5</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -910,7 +960,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#文件类型识别"><span class="nav-number">1.</span> <span class="nav-text">文件类型识别</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#File命令"><span class="nav-number">1.1.</span> <span class="nav-text">File命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#查看文件头"><span class="nav-number">1.2.</span> <span class="nav-text">查看文件头</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#文件头残缺-错误"><span class="nav-number">1.3.</span> <span class="nav-text">文件头残缺/错误</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#文件完整性检测"><span class="nav-number">1.4.</span> <span class="nav-text">文件完整性检测</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#md5sum命令-–-Linux"><span class="nav-number">1.4.1.</span> <span class="nav-text">md5sum命令 – Linux</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#certutil命令-–-Windows"><span class="nav-number">1.4.2.</span> <span class="nav-text">certutil命令 – Windows</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#文件分离"><span class="nav-number">2.</span> <span class="nav-text">文件分离</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Binwalk工具-–-Linux"><span class="nav-number">2.1.</span> <span class="nav-text">Binwalk工具 – Linux</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Formost工具-–-Linux"><span class="nav-number">2.2.</span> <span class="nav-text">Formost工具 – Linux</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#dd命令-–-Linux"><span class="nav-number">2.3.</span> <span class="nav-text">dd命令 – Linux</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Winhex工具-–-Windows"><span class="nav-number">2.4.</span> <span class="nav-text">Winhex工具 – Windows</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#010Editor工具-–-Windows"><span class="nav-number">2.5.</span> <span class="nav-text">010Editor工具 – Windows</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#文件合并"><span class="nav-number">3.</span> <span class="nav-text">文件合并</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#cat命令-–-Linux"><span class="nav-number">3.1.</span> <span class="nav-text">cat命令 – Linux</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#copy命令-–-Windows"><span class="nav-number">3.2.</span> <span class="nav-text">copy命令 – Windows</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#文件隐写"><span class="nav-number">4.</span> <span class="nav-text">文件隐写</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#LSB隐写–最低有效位"><span class="nav-number">4.1.</span> <span class="nav-text">LSB隐写–最低有效位</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Stegsolve"><span class="nav-number">4.1.1.</span> <span class="nav-text">Stegsolve</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Zsteg"><span class="nav-number">4.1.2.</span> <span class="nav-text">Zsteg</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Wbstego4"><span class="nav-number">4.1.3.</span> <span class="nav-text">Wbstego4</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#python脚本"><span class="nav-number">4.1.4.</span> <span class="nav-text">python脚本</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#CRC检验码出错"><span class="nav-number">4.2.</span> <span class="nav-text">CRC检验码出错</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#TweakPNG"><span class="nav-number">4.2.1.</span> <span class="nav-text">TweakPNG</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#图片加密解密"><span class="nav-number">4.3.</span> <span class="nav-text">图片加密解密</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Stegdetect工具–Linux"><span class="nav-number">4.3.1.</span> <span class="nav-text">Stegdetect工具–Linux</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#JPHide图片隐写–Windows"><span class="nav-number">4.3.2.</span> <span class="nav-text">JPHide图片隐写–Windows</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#OutGuess–Linux"><span class="nav-number">4.3.3.</span> <span class="nav-text">OutGuess–Linux</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#F5"><span class="nav-number">4.3.4.</span> <span class="nav-text">F5</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#bftools"><span class="nav-number">4.3.5.</span> <span class="nav-text">bftools</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SilentEye"><span class="nav-number">4.3.6.</span> <span class="nav-text">SilentEye</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#FIrework作图软件"><span class="nav-number">4.4.</span> <span class="nav-text">FIrework作图软件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Winhex-010Editor-notepad"><span class="nav-number">4.5.</span> <span class="nav-text">Winhex/010Editor/notepad++</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#二维码处理"><span class="nav-number">5.</span> <span class="nav-text">二维码处理</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#CRQ二维码扫描工具"><span class="nav-number">5.1.</span> <span class="nav-text">CRQ二维码扫描工具</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#压缩文件"><span class="nav-number">6.</span> <span class="nav-text">压缩文件</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#伪加密"><span class="nav-number">6.1.</span> <span class="nav-text">伪加密</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#暴力破解"><span class="nav-number">6.2.</span> <span class="nav-text">暴力破解</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#明文攻击"><span class="nav-number">6.3.</span> <span class="nav-text">明文攻击</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#取证分析"><span class="nav-number">7.</span> <span class="nav-text">取证分析</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Wireshark过滤器"><span class="nav-number">7.1.</span> <span class="nav-text">Wireshark过滤器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Wireshark流汇聚"><span class="nav-number">7.2.</span> <span class="nav-text">Wireshark流汇聚</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Wireshark数据提取"><span class="nav-number">7.3.</span> <span class="nav-text">Wireshark数据提取</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#WIFI握手包破解"><span class="nav-number">7.4.</span> <span class="nav-text">WIFI握手包破解</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#USB键盘流量分析"><span class="nav-number">7.5.</span> <span class="nav-text">USB键盘流量分析</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#USB鼠标流量分析"><span class="nav-number">7.6.</span> <span class="nav-text">USB鼠标流量分析</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#https数据包分析"><span class="nav-number">7.7.</span> <span class="nav-text">https数据包分析</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#文件类型识别"><span class="nav-number">1.</span> <span class="nav-text">文件类型识别</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#File命令"><span class="nav-number">1.1.</span> <span class="nav-text">File命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#查看文件头"><span class="nav-number">1.2.</span> <span class="nav-text">查看文件头</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#文件头残缺-错误"><span class="nav-number">1.3.</span> <span class="nav-text">文件头残缺/错误</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#文件完整性检测"><span class="nav-number">1.4.</span> <span class="nav-text">文件完整性检测</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#md5sum命令-–-Linux"><span class="nav-number">1.4.1.</span> <span class="nav-text">md5sum命令 – Linux</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#certutil命令-–-Windows"><span class="nav-number">1.4.2.</span> <span class="nav-text">certutil命令 – Windows</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#文件分离"><span class="nav-number">2.</span> <span class="nav-text">文件分离</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Binwalk工具-–-Linux"><span class="nav-number">2.1.</span> <span class="nav-text">Binwalk工具 – Linux</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Formost工具-–-Linux"><span class="nav-number">2.2.</span> <span class="nav-text">Formost工具 – Linux</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#dd命令-–-Linux"><span class="nav-number">2.3.</span> <span class="nav-text">dd命令 – Linux</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Winhex工具-–-Windows"><span class="nav-number">2.4.</span> <span class="nav-text">Winhex工具 – Windows</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#010Editor工具-–-Windows"><span class="nav-number">2.5.</span> <span class="nav-text">010Editor工具 – Windows</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#文件合并"><span class="nav-number">3.</span> <span class="nav-text">文件合并</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#cat命令-–-Linux"><span class="nav-number">3.1.</span> <span class="nav-text">cat命令 – Linux</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#copy命令-–-Windows"><span class="nav-number">3.2.</span> <span class="nav-text">copy命令 – Windows</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#文件隐写"><span class="nav-number">4.</span> <span class="nav-text">文件隐写</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#LSB隐写–最低有效位"><span class="nav-number">4.1.</span> <span class="nav-text">LSB隐写–最低有效位</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Stegsolve"><span class="nav-number">4.1.1.</span> <span class="nav-text">Stegsolve</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Zsteg"><span class="nav-number">4.1.2.</span> <span class="nav-text">Zsteg</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Wbstego4"><span class="nav-number">4.1.3.</span> <span class="nav-text">Wbstego4</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#python脚本"><span class="nav-number">4.1.4.</span> <span class="nav-text">python脚本</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#CRC检验码出错"><span class="nav-number">4.2.</span> <span class="nav-text">CRC检验码出错</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#TweakPNG"><span class="nav-number">4.2.1.</span> <span class="nav-text">TweakPNG</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#图片加密解密"><span class="nav-number">4.3.</span> <span class="nav-text">图片加密解密</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Stegdetect工具–Linux"><span class="nav-number">4.3.1.</span> <span class="nav-text">Stegdetect工具–Linux</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#JPHide图片隐写–Windows"><span class="nav-number">4.3.2.</span> <span class="nav-text">JPHide图片隐写–Windows</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#OutGuess–Linux"><span class="nav-number">4.3.3.</span> <span class="nav-text">OutGuess–Linux</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#F5"><span class="nav-number">4.3.4.</span> <span class="nav-text">F5</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#bftools"><span class="nav-number">4.3.5.</span> <span class="nav-text">bftools</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SilentEye"><span class="nav-number">4.3.6.</span> <span class="nav-text">SilentEye</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#FIrework作图软件"><span class="nav-number">4.4.</span> <span class="nav-text">FIrework作图软件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Winhex-010Editor-notepad"><span class="nav-number">4.5.</span> <span class="nav-text">Winhex/010Editor/notepad++</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#二维码处理"><span class="nav-number">5.</span> <span class="nav-text">二维码处理</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#CRQ二维码扫描工具"><span class="nav-number">5.1.</span> <span class="nav-text">CRQ二维码扫描工具</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#压缩文件"><span class="nav-number">6.</span> <span class="nav-text">压缩文件</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#RAR文件格式"><span class="nav-number">6.1.</span> <span class="nav-text">RAR文件格式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#标记块"><span class="nav-number">6.1.1.</span> <span class="nav-text">标记块</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#压缩文件头"><span class="nav-number">6.1.2.</span> <span class="nav-text">压缩文件头</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#文件头"><span class="nav-number">6.1.3.</span> <span class="nav-text">文件头</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#结尾块"><span class="nav-number">6.1.4.</span> <span class="nav-text">结尾块</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ZIP伪加密"><span class="nav-number">6.2.</span> <span class="nav-text">ZIP伪加密</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#暴力破解"><span class="nav-number">6.3.</span> <span class="nav-text">暴力破解</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#明文攻击"><span class="nav-number">6.4.</span> <span class="nav-text">明文攻击</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#取证分析"><span class="nav-number">7.</span> <span class="nav-text">取证分析</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Wireshark过滤器"><span class="nav-number">7.1.</span> <span class="nav-text">Wireshark过滤器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Wireshark流汇聚"><span class="nav-number">7.2.</span> <span class="nav-text">Wireshark流汇聚</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Wireshark数据提取"><span class="nav-number">7.3.</span> <span class="nav-text">Wireshark数据提取</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#WIFI握手包破解"><span class="nav-number">7.4.</span> <span class="nav-text">WIFI握手包破解</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#USB键盘流量分析"><span class="nav-number">7.5.</span> <span class="nav-text">USB键盘流量分析</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#USB鼠标流量分析"><span class="nav-number">7.6.</span> <span class="nav-text">USB鼠标流量分析</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#https数据包分析"><span class="nav-number">7.7.</span> <span class="nav-text">https数据包分析</span></a></li></ol></li></ol></div>
             
 
           </div>
@@ -956,7 +1006,7 @@
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共5.4k字</span>
+  <span class="post-count">博客全站共6.2k字</span>
 </div>
 
 
