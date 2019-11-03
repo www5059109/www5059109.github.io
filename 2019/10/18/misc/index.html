@@ -163,6 +163,8 @@
 <meta property="og:image" content="https://www5059109.github.io/2019/10/18/misc/outguess.png">
 <meta property="og:image" content="https://www5059109.github.io/2019/10/18/misc/outguess1.png">
 <meta property="og:image" content="https://www5059109.github.io/2019/10/18/misc/outguess2.png">
+<meta property="og:image" content="https://www5059109.github.io/2019/10/18/misc/bftools1.png">
+<meta property="og:image" content="https://www5059109.github.io/2019/10/18/misc/bftools2.png">
 <meta property="og:image" content="https://www5059109.github.io/2019/10/18/misc/slienteye.png">
 <meta property="og:image" content="https://www5059109.github.io/2019/10/18/misc/silenteye1.png">
 <meta property="og:image" content="https://www5059109.github.io/2019/10/18/misc/firework1.png">
@@ -191,7 +193,7 @@
 <meta property="og:image" content="https://www5059109.github.io/2019/10/18/misc/tls.png">
 <meta property="og:image" content="https://www5059109.github.io/2019/10/18/misc/tls1.png">
 <meta property="og:image" content="https://www5059109.github.io/2019/10/18/misc/tls2.png">
-<meta property="og:updated_time" content="2019-10-30T14:43:47.349Z">
+<meta property="og:updated_time" content="2019-11-03T01:48:16.219Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="misc">
 <meta name="twitter:description" content="文件类型识别File命令应用场景: 文件后缀名不可见，通过识别文件头判断文件类型，修改后缀名即可正常打开。 命令:  file unkonw 示例:  查看文件头应用场景: Windows下，查看文件头信息判断文件类型 常见类型的文件头:  使用Winhex查看文件头信息:  文件头残缺/错误发生现象: 文件无法打开。利用file命令查看后显示为 data。 解决方法:  windows下使用wi">
@@ -384,8 +386,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2019-10-30T22:43:47+08:00">
-                2019-10-30
+              <time title="更新于" itemprop="dateModified" datetime="2019-11-03T09:48:16+08:00">
+                2019-11-03
               </time>
             
           </span>
@@ -553,7 +555,11 @@
 <p>​    <code>bftools.exe decode braincopter source.png -output key.png</code></p>
 <p>​    <code>bftools.exe run</code> // 查看上一步输出文件</p>
 <p>举例:</p>
-<p>遇到再来。</p>
+<p><img src="/2019/10/18/misc/bftools1.png" alt="bftools1"></p>
+<p>在Windows的DOS命令下:</p>
+<p>​    <code>bftools.exe decode braincopter 解密图片 -out 输出文件</code></p>
+<p>​    <code>bftools.exe run 输出文件</code></p>
+<p><img src="/2019/10/18/misc/bftools2.png" alt="bftools2"></p>
 <h3 id="SilentEye"><a href="#SilentEye" class="headerlink" title="SilentEye"></a>SilentEye</h3><p>简介: 能够将文字或者文件隐藏在图片中。使用AES 128、AES 256加密数据。LSB隐写(支持的格式 jpeg bmp wave)。</p>
 <p>使用方法: </p>
 <ul>
@@ -642,7 +648,6 @@
 <p>密码已经不见了，说明这是伪加密。</p>
 <h2 id="暴力破解"><a href="#暴力破解" class="headerlink" title="暴力破解"></a>暴力破解</h2><p>应用场景: 当rar为真加密时，使用 ARCHPR.exe 或其他暴力破解工具破解压缩文件密码。支持压缩类型( ZIP \ RAR \ ACE\ ARJ)</p>
 <p>PS: 尽量收集信息，准备好字典，拼人品的时候到了。</p>
-<p>例子:</p>
 <h2 id="明文攻击"><a href="#明文攻击" class="headerlink" title="明文攻击"></a>明文攻击</h2><p>原理: zip压缩文件设定的密码被转换成3个4B的key。攻击者将已知明文文件(将无密码的文件压缩)与加密压缩包对比，提取出两文件的不同值则为key。</p>
 <p>前提: </p>
 <ul>
@@ -780,7 +785,7 @@
   <p><span>本文标题:</span><a href="/2019/10/18/misc/">misc</a></p>
   <p><span>文章作者:</span><a href="/" title="访问 Tanker 的个人博客">Tanker</a></p>
   <p><span>发布时间:</span>2019年10月18日 - 19:20</p>
-  <p><span>最后更新:</span>2019年10月30日 - 22:43</p>
+  <p><span>最后更新:</span>2019年11月03日 - 09:48</p>
   <p><span>原始链接:</span><a href="/2019/10/18/misc/" title="misc">https://www5059109.github.io/2019/10/18/misc/</a>
     <span class="copy-path" title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="https://www5059109.github.io/2019/10/18/misc/" aria-label="复制成功！"></i></span>
   </p>
@@ -909,7 +914,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-count">6</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -1006,7 +1011,7 @@
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共6.2k字</span>
+  <span class="post-count">博客全站共7.6k字</span>
 </div>
 
 

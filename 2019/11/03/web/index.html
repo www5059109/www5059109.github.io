@@ -1,0 +1,929 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Lobster Two:300,300italic,400,400italic,700,700italic|Roboto Mono:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="HTTP请求方法 GET : 提交内容明文显示在URL中，请求页面信息并返回实体。 POST : 请求内容隐藏在请求正文中，请求页面信息并返回实体。 HEAD : 类似于GET，用于测试网页服务，返回无具体内容。 OPTIONS : 用于获取当前网站所允许的请求方法 TRACE : 回显服务器收到的请求，用于测试网站。 PUT : 向服务器上传文件 DELETE : 请求服务器删除文件 MOVE">
+<meta property="og:type" content="article">
+<meta property="og:title" content="web">
+<meta property="og:url" content="https://www5059109.github.io/2019/11/03/web/index.html">
+<meta property="og:site_name" content="筑梦千里">
+<meta property="og:description" content="HTTP请求方法 GET : 提交内容明文显示在URL中，请求页面信息并返回实体。 POST : 请求内容隐藏在请求正文中，请求页面信息并返回实体。 HEAD : 类似于GET，用于测试网页服务，返回无具体内容。 OPTIONS : 用于获取当前网站所允许的请求方法 TRACE : 回显服务器收到的请求，用于测试网站。 PUT : 向服务器上传文件 DELETE : 请求服务器删除文件 MOVE">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://www5059109.github.io/2019/11/03/web/mysql.png">
+<meta property="og:image" content="https://www5059109.github.io/2019/11/03/web/mysql1.png">
+<meta property="og:image" content="https://www5059109.github.io/2019/11/03/web/bugku1.png">
+<meta property="og:updated_time" content="2019-11-03T14:57:59.471Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="web">
+<meta name="twitter:description" content="HTTP请求方法 GET : 提交内容明文显示在URL中，请求页面信息并返回实体。 POST : 请求内容隐藏在请求正文中，请求页面信息并返回实体。 HEAD : 类似于GET，用于测试网页服务，返回无具体内容。 OPTIONS : 用于获取当前网站所允许的请求方法 TRACE : 回显服务器收到的请求，用于测试网站。 PUT : 向服务器上传文件 DELETE : 请求服务器删除文件 MOVE">
+<meta name="twitter:image" content="https://www5059109.github.io/2019/11/03/web/mysql.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://www5059109.github.io/2019/11/03/web/">
+
+
+
+
+
+  <title>web | 筑梦千里</title>
+  
+
+
+
+
+
+
+
+
+  <script type="text/javascript" src="/js/src/copy.js"></script>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">筑梦千里</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://www5059109.github.io/2019/11/03/web/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Tanker">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="筑梦千里">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">web</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-11-03T09:55:13+08:00">
+                2019-11-03
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2019-11-03T22:57:59+08:00">
+                2019-11-03
+              </time>
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="HTTP请求方法"><a href="#HTTP请求方法" class="headerlink" title="HTTP请求方法"></a>HTTP请求方法</h1><ul>
+<li>GET : 提交内容明文显示在URL中，请求页面信息并返回实体。</li>
+<li>POST : 请求内容隐藏在请求正文中，请求页面信息并返回实体。</li>
+<li>HEAD : 类似于GET，用于测试网页服务，返回无具体内容。</li>
+<li>OPTIONS : 用于获取当前网站所允许的请求方法</li>
+<li>TRACE : 回显服务器收到的请求，用于测试网站。</li>
+<li>PUT : 向服务器上传文件</li>
+<li>DELETE : 请求服务器删除文件</li>
+<li>MOVE : 请求服务器将指定文件移动到另一个地方</li>
+<li>COPY : 请求服务器将指定文件拷贝到另一个地方</li>
+</ul>
+<h1 id="HTTP消息报头"><a href="#HTTP消息报头" class="headerlink" title="HTTP消息报头"></a>HTTP消息报头</h1><ul>
+<li>Accept : 指定客户端接收内容的类型</li>
+<li>Accept-charset : 浏览器可以接受的字符集</li>
+<li>Accept-Encoding : 浏览器可以接受的压缩编码类型</li>
+<li>Accept-Language : 浏览器可以接受的语言</li>
+<li>Connection : 是否长连接(HTTP/1.1 默认是 ) <ul>
+<li>开启 Connection: keep-alive </li>
+<li>关闭 Connection: close</li>
+</ul>
+</li>
+<li>Cookie : 浏览器将该域名下的Cookie发送给服务器</li>
+<li>Connect-Length : 请求内容长度</li>
+<li>Host : 请求服务器的域名(IP)和端口号(默认8080可省略)</li>
+<li>Referer : 标识从哪个页面跳转过来的</li>
+<li>User-Agent : 用户信息(系统版本 浏览器版本等)</li>
+<li>X-Forwarding-For 或 Client-ip : 用于标识用户真实IP</li>
+</ul>
+<h1 id="HTTP状态码"><a href="#HTTP状态码" class="headerlink" title="HTTP状态码"></a>HTTP状态码</h1><ul>
+<li><p>1XX : 请求已接收，正在处理</p>
+</li>
+<li><p>2XX : 正常响应</p>
+</li>
+<li><p>3XX : 请求正常，但重定向</p>
+<ul>
+<li>302 : 请求资源存在，但服务器引导用户向其他URL请求资源</li>
+</ul>
+</li>
+<li><p>4XX : 客户端请求错误</p>
+<ul>
+<li>400 : 请求语法错误</li>
+<li>403 : 拒绝提供服务，权限限制</li>
+<li>404 : 请求资源不存在</li>
+<li>405 : 请求方式不合法，请求方式不被允许</li>
+</ul>
+</li>
+<li><p>5XX : 服务器错误</p>
+<ul>
+<li>500 : 服务器发生不可预期错误</li>
+<li>503 : 服务器当前无法处理请求</li>
+</ul>
+</li>
+</ul>
+<h1 id="Mysql数据库"><a href="#Mysql数据库" class="headerlink" title="Mysql数据库"></a>Mysql数据库</h1><h2 id="数据库、数据表、字段还有记录-列"><a href="#数据库、数据表、字段还有记录-列" class="headerlink" title="数据库、数据表、字段还有记录(列)"></a>数据库、数据表、字段还有记录(列)</h2><p><img src="/2019/11/03/web/mysql.png" alt="mysql"></p>
+<h2 id="MYSQL语句"><a href="#MYSQL语句" class="headerlink" title="MYSQL语句"></a>MYSQL语句</h2><ul>
+<li>增</li>
+</ul>
+<p><code>insert into 表名 (字段名称1,字段名称2) value (值1,值2)</code></p>
+<ul>
+<li>删</li>
+</ul>
+<p><code>delete from 表名 where id=1</code></p>
+<ul>
+<li>改</li>
+</ul>
+<p><code>update 表名 set 字段名1=值1 where id=1</code></p>
+<ul>
+<li>查</li>
+</ul>
+<p><code>select * from 表名</code></p>
+<p><code>select 列名 from 表名</code></p>
+<p><code>select * from 表名 order by id</code> // 默认升序 。此处以id升序排序</p>
+<p><code>select * from 表名 like &#39;%模糊词%&#39;</code> // 查询中间带模糊词的</p>
+<p><code>select * from 表名 where id&gt;2</code></p>
+<p><code>select * from 表名 limit 0,1</code> //只显示1条 [0,1)区间内的字段</p>
+<ul>
+<li>And 和 Or 运算符</li>
+</ul>
+<p>and的优先级大于or。即先进行and运算，再进行or运算。</p>
+<h1 id="注入攻击"><a href="#注入攻击" class="headerlink" title="注入攻击"></a>注入攻击</h1><p>简介: 构造数据库执行语句进行对数据库的操作。下面以常见的Mysql注入作为介绍。</p>
+<h2 id="万能密码"><a href="#万能密码" class="headerlink" title="万能密码"></a>万能密码</h2><p>原理: 通过输入账号密码构造sql注入语句，达到绕过登录的目的。</p>
+<p>假设服务器使用的查询语句为: <code>select * from admin where username=&#39;admin&#39; and password=&#39;thisismypw&#39;;</code></p>
+<p>①在用户名已知的情况下:</p>
+<ol>
+<li>select * from admin where username=’<strong>admin’ or ‘1’=’1</strong>‘ and password=’thisismypw’;</li>
+<li>select * from admin where username=’<strong>admin’#</strong>‘ and password=’thisismypw’; //只会返回username=’admin’的记录</li>
+</ol>
+<p>②在用户名未知的情况下:</p>
+<ol>
+<li>select * from admin where username=’<strong>1’ or 1 or ‘1</strong>‘  and password=’thisismypw’; //该命令会返回表所有记录</li>
+</ol>
+<h2 id="联合查询"><a href="#联合查询" class="headerlink" title="联合查询"></a>联合查询</h2><p>简介: Union联合查询用于合并多个select语句结果</p>
+<p>注意: Union内部select语句的列数要与外部select相同。</p>
+<p>例<img src="/2019/11/03/web/mysql1.png" alt="mysql1"></p>
+<h1 id="上传漏洞"><a href="#上传漏洞" class="headerlink" title="上传漏洞"></a>上传漏洞</h1><p>常见五种上传检测方式:</p>
+<p>1、客户端javascript检测</p>
+<p>2、服务端MIME类型检测(数据包中content-type内容)</p>
+<p>3、服务端目录路径检测(检测 path 参数)</p>
+<p>4、服务端文件扩展名检测</p>
+<p>5、服务端文件内容检测。</p>
+<p>1、javascript检测绕过:</p>
+<p>①判断JS本地验证。通过Burp抓包，当数据包未发送时，本地弹框，则为JS检测。</p>
+<p>②绕过: 上传正常jpg格式，通过Burp抓包改包；使用检查元素修改HTML代码。</p>
+<p>2、MIME类型检测绕过:</p>
+<p>①Burp抓包 修改数据包中的 content-type 内容。一般改为 image/gif ；或上传正常jpg格式，修改数据包中的后缀。</p>
+<p>3、修改文件上传路径(当前目录权限低):</p>
+<p>①上传 ../1.asp 可以上传到当前目录的上一级目录。</p>
+<p>②利用Burp抓包修改Filepath。PS:通过filepath修改文件名称 /xx.asp;.jpg</p>
+<p>4、文件扩展名检测绕过:</p>
+<p>①黑名单检测：</p>
+<pre><code>1. 大小写绕过。
+ 2. 名单列表绕过。
+ 3. 特殊文件名绕过。 xx.asp_ 在WINDOWS中会自动去除_。在LINUX中不适用。
+ 4. 0x00截断绕过。xx.asp%00.jpg %00 复制之后 ctrl+shift+u</code></pre><p>②白名单检测：</p>
+<ol>
+<li>0x00截断绕过。</li>
+<li>解析调用绕过。配合上传一个代码注入过的白名单文件。</li>
+<li>双扩展文件名绕过。 1.jpg.php</li>
+</ol>
+<p>5、双文件上传绕过:</p>
+<ol>
+<li>使用Burp抓包，到Repeater中修改数据包。</li>
+<li>从——WebKitFormBoundaryJyQaD31BFy7f6JAC 开始复制到 图片结束。修改第二段数据的name和filename</li>
+</ol>
+<p>6、文件内容检测绕过:</p>
+<ol>
+<li>图片马。</li>
+</ol>
+<h1 id="弱类型攻击"><a href="#弱类型攻击" class="headerlink" title="弱类型攻击"></a>弱类型攻击</h1><p>原因: PHP类型比较存在松散比较(==)和严格比较(===)的区别。</p>
+<p>原理: </p>
+<ol>
+<li>松散比较: 类型强制转换之后比较值。字符串转为数值四种情形:<ol>
+<li>纯字符串。例如 admin =》 0</li>
+<li>以合法数值开头的字符串。例如 123admin =》 123</li>
+<li>科学记数法型的字符串。例如 1e2 =》 100</li>
+<li>0x开头的字符串。例如 0x10 =》16 </li>
+</ol>
+</li>
+</ol>
+<p>​    ②严格比较: 比较类型和值。 </p>
+<p>实例: <a href="http://123.206.87.240:8002/get/index1.php" target="_blank" rel="noopener">BugKu 矛盾</a></p>
+<p><img src="/2019/11/03/web/bugku1.png" alt="bugku1"></p>
+<p>分析: 简单的PHP弱类型利用。大致代码意思是<strong>要求num不能是数值的前提下num要等于1</strong>才能够显示flag。</p>
+<p>构造Payload: index1.php?num=1a </p>
+<p>PS: PHP弱类型利用还有 MD5\HASH绕过、json绕过、array_search is_array、strcmp绕过 php 5.3 、Switch绕过、DeDe任意用户密码重置、in_array()、is_number()</p>
+
+      
+    </div>
+    
+    
+    
+	
+	<div>
+      
+        
+<div class="my_post_copyright">
+  <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+  
+  <!-- JS库 sweetalert 可修改路径 -->
+  <script src="https://cdn.bootcss.com/jquery/2.0.0/jquery.min.js"></script>
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+  <p><span>本文标题:</span><a href="/2019/11/03/web/">web</a></p>
+  <p><span>文章作者:</span><a href="/" title="访问 Tanker 的个人博客">Tanker</a></p>
+  <p><span>发布时间:</span>2019年11月03日 - 09:55</p>
+  <p><span>最后更新:</span>2019年11月03日 - 22:57</p>
+  <p><span>原始链接:</span><a href="/2019/11/03/web/" title="web">https://www5059109.github.io/2019/11/03/web/</a>
+    <span class="copy-path" title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="https://www5059109.github.io/2019/11/03/web/" aria-label="复制成功！"></i></span>
+  </p>
+  <p><span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" title="Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)">署名-非商业性使用-禁止演绎 4.0 国际</a> 转载请保留原文链接及作者。</p>  
+</div>
+<script> 
+    var clipboard = new Clipboard('.fa-clipboard');
+    $(".fa-clipboard").click(function(){
+      clipboard.on('success', function(){
+        swal({   
+          title: "",   
+          text: '复制成功',
+          icon: "success", 
+          showConfirmButton: true
+          });
+    });
+    });  
+</script>
+
+      
+	</div>
+	
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/10/30/RAR-图片隐写/" rel="next" title="RAR+图片隐写">
+                <i class="fa fa-chevron-left"></i> RAR+图片隐写
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Tanker</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://baidu.com/" title="Baidu" target="_blank">Baidu</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#HTTP请求方法"><span class="nav-number">1.</span> <span class="nav-text">HTTP请求方法</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#HTTP消息报头"><span class="nav-number">2.</span> <span class="nav-text">HTTP消息报头</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#HTTP状态码"><span class="nav-number">3.</span> <span class="nav-text">HTTP状态码</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Mysql数据库"><span class="nav-number">4.</span> <span class="nav-text">Mysql数据库</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#数据库、数据表、字段还有记录-列"><span class="nav-number">4.1.</span> <span class="nav-text">数据库、数据表、字段还有记录(列)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#MYSQL语句"><span class="nav-number">4.2.</span> <span class="nav-text">MYSQL语句</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#注入攻击"><span class="nav-number">5.</span> <span class="nav-text">注入攻击</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#万能密码"><span class="nav-number">5.1.</span> <span class="nav-text">万能密码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#联合查询"><span class="nav-number">5.2.</span> <span class="nav-text">联合查询</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#上传漏洞"><span class="nav-number">6.</span> <span class="nav-text">上传漏洞</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#弱类型攻击"><span class="nav-number">7.</span> <span class="nav-text">弱类型攻击</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Tanker</span>
+
+  
+</div>
+
+<!-- 
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+ 
+-->
+
+
+
+<div class="theme-info">
+  <div class="powered-by"></div>
+  <span class="post-count">博客全站共7.6k字</span>
+</div>
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+  <script type="text/javascript" src="/js/src/clipboard.min.js"></script> 
+  <script type="text/javascript" src="/js/src/clipboard-use.js"></script>
+  <script type="text/javascript" src="/js/click.js"></script>
+  
+</body>
+</html>
