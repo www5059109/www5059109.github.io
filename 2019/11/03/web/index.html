@@ -133,7 +133,10 @@
 <meta property="og:image" content="https://www5059109.github.io/2019/11/03/web/mysql.png">
 <meta property="og:image" content="https://www5059109.github.io/2019/11/03/web/mysql1.png">
 <meta property="og:image" content="https://www5059109.github.io/2019/11/03/web/bugku1.png">
-<meta property="og:updated_time" content="2019-11-03T14:57:59.471Z">
+<meta property="og:image" content="https://www5059109.github.io/2019/11/03/web/file.png">
+<meta property="og:image" content="https://www5059109.github.io/2019/11/03/web/phpfilter.png">
+<meta property="og:image" content="https://www5059109.github.io/2019/11/03/web/notepad.png">
+<meta property="og:updated_time" content="2019-11-05T14:09:14.277Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="web">
 <meta name="twitter:description" content="HTTP请求方法 GET : 提交内容明文显示在URL中，请求页面信息并返回实体。 POST : 请求内容隐藏在请求正文中，请求页面信息并返回实体。 HEAD : 类似于GET，用于测试网页服务，返回无具体内容。 OPTIONS : 用于获取当前网站所允许的请求方法 TRACE : 回显服务器收到的请求，用于测试网站。 PUT : 向服务器上传文件 DELETE : 请求服务器删除文件 MOVE">
@@ -326,8 +329,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2019-11-03T22:57:59+08:00">
-                2019-11-03
+              <time title="更新于" itemprop="dateModified" datetime="2019-11-05T22:09:14+08:00">
+                2019-11-05
               </time>
             
           </span>
@@ -382,7 +385,8 @@
 </ul>
 </li>
 <li>Cookie : 浏览器将该域名下的Cookie发送给服务器</li>
-<li>Connect-Length : 请求内容长度</li>
+<li>Content-Length : 请求内容长度。构造POST数据包。</li>
+<li>content-type: 请求内容类型。最常见:  <code>application/x-www-form-urlencoded</code>用于构造POST数据包</li>
 <li>Host : 请求服务器的域名(IP)和端口号(默认8080可省略)</li>
 <li>Referer : 标识从哪个页面跳转过来的</li>
 <li>User-Agent : 用户信息(系统版本 浏览器版本等)</li>
@@ -505,6 +509,34 @@
 <p>分析: 简单的PHP弱类型利用。大致代码意思是<strong>要求num不能是数值的前提下num要等于1</strong>才能够显示flag。</p>
 <p>构造Payload: index1.php?num=1a </p>
 <p>PS: PHP弱类型利用还有 MD5\HASH绕过、json绕过、array_search is_array、strcmp绕过 php 5.3 、Switch绕过、DeDe任意用户密码重置、in_array()、is_number()</p>
+<h1 id="PHP-filter-封装协议"><a href="#PHP-filter-封装协议" class="headerlink" title="PHP://filter 封装协议"></a>PHP://filter 封装协议</h1><p>简介: 用于数据流打开时的筛选过滤应用。作用在类似 readfile()、file()、file_get_contents()等文件函数。</p>
+<p>语法: php://filter/&lt;action&gt;=&lt;name&gt;</p>
+<p>可选参数:</p>
+<ul>
+<li>read : 读。 多个过滤器使用管道符 | 分割。可选值:<ul>
+<li>convert.base64-encode : 将数据流编码为base64</li>
+<li>convert.base64-decode : 将数据流解码为base64</li>
+<li>string.strip_tags : 清除数据流中的html标签。可以去除&lt;?php exit;?&gt;导致的一句话木马无法执行。</li>
+<li>string.toupper : 转换为大写</li>
+<li>string.tolower : 转换为小写</li>
+</ul>
+</li>
+<li>write : 写。可选值:</li>
+<li>resource : 要过滤的数据流。</li>
+</ul>
+<p>例: <a href="http://123.206.87.240:8005/post/" target="_blank" rel="noopener">Bugku flag在index里</a></p>
+<p><img src="/2019/11/03/web/file.png" alt="file"></p>
+<p>分析: 一眼看到file=，想到任意文件读写。利用<kbd>php://filter</kbd>封装处理数据流将index.php编码为base64后输出(若不进行编码，则会被解析运行)。</p>
+<p>构造payload:  </p>
+<p><code>file=php://filter/read=convert.base64-encode/resource=index.php</code></p>
+<p><img src="/2019/11/03/web/phpfilter.png" alt="phpfilter"></p>
+<p>利用notepad++的base64解码功能，即可得到 index.php 的源代码。</p>
+<p><img src="/2019/11/03/web/notepad.png" alt="notepad"></p>
+<p>函数解释:</p>
+<ul>
+<li>strstr($file,”../“) : 在file字符串中的查找 ../  。 区分大小写</li>
+<li>stristr($file,”tp”) : 类似strstr，不区分大小写。</li>
+</ul>
 
       
     </div>
@@ -524,7 +556,7 @@
   <p><span>本文标题:</span><a href="/2019/11/03/web/">web</a></p>
   <p><span>文章作者:</span><a href="/" title="访问 Tanker 的个人博客">Tanker</a></p>
   <p><span>发布时间:</span>2019年11月03日 - 09:55</p>
-  <p><span>最后更新:</span>2019年11月03日 - 22:57</p>
+  <p><span>最后更新:</span>2019年11月05日 - 22:09</p>
   <p><span>原始链接:</span><a href="/2019/11/03/web/" title="web">https://www5059109.github.io/2019/11/03/web/</a>
     <span class="copy-path" title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="https://www5059109.github.io/2019/11/03/web/" aria-label="复制成功！"></i></span>
   </p>
@@ -700,7 +732,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#HTTP请求方法"><span class="nav-number">1.</span> <span class="nav-text">HTTP请求方法</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#HTTP消息报头"><span class="nav-number">2.</span> <span class="nav-text">HTTP消息报头</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#HTTP状态码"><span class="nav-number">3.</span> <span class="nav-text">HTTP状态码</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Mysql数据库"><span class="nav-number">4.</span> <span class="nav-text">Mysql数据库</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#数据库、数据表、字段还有记录-列"><span class="nav-number">4.1.</span> <span class="nav-text">数据库、数据表、字段还有记录(列)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#MYSQL语句"><span class="nav-number">4.2.</span> <span class="nav-text">MYSQL语句</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#注入攻击"><span class="nav-number">5.</span> <span class="nav-text">注入攻击</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#万能密码"><span class="nav-number">5.1.</span> <span class="nav-text">万能密码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#联合查询"><span class="nav-number">5.2.</span> <span class="nav-text">联合查询</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#上传漏洞"><span class="nav-number">6.</span> <span class="nav-text">上传漏洞</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#弱类型攻击"><span class="nav-number">7.</span> <span class="nav-text">弱类型攻击</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#HTTP请求方法"><span class="nav-number">1.</span> <span class="nav-text">HTTP请求方法</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#HTTP消息报头"><span class="nav-number">2.</span> <span class="nav-text">HTTP消息报头</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#HTTP状态码"><span class="nav-number">3.</span> <span class="nav-text">HTTP状态码</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Mysql数据库"><span class="nav-number">4.</span> <span class="nav-text">Mysql数据库</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#数据库、数据表、字段还有记录-列"><span class="nav-number">4.1.</span> <span class="nav-text">数据库、数据表、字段还有记录(列)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#MYSQL语句"><span class="nav-number">4.2.</span> <span class="nav-text">MYSQL语句</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#注入攻击"><span class="nav-number">5.</span> <span class="nav-text">注入攻击</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#万能密码"><span class="nav-number">5.1.</span> <span class="nav-text">万能密码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#联合查询"><span class="nav-number">5.2.</span> <span class="nav-text">联合查询</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#上传漏洞"><span class="nav-number">6.</span> <span class="nav-text">上传漏洞</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#弱类型攻击"><span class="nav-number">7.</span> <span class="nav-text">弱类型攻击</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#PHP-filter-封装协议"><span class="nav-number">8.</span> <span class="nav-text">PHP://filter 封装协议</span></a></li></ol></div>
             
 
           </div>
@@ -746,7 +778,7 @@
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共7.6k字</span>
+  <span class="post-count">博客全站共7.9k字</span>
 </div>
 
 
