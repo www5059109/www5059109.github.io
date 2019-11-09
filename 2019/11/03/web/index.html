@@ -136,7 +136,16 @@
 <meta property="og:image" content="https://www5059109.github.io/2019/11/03/web/file.png">
 <meta property="og:image" content="https://www5059109.github.io/2019/11/03/web/phpfilter.png">
 <meta property="og:image" content="https://www5059109.github.io/2019/11/03/web/notepad.png">
-<meta property="og:updated_time" content="2019-11-05T14:09:14.277Z">
+<meta property="og:image" content="https://www5059109.github.io/2019/11/03/web/hex.png">
+<meta property="og:image" content="https://www5059109.github.io/2019/11/03/web/hex.png">
+<meta property="og:image" content="https://www5059109.github.io/2019/11/03/web/intval.png">
+<meta property="og:image" content="https://www5059109.github.io/2019/11/03/web/strcmp.png">
+<meta property="og:image" content="https://www5059109.github.io/2019/11/03/web/ereg.png">
+<meta property="og:image" content="https://www5059109.github.io/2019/11/03/web/isnumeric.png">
+<meta property="og:image" content="https://www5059109.github.io/2019/11/03/web/sql.png">
+<meta property="og:image" content="https://www5059109.github.io/2019/11/03/web/sql1.png">
+<meta property="og:image" content="https://www5059109.github.io/2019/11/03/web/sql2.png">
+<meta property="og:updated_time" content="2019-11-09T07:05:23.523Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="web">
 <meta name="twitter:description" content="HTTP请求方法 GET : 提交内容明文显示在URL中，请求页面信息并返回实体。 POST : 请求内容隐藏在请求正文中，请求页面信息并返回实体。 HEAD : 类似于GET，用于测试网页服务，返回无具体内容。 OPTIONS : 用于获取当前网站所允许的请求方法 TRACE : 回显服务器收到的请求，用于测试网站。 PUT : 向服务器上传文件 DELETE : 请求服务器删除文件 MOVE">
@@ -329,8 +338,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2019-11-05T22:09:14+08:00">
-                2019-11-05
+              <time title="更新于" itemprop="dateModified" datetime="2019-11-09T15:05:23+08:00">
+                2019-11-09
               </time>
             
           </span>
@@ -492,7 +501,7 @@
 <ol>
 <li>图片马。</li>
 </ol>
-<h1 id="弱类型攻击"><a href="#弱类型攻击" class="headerlink" title="弱类型攻击"></a>弱类型攻击</h1><p>原因: PHP类型比较存在松散比较(==)和严格比较(===)的区别。</p>
+<h1 id="比较攻击"><a href="#比较攻击" class="headerlink" title="比较攻击"></a>比较攻击</h1><p>原因: PHP类型比较存在松散比较(==)和严格比较(===)的区别。</p>
 <p>原理: </p>
 <ol>
 <li>松散比较: 类型强制转换之后比较值。字符串转为数值四种情形:<ol>
@@ -537,6 +546,48 @@
 <li>strstr($file,”../“) : 在file字符串中的查找 ../  。 区分大小写</li>
 <li>stristr($file,”tp”) : 类似strstr，不区分大小写。</li>
 </ul>
+<h1 id="PHP黑魔法"><a href="#PHP黑魔法" class="headerlink" title="PHP黑魔法"></a>PHP黑魔法</h1><p>参考: <a href="[https://skysec.top/2017/07/22/PHP%E5%87%BD%E6%95%B0%E9%BB%91%E9%AD%94%E6%B3%95%E5%B0%8F%E6%80%BB%E7%BB%93/](https://skysec.top/2017/07/22/PHP函数黑魔法小总结/)">PHP函数黑魔法小总结</a></p>
+<h2 id="MD5-、SHA1-绕过"><a href="#MD5-、SHA1-绕过" class="headerlink" title="MD5()、SHA1()绕过"></a>MD5()、SHA1()绕过</h2><p>PHP中MD5、SHA1无法处理数组，当传入参数为数组时返回NULL。</p>
+<h2 id="转换"><a href="#转换" class="headerlink" title="转换"></a>转换</h2><p>php自动转换16进制和科学记数法等</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">	$a = <span class="number">0x208</span>;</span><br><span class="line">	<span class="keyword">echo</span> $a;</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="/2019/11/03/web/hex.png" alt="hex"></p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?PHP</span></span><br><span class="line">	$a = <span class="number">5.2e2</span>;</span><br><span class="line">	<span class="keyword">echo</span> $a;</span><br><span class="line"> <span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="/2019/11/03/web/hex.png" alt="hex"></p>
+<h2 id="intval"><a href="#intval" class="headerlink" title="intval()"></a>intval()</h2><p>将字符串开始转换直到遇到非数字字符。若字符串无法转换则返回0。</p>
+<p>注: 科学记数法字符串若E后面的数值小于某个值则会转为double，若强制转换为int则可以使值为0。</p>
+<p>例: 变量 1e-1000 可以使得变量 <strong>既大于0又不大于0</strong>。</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?PHP</span></span><br><span class="line">	var_dump((int)<span class="string">'1e-1000'</span>&gt;<span class="number">0</span>);</span><br><span class="line">	var_dump(<span class="string">'1e-1000'</span>&gt;<span class="number">0</span>);</span><br><span class="line"> <span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="/2019/11/03/web/intval.png" alt="intval"></p>
+<h2 id="strcmp"><a href="#strcmp" class="headerlink" title="strcmp()"></a>strcmp()</h2><p>由于当str1和str2相等时返回0。当传入str1或str2为数组时 NULL==0 又是松散比较，所以最后strcmp()返回0。</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">	$str1[]=<span class="string">'1'</span>;</span><br><span class="line">	<span class="keyword">if</span>(!@strcmp($str1,<span class="string">'ssssss'</span>))</span><br><span class="line">		<span class="keyword">echo</span> <span class="string">'yes'</span>;</span><br><span class="line">	<span class="comment"># 在函数前加'@'可以屏蔽错误信息</span></span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="/2019/11/03/web/strcmp.png" alt="strcmp"></p>
+<h2 id="ereg-str1-str2"><a href="#ereg-str1-str2" class="headerlink" title="ereg(str1,str2)"></a>ereg(str1,str2)</h2><p>存在空字符截断漏洞。当读取str1或str2遇到空字符时，则结束后面的匹配。</p>
+<p>注: URL中的空字符为 %00 。</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?PHP</span></span><br><span class="line">	$b = $_GET[<span class="string">"b"</span>];</span><br><span class="line">	<span class="comment">#$b = urldecode($_GET["b"]);</span></span><br><span class="line">	var_dump(@eregi(<span class="string">"111"</span>.substr($b,<span class="number">0</span>,<span class="number">1</span>),<span class="string">"1114"</span>));</span><br><span class="line"> <span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="/2019/11/03/web/ereg.png" alt="ereg"></p>
+<h2 id="is-numeric-a"><a href="#is-numeric-a" class="headerlink" title="is_numeric($a)"></a>is_numeric($a)</h2><p>当出现 <code>is_numeric($a) and is_numeric($b)</code>时，第二个is_numeric可以绕过检测。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$is_numeric1 = &apos;01234&apos;;</span><br><span class="line">$is_numeric2 = &apos;abc&apos;;</span><br><span class="line">$c = is_numeric($is_numeric1) and is_numeric($is_numeric2);</span><br><span class="line">if($c)&#123;</span><br><span class="line">	var_dump(is_numeric($is_numeric2)); </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2019/11/03/web/isnumeric.png" alt="isnumeric"></p>
+<p>PS: 当$a为<strong>+.123</strong>和<strong>-.1234</strong>时返回也为true。</p>
+<h2 id="json-decode"><a href="#json-decode" class="headerlink" title="json_decode()"></a>json_decode()</h2><h1 id="SQL约束攻击"><a href="#SQL约束攻击" class="headerlink" title="SQL约束攻击"></a>SQL约束攻击</h1><p>简介: 当新用户尝试注册时检测数据库中是否已经存在用户。若已存在则不让注册。</p>
+<p>利用:通过注册管理员用户从而取得管理员权限。</p>
+<p><strong>攻击原理</strong>: SQL处理字符串时会将空格符删除。SQL检索数据库返回第一个数据记录。</p>
+<p>例如<code>select * from users where username=&#39;admin   &#39;;</code>与<code>select * from users where username=&#39;admin&#39;</code>效果一致。 类似的还有 <code>insert into users values(&#39;user   &#39;,&#39;pass    &#39;);</code></p>
+<p><strong>攻击复现</strong> :</p>
+<p><img src="/2019/11/03/web/sql.png" alt="sql"></p>
+<p><code>select  * from users where username=&#39;user      &#39;;</code></p>
+<p>PS: 执行select查询时 不会将字符串缩短为 定义表时的varchar(5)长度。</p>
+<p><img src="/2019/11/03/web/sql1.png" alt></p>
+<p><code>insert into users value(&#39;test           &#39;,&#39;admin            &#39;);</code></p>
+<p>PS: 当字符串超过 varchar(5)定义的长度时，则截断插入。</p>
+<p><img src="/2019/11/03/web/sql2.png" alt="sql2"></p>
+<p>参考:<a href="https://www.cnblogs.com/ECJTUACM-873284962/p/8977983.html" target="_blank" rel="noopener">基于约束的SQL攻击</a></p>
 
       
     </div>
@@ -556,7 +607,7 @@
   <p><span>本文标题:</span><a href="/2019/11/03/web/">web</a></p>
   <p><span>文章作者:</span><a href="/" title="访问 Tanker 的个人博客">Tanker</a></p>
   <p><span>发布时间:</span>2019年11月03日 - 09:55</p>
-  <p><span>最后更新:</span>2019年11月05日 - 22:09</p>
+  <p><span>最后更新:</span>2019年11月09日 - 15:05</p>
   <p><span>原始链接:</span><a href="/2019/11/03/web/" title="web">https://www5059109.github.io/2019/11/03/web/</a>
     <span class="copy-path" title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="https://www5059109.github.io/2019/11/03/web/" aria-label="复制成功！"></i></span>
   </p>
@@ -732,7 +783,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#HTTP请求方法"><span class="nav-number">1.</span> <span class="nav-text">HTTP请求方法</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#HTTP消息报头"><span class="nav-number">2.</span> <span class="nav-text">HTTP消息报头</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#HTTP状态码"><span class="nav-number">3.</span> <span class="nav-text">HTTP状态码</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Mysql数据库"><span class="nav-number">4.</span> <span class="nav-text">Mysql数据库</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#数据库、数据表、字段还有记录-列"><span class="nav-number">4.1.</span> <span class="nav-text">数据库、数据表、字段还有记录(列)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#MYSQL语句"><span class="nav-number">4.2.</span> <span class="nav-text">MYSQL语句</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#注入攻击"><span class="nav-number">5.</span> <span class="nav-text">注入攻击</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#万能密码"><span class="nav-number">5.1.</span> <span class="nav-text">万能密码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#联合查询"><span class="nav-number">5.2.</span> <span class="nav-text">联合查询</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#上传漏洞"><span class="nav-number">6.</span> <span class="nav-text">上传漏洞</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#弱类型攻击"><span class="nav-number">7.</span> <span class="nav-text">弱类型攻击</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#PHP-filter-封装协议"><span class="nav-number">8.</span> <span class="nav-text">PHP://filter 封装协议</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#HTTP请求方法"><span class="nav-number">1.</span> <span class="nav-text">HTTP请求方法</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#HTTP消息报头"><span class="nav-number">2.</span> <span class="nav-text">HTTP消息报头</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#HTTP状态码"><span class="nav-number">3.</span> <span class="nav-text">HTTP状态码</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Mysql数据库"><span class="nav-number">4.</span> <span class="nav-text">Mysql数据库</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#数据库、数据表、字段还有记录-列"><span class="nav-number">4.1.</span> <span class="nav-text">数据库、数据表、字段还有记录(列)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#MYSQL语句"><span class="nav-number">4.2.</span> <span class="nav-text">MYSQL语句</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#注入攻击"><span class="nav-number">5.</span> <span class="nav-text">注入攻击</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#万能密码"><span class="nav-number">5.1.</span> <span class="nav-text">万能密码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#联合查询"><span class="nav-number">5.2.</span> <span class="nav-text">联合查询</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#上传漏洞"><span class="nav-number">6.</span> <span class="nav-text">上传漏洞</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#比较攻击"><span class="nav-number">7.</span> <span class="nav-text">比较攻击</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#PHP-filter-封装协议"><span class="nav-number">8.</span> <span class="nav-text">PHP://filter 封装协议</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#PHP黑魔法"><span class="nav-number">9.</span> <span class="nav-text">PHP黑魔法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#MD5-、SHA1-绕过"><span class="nav-number">9.1.</span> <span class="nav-text">MD5()、SHA1()绕过</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#转换"><span class="nav-number">9.2.</span> <span class="nav-text">转换</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#intval"><span class="nav-number">9.3.</span> <span class="nav-text">intval()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#strcmp"><span class="nav-number">9.4.</span> <span class="nav-text">strcmp()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ereg-str1-str2"><span class="nav-number">9.5.</span> <span class="nav-text">ereg(str1,str2)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#is-numeric-a"><span class="nav-number">9.6.</span> <span class="nav-text">is_numeric($a)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#json-decode"><span class="nav-number">9.7.</span> <span class="nav-text">json_decode()</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#SQL约束攻击"><span class="nav-number">10.</span> <span class="nav-text">SQL约束攻击</span></a></li></ol></div>
             
 
           </div>
@@ -778,7 +829,7 @@
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共7.9k字</span>
+  <span class="post-count">博客全站共8.5k字</span>
 </div>
 
 
