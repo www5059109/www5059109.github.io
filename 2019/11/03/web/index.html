@@ -145,7 +145,7 @@
 <meta property="og:image" content="https://www5059109.github.io/2019/11/03/web/sql.png">
 <meta property="og:image" content="https://www5059109.github.io/2019/11/03/web/sql1.png">
 <meta property="og:image" content="https://www5059109.github.io/2019/11/03/web/sql2.png">
-<meta property="og:updated_time" content="2019-11-09T07:05:23.523Z">
+<meta property="og:updated_time" content="2019-11-15T07:40:58.481Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="web">
 <meta name="twitter:description" content="HTTP请求方法 GET : 提交内容明文显示在URL中，请求页面信息并返回实体。 POST : 请求内容隐藏在请求正文中，请求页面信息并返回实体。 HEAD : 类似于GET，用于测试网页服务，返回无具体内容。 OPTIONS : 用于获取当前网站所允许的请求方法 TRACE : 回显服务器收到的请求，用于测试网站。 PUT : 向服务器上传文件 DELETE : 请求服务器删除文件 MOVE">
@@ -338,8 +338,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2019-11-09T15:05:23+08:00">
-                2019-11-09
+              <time title="更新于" itemprop="dateModified" datetime="2019-11-15T15:40:58+08:00">
+                2019-11-15
               </time>
             
           </span>
@@ -452,6 +452,18 @@
 <li>And 和 Or 运算符</li>
 </ul>
 <p>and的优先级大于or。即先进行and运算，再进行or运算。</p>
+<h2 id="搭建测试环境"><a href="#搭建测试环境" class="headerlink" title="搭建测试环境"></a>搭建测试环境</h2><ol>
+<li><code>CREATE DATABASE test;</code> 创建数据库</li>
+<li><code>USE test;</code> 使用数据库</li>
+<li><code>CREATE TABLE user(username varchar(30),password varchar(30));</code> 创建表</li>
+<li><code>INSERT INTO user(username,password) values(&#39;admin&#39;,&#39;passwd&#39;);</code> 插入数据</li>
+<li><code>DROP TABLE user</code> 删除表</li>
+<li><code>DROP DATABASE test</code> 删除数据库</li>
+<li><code>UPDATE user SET password=&#39;root&#39; where username=&#39;admin&#39;</code> 更新表中的记录</li>
+<li><code>DELETE FROM user where username=&#39;admin&#39;</code> 删除表中记录</li>
+<li><code>ALTER TABLE user ADD lasttime TIME</code> 增加字段</li>
+<li><code>ALTER TABLE user DROP lasttime</code> 删除字段</li>
+</ol>
 <h1 id="注入攻击"><a href="#注入攻击" class="headerlink" title="注入攻击"></a>注入攻击</h1><p>简介: 构造数据库执行语句进行对数据库的操作。下面以常见的Mysql注入作为介绍。</p>
 <h2 id="万能密码"><a href="#万能密码" class="headerlink" title="万能密码"></a>万能密码</h2><p>原理: 通过输入账号密码构造sql注入语句，达到绕过登录的目的。</p>
 <p>假设服务器使用的查询语句为: <code>select * from admin where username=&#39;admin&#39; and password=&#39;thisismypw&#39;;</code></p>
@@ -467,40 +479,49 @@
 <h2 id="联合查询"><a href="#联合查询" class="headerlink" title="联合查询"></a>联合查询</h2><p>简介: Union联合查询用于合并多个select语句结果</p>
 <p>注意: Union内部select语句的列数要与外部select相同。</p>
 <p>例<img src="/2019/11/03/web/mysql1.png" alt="mysql1"></p>
-<h1 id="上传漏洞"><a href="#上传漏洞" class="headerlink" title="上传漏洞"></a>上传漏洞</h1><p>常见五种上传检测方式:</p>
+<h2 id="异或注入"><a href="#异或注入" class="headerlink" title="异或注入"></a>异或注入</h2><h2 id="MYSQL注入语句"><a href="#MYSQL注入语句" class="headerlink" title="MYSQL注入语句"></a>MYSQL注入语句</h2><h1 id="上传漏洞"><a href="#上传漏洞" class="headerlink" title="上传漏洞"></a>上传漏洞</h1><p>常见五种上传检测方式:</p>
 <p>1、客户端javascript检测</p>
 <p>2、服务端MIME类型检测(数据包中content-type内容)</p>
 <p>3、服务端目录路径检测(检测 path 参数)</p>
 <p>4、服务端文件扩展名检测</p>
 <p>5、服务端文件内容检测。</p>
-<p>1、javascript检测绕过:</p>
-<p>①判断JS本地验证。通过Burp抓包，当数据包未发送时，本地弹框，则为JS检测。</p>
+<h2 id="1、javascript检测绕过"><a href="#1、javascript检测绕过" class="headerlink" title="1、javascript检测绕过:"></a>1、javascript检测绕过:</h2><p>①判断JS本地验证。通过Burp抓包，当数据包未发送时，本地弹框，则为JS检测。</p>
 <p>②绕过: 上传正常jpg格式，通过Burp抓包改包；使用检查元素修改HTML代码。</p>
-<p>2、MIME类型检测绕过:</p>
-<p>①Burp抓包 修改数据包中的 content-type 内容。一般改为 image/gif ；或上传正常jpg格式，修改数据包中的后缀。</p>
-<p>3、修改文件上传路径(当前目录权限低):</p>
-<p>①上传 ../1.asp 可以上传到当前目录的上一级目录。</p>
-<p>②利用Burp抓包修改Filepath。PS:通过filepath修改文件名称 /xx.asp;.jpg</p>
-<p>4、文件扩展名检测绕过:</p>
-<p>①黑名单检测：</p>
-<pre><code>1. 大小写绕过。
- 2. 名单列表绕过。
- 3. 特殊文件名绕过。 xx.asp_ 在WINDOWS中会自动去除_。在LINUX中不适用。
- 4. 0x00截断绕过。xx.asp%00.jpg %00 复制之后 ctrl+shift+u</code></pre><p>②白名单检测：</p>
+<h2 id="2、MIME类型检测绕过"><a href="#2、MIME类型检测绕过" class="headerlink" title="2、MIME类型检测绕过:"></a>2、MIME类型检测绕过:</h2><p>1、Burp抓包 修改图片数据中的 content-type 内容。一般改为 image/gif ；或上传正常jpg格式，修改数据包中的后缀。</p>
+<p>2、还有通过表单上传的话 请求报头中的 content-type: multipart/form-data 也会通过表单检测文件类型。解决方法: 将 multipart/form-data 改为大写即可。</p>
+<h2 id="3、文件扩展名检测绕过"><a href="#3、文件扩展名检测绕过" class="headerlink" title="3、文件扩展名检测绕过:"></a>3、文件扩展名检测绕过:</h2><p>①黑名单检测：</p>
+<ol>
+<li><p>大小写绕过。</p>
+<ol start="2">
+<li>名单列表绕过。</li>
+<li>特殊文件名绕过。 xx.asp_ 在WINDOWS中会自动去除_。在LINUX中不适用。</li>
+<li>0x00截断绕过。xx.asp%00.jpg %00 复制之后 ctrl+shift+u<ol start="5">
+<li>PHP别名绕过。php2、php3、php4、php5、phps、pht、phtm、phtml</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+<p>②白名单检测：</p>
 <ol>
 <li>0x00截断绕过。</li>
 <li>解析调用绕过。配合上传一个代码注入过的白名单文件。</li>
 <li>双扩展文件名绕过。 1.jpg.php</li>
 </ol>
-<p>5、双文件上传绕过:</p>
-<ol>
+<h2 id="4、双文件上传绕过"><a href="#4、双文件上传绕过" class="headerlink" title="4、双文件上传绕过:"></a>4、双文件上传绕过:</h2><ol>
 <li>使用Burp抓包，到Repeater中修改数据包。</li>
 <li>从——WebKitFormBoundaryJyQaD31BFy7f6JAC 开始复制到 图片结束。修改第二段数据的name和filename</li>
 </ol>
-<p>6、文件内容检测绕过:</p>
-<ol>
+<h2 id="5、文件包含"><a href="#5、文件包含" class="headerlink" title="5、文件包含"></a>5、文件包含</h2><ol>
+<li>HTML标签 &lt;script language=php&gt; 一句话木马 &lt;/script&gt;</li>
+</ol>
+<h2 id="6、文件内容检测绕过"><a href="#6、文件内容检测绕过" class="headerlink" title="6、文件内容检测绕过:"></a>6、文件内容检测绕过:</h2><ol>
 <li>图片马。</li>
 </ol>
+<h2 id="7、htaccess重写解析绕过"><a href="#7、htaccess重写解析绕过" class="headerlink" title="7、htaccess重写解析绕过"></a>7、htaccess重写解析绕过</h2><p>方法:将代码<code>AddType application/x-httpd-php .jpg</code>保存为.htaccess文件，上传到服务器，再上传一张.jpg格式的图片马，用c刀或菜刀连接即可。</p>
+<p>原理: 将.jpg格式的文件以php格式来解析</p>
+<h2 id="8、修改文件上传路径-当前目录权限低"><a href="#8、修改文件上传路径-当前目录权限低" class="headerlink" title="8、修改文件上传路径(当前目录权限低):"></a>8、修改文件上传路径(当前目录权限低):</h2><p>①上传 ../1.asp 可以上传到当前目录的上一级目录。</p>
+<p>②利用Burp抓包修改Filepath。PS:通过filepath修改文件名称 /xx.asp;.jpg</p>
 <h1 id="比较攻击"><a href="#比较攻击" class="headerlink" title="比较攻击"></a>比较攻击</h1><p>原因: PHP类型比较存在松散比较(==)和严格比较(===)的区别。</p>
 <p>原理: </p>
 <ol>
@@ -588,7 +609,35 @@
 <p>PS: 当字符串超过 varchar(5)定义的长度时，则截断插入。</p>
 <p><img src="/2019/11/03/web/sql2.png" alt="sql2"></p>
 <p>参考:<a href="https://www.cnblogs.com/ECJTUACM-873284962/p/8977983.html" target="_blank" rel="noopener">基于约束的SQL攻击</a></p>
+<h1 id="反序列化"><a href="#反序列化" class="headerlink" title="反序列化"></a>反序列化</h1><p>函数: serialize() \ unserialize()  : 用于序列化(解序列化)对象或数组，返回字符串</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span> </span><br><span class="line">	$KEY=<span class="string">"I am string"</span>;</span><br><span class="line">	$s = serialize($KEY);</span><br><span class="line">	<span class="keyword">echo</span> $s; <span class="comment"># s:11:"I am string";</span></span><br><span class="line"><span class="meta">?&gt;</span></span><br><span class="line">​```参数简介</span><br><span class="line">    s:string类型 <span class="number">11</span>:字符串长度 <span class="string">"字符串内容"</span></span><br><span class="line">​</span><br></pre></td></tr></table></figure>
 
+<?php 
+    class ClassA
+    {
+        var $a = "hello";
+        function print1(){
+            print('I am here');
+        }
+    }
+    $KEY = new ClassA();
+    $s = serialize($KEY);
+    echo $s; # O:6:"ClassA":1:{s:1:"a";s:5:"hello";} 
+?>
+<p>​<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">O:object对象 6:对象名称长度 &quot;类名&quot; 1:属性数量 &#123;&#125;:分别代表--s:string 1:属性名长度 &quot;属性名&quot; s:属性值类型 5:属性值长度 &quot;属性值内容&quot;</span><br></pre></td></tr></table></figure></p>
+<pre><code>
+原理: unserialize()参数可控，注入payload触发对象中的魔术方法。
+
+魔术方法:
+
+* _construct(): 当对象**创建**时自动调用。注意 unserialize() 解序列时不会自动调用。
+* _destruct(): 当对象**销毁**时自动调用。
+* _wakeup(): 当 unserialize() **解序列**后 自动调用。
+* _toString(): 当一个对象被**当做字符串**使用时调用
+* _sleep(): 在对象被**序列化**之前调用
+* _invoke(): 尝试以**调用函数的方式**调用一个对象时，自动调用。
+* _get(): 当**访问**一个类中**不存在的属性**时调用。
+</code></pre>
       
     </div>
     
@@ -607,7 +656,7 @@
   <p><span>本文标题:</span><a href="/2019/11/03/web/">web</a></p>
   <p><span>文章作者:</span><a href="/" title="访问 Tanker 的个人博客">Tanker</a></p>
   <p><span>发布时间:</span>2019年11月03日 - 09:55</p>
-  <p><span>最后更新:</span>2019年11月09日 - 15:05</p>
+  <p><span>最后更新:</span>2019年11月15日 - 15:40</p>
   <p><span>原始链接:</span><a href="/2019/11/03/web/" title="web">https://www5059109.github.io/2019/11/03/web/</a>
     <span class="copy-path" title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="https://www5059109.github.io/2019/11/03/web/" aria-label="复制成功！"></i></span>
   </p>
@@ -656,6 +705,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/11/15/百越杯-phpbaby-反序列化/" rel="prev" title="百越杯 phpbaby--反序列化">
+                百越杯 phpbaby--反序列化 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -732,7 +785,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-count">7</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -783,7 +836,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#HTTP请求方法"><span class="nav-number">1.</span> <span class="nav-text">HTTP请求方法</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#HTTP消息报头"><span class="nav-number">2.</span> <span class="nav-text">HTTP消息报头</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#HTTP状态码"><span class="nav-number">3.</span> <span class="nav-text">HTTP状态码</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Mysql数据库"><span class="nav-number">4.</span> <span class="nav-text">Mysql数据库</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#数据库、数据表、字段还有记录-列"><span class="nav-number">4.1.</span> <span class="nav-text">数据库、数据表、字段还有记录(列)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#MYSQL语句"><span class="nav-number">4.2.</span> <span class="nav-text">MYSQL语句</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#注入攻击"><span class="nav-number">5.</span> <span class="nav-text">注入攻击</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#万能密码"><span class="nav-number">5.1.</span> <span class="nav-text">万能密码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#联合查询"><span class="nav-number">5.2.</span> <span class="nav-text">联合查询</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#上传漏洞"><span class="nav-number">6.</span> <span class="nav-text">上传漏洞</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#比较攻击"><span class="nav-number">7.</span> <span class="nav-text">比较攻击</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#PHP-filter-封装协议"><span class="nav-number">8.</span> <span class="nav-text">PHP://filter 封装协议</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#PHP黑魔法"><span class="nav-number">9.</span> <span class="nav-text">PHP黑魔法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#MD5-、SHA1-绕过"><span class="nav-number">9.1.</span> <span class="nav-text">MD5()、SHA1()绕过</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#转换"><span class="nav-number">9.2.</span> <span class="nav-text">转换</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#intval"><span class="nav-number">9.3.</span> <span class="nav-text">intval()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#strcmp"><span class="nav-number">9.4.</span> <span class="nav-text">strcmp()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ereg-str1-str2"><span class="nav-number">9.5.</span> <span class="nav-text">ereg(str1,str2)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#is-numeric-a"><span class="nav-number">9.6.</span> <span class="nav-text">is_numeric($a)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#json-decode"><span class="nav-number">9.7.</span> <span class="nav-text">json_decode()</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#SQL约束攻击"><span class="nav-number">10.</span> <span class="nav-text">SQL约束攻击</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#HTTP请求方法"><span class="nav-number">1.</span> <span class="nav-text">HTTP请求方法</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#HTTP消息报头"><span class="nav-number">2.</span> <span class="nav-text">HTTP消息报头</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#HTTP状态码"><span class="nav-number">3.</span> <span class="nav-text">HTTP状态码</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Mysql数据库"><span class="nav-number">4.</span> <span class="nav-text">Mysql数据库</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#数据库、数据表、字段还有记录-列"><span class="nav-number">4.1.</span> <span class="nav-text">数据库、数据表、字段还有记录(列)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#MYSQL语句"><span class="nav-number">4.2.</span> <span class="nav-text">MYSQL语句</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#搭建测试环境"><span class="nav-number">4.3.</span> <span class="nav-text">搭建测试环境</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#注入攻击"><span class="nav-number">5.</span> <span class="nav-text">注入攻击</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#万能密码"><span class="nav-number">5.1.</span> <span class="nav-text">万能密码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#联合查询"><span class="nav-number">5.2.</span> <span class="nav-text">联合查询</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#异或注入"><span class="nav-number">5.3.</span> <span class="nav-text">异或注入</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#MYSQL注入语句"><span class="nav-number">5.4.</span> <span class="nav-text">MYSQL注入语句</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#上传漏洞"><span class="nav-number">6.</span> <span class="nav-text">上传漏洞</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1、javascript检测绕过"><span class="nav-number">6.1.</span> <span class="nav-text">1、javascript检测绕过:</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2、MIME类型检测绕过"><span class="nav-number">6.2.</span> <span class="nav-text">2、MIME类型检测绕过:</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3、文件扩展名检测绕过"><span class="nav-number">6.3.</span> <span class="nav-text">3、文件扩展名检测绕过:</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4、双文件上传绕过"><span class="nav-number">6.4.</span> <span class="nav-text">4、双文件上传绕过:</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5、文件包含"><span class="nav-number">6.5.</span> <span class="nav-text">5、文件包含</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6、文件内容检测绕过"><span class="nav-number">6.6.</span> <span class="nav-text">6、文件内容检测绕过:</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7、htaccess重写解析绕过"><span class="nav-number">6.7.</span> <span class="nav-text">7、htaccess重写解析绕过</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#8、修改文件上传路径-当前目录权限低"><span class="nav-number">6.8.</span> <span class="nav-text">8、修改文件上传路径(当前目录权限低):</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#比较攻击"><span class="nav-number">7.</span> <span class="nav-text">比较攻击</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#PHP-filter-封装协议"><span class="nav-number">8.</span> <span class="nav-text">PHP://filter 封装协议</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#PHP黑魔法"><span class="nav-number">9.</span> <span class="nav-text">PHP黑魔法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#MD5-、SHA1-绕过"><span class="nav-number">9.1.</span> <span class="nav-text">MD5()、SHA1()绕过</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#转换"><span class="nav-number">9.2.</span> <span class="nav-text">转换</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#intval"><span class="nav-number">9.3.</span> <span class="nav-text">intval()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#strcmp"><span class="nav-number">9.4.</span> <span class="nav-text">strcmp()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ereg-str1-str2"><span class="nav-number">9.5.</span> <span class="nav-text">ereg(str1,str2)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#is-numeric-a"><span class="nav-number">9.6.</span> <span class="nav-text">is_numeric($a)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#json-decode"><span class="nav-number">9.7.</span> <span class="nav-text">json_decode()</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#SQL约束攻击"><span class="nav-number">10.</span> <span class="nav-text">SQL约束攻击</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#反序列化"><span class="nav-number">11.</span> <span class="nav-text">反序列化</span></a></li></ol></div>
             
 
           </div>
@@ -829,7 +882,7 @@
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共8.5k字</span>
+  <span class="post-count">博客全站共9.8k字</span>
 </div>
 
 
