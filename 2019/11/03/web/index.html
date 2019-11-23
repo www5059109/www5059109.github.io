@@ -145,7 +145,7 @@
 <meta property="og:image" content="https://www5059109.github.io/2019/11/03/web/sql.png">
 <meta property="og:image" content="https://www5059109.github.io/2019/11/03/web/sql1.png">
 <meta property="og:image" content="https://www5059109.github.io/2019/11/03/web/sql2.png">
-<meta property="og:updated_time" content="2019-11-15T07:40:58.481Z">
+<meta property="og:updated_time" content="2019-11-23T08:53:23.962Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="web">
 <meta name="twitter:description" content="HTTP请求方法 GET : 提交内容明文显示在URL中，请求页面信息并返回实体。 POST : 请求内容隐藏在请求正文中，请求页面信息并返回实体。 HEAD : 类似于GET，用于测试网页服务，返回无具体内容。 OPTIONS : 用于获取当前网站所允许的请求方法 TRACE : 回显服务器收到的请求，用于测试网站。 PUT : 向服务器上传文件 DELETE : 请求服务器删除文件 MOVE">
@@ -338,8 +338,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2019-11-15T15:40:58+08:00">
-                2019-11-15
+              <time title="更新于" itemprop="dateModified" datetime="2019-11-23T16:53:23+08:00">
+                2019-11-23
               </time>
             
           </span>
@@ -396,7 +396,7 @@
 <li>Cookie : 浏览器将该域名下的Cookie发送给服务器</li>
 <li>Content-Length : 请求内容长度。构造POST数据包。</li>
 <li>content-type: 请求内容类型。最常见:  <code>application/x-www-form-urlencoded</code>用于构造POST数据包</li>
-<li>Host : 请求服务器的域名(IP)和端口号(默认8080可省略)</li>
+<li>Host : 请求服务器的域名(IP)和端口号(默认8080可省略)。</li>
 <li>Referer : 标识从哪个页面跳转过来的</li>
 <li>User-Agent : 用户信息(系统版本 浏览器版本等)</li>
 <li>X-Forwarding-For 或 Client-ip : 用于标识用户真实IP</li>
@@ -522,7 +522,7 @@
 <p>原理: 将.jpg格式的文件以php格式来解析</p>
 <h2 id="8、修改文件上传路径-当前目录权限低"><a href="#8、修改文件上传路径-当前目录权限低" class="headerlink" title="8、修改文件上传路径(当前目录权限低):"></a>8、修改文件上传路径(当前目录权限低):</h2><p>①上传 ../1.asp 可以上传到当前目录的上一级目录。</p>
 <p>②利用Burp抓包修改Filepath。PS:通过filepath修改文件名称 /xx.asp;.jpg</p>
-<h1 id="比较攻击"><a href="#比较攻击" class="headerlink" title="比较攻击"></a>比较攻击</h1><p>原因: PHP类型比较存在松散比较(==)和严格比较(===)的区别。</p>
+<h1 id="弱类型比较"><a href="#弱类型比较" class="headerlink" title="弱类型比较"></a>弱类型比较</h1><p>原因: PHP类型比较存在松散比较(==)和严格比较(===)的区别。</p>
 <p>原理: </p>
 <ol>
 <li>松散比较: 类型强制转换之后比较值。字符串转为数值四种情形:<ol>
@@ -625,19 +625,7 @@
     echo $s; # O:6:"ClassA":1:{s:1:"a";s:5:"hello";} 
 ?>
 <p>​<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">O:object对象 6:对象名称长度 &quot;类名&quot; 1:属性数量 &#123;&#125;:分别代表--s:string 1:属性名长度 &quot;属性名&quot; s:属性值类型 5:属性值长度 &quot;属性值内容&quot;</span><br></pre></td></tr></table></figure></p>
-<pre><code>
-原理: unserialize()参数可控，注入payload触发对象中的魔术方法。
-
-魔术方法:
-
-* _construct(): 当对象**创建**时自动调用。注意 unserialize() 解序列时不会自动调用。
-* _destruct(): 当对象**销毁**时自动调用。
-* _wakeup(): 当 unserialize() **解序列**后 自动调用。
-* _toString(): 当一个对象被**当做字符串**使用时调用
-* _sleep(): 在对象被**序列化**之前调用
-* _invoke(): 尝试以**调用函数的方式**调用一个对象时，自动调用。
-* _get(): 当**访问**一个类中**不存在的属性**时调用。
-</code></pre>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">原理: unserialize()参数可控，注入payload触发对象中的魔术方法。</span><br><span class="line"></span><br><span class="line">魔术方法:</span><br><span class="line"></span><br><span class="line"><span class="bullet">* </span>_construct(): 当对象<span class="strong">**创建**</span>时自动调用。注意 unserialize() 解序列时不会自动调用。</span><br><span class="line"><span class="bullet">* </span>_destruct(): 当对象<span class="strong">**销毁**</span>时自动调用。</span><br><span class="line"><span class="bullet">* </span>_wakeup(): 当 unserialize() <span class="strong">**解序列**</span>后 自动调用。</span><br><span class="line"><span class="bullet">* </span>_toString(): 当一个对象被<span class="strong">**当做字符串**</span>使用时调用</span><br><span class="line"><span class="bullet">* </span>_sleep(): 在对象被<span class="strong">**序列化**</span>之前调用</span><br><span class="line"><span class="bullet">* </span>_invoke(): 尝试以<span class="strong">**调用函数的方式**</span>调用一个对象时，自动调用。</span><br><span class="line"><span class="bullet">* </span>_get(): 当<span class="strong">**访问**</span>一个类中<span class="strong">**不存在的属性**</span>时调用。</span><br></pre></td></tr></table></figure>
       
     </div>
     
@@ -656,7 +644,7 @@
   <p><span>本文标题:</span><a href="/2019/11/03/web/">web</a></p>
   <p><span>文章作者:</span><a href="/" title="访问 Tanker 的个人博客">Tanker</a></p>
   <p><span>发布时间:</span>2019年11月03日 - 09:55</p>
-  <p><span>最后更新:</span>2019年11月15日 - 15:40</p>
+  <p><span>最后更新:</span>2019年11月23日 - 16:53</p>
   <p><span>原始链接:</span><a href="/2019/11/03/web/" title="web">https://www5059109.github.io/2019/11/03/web/</a>
     <span class="copy-path" title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="https://www5059109.github.io/2019/11/03/web/" aria-label="复制成功！"></i></span>
   </p>
@@ -785,7 +773,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-count">9</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -836,7 +824,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#HTTP请求方法"><span class="nav-number">1.</span> <span class="nav-text">HTTP请求方法</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#HTTP消息报头"><span class="nav-number">2.</span> <span class="nav-text">HTTP消息报头</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#HTTP状态码"><span class="nav-number">3.</span> <span class="nav-text">HTTP状态码</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Mysql数据库"><span class="nav-number">4.</span> <span class="nav-text">Mysql数据库</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#数据库、数据表、字段还有记录-列"><span class="nav-number">4.1.</span> <span class="nav-text">数据库、数据表、字段还有记录(列)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#MYSQL语句"><span class="nav-number">4.2.</span> <span class="nav-text">MYSQL语句</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#搭建测试环境"><span class="nav-number">4.3.</span> <span class="nav-text">搭建测试环境</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#注入攻击"><span class="nav-number">5.</span> <span class="nav-text">注入攻击</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#万能密码"><span class="nav-number">5.1.</span> <span class="nav-text">万能密码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#联合查询"><span class="nav-number">5.2.</span> <span class="nav-text">联合查询</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#异或注入"><span class="nav-number">5.3.</span> <span class="nav-text">异或注入</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#MYSQL注入语句"><span class="nav-number">5.4.</span> <span class="nav-text">MYSQL注入语句</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#上传漏洞"><span class="nav-number">6.</span> <span class="nav-text">上传漏洞</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1、javascript检测绕过"><span class="nav-number">6.1.</span> <span class="nav-text">1、javascript检测绕过:</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2、MIME类型检测绕过"><span class="nav-number">6.2.</span> <span class="nav-text">2、MIME类型检测绕过:</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3、文件扩展名检测绕过"><span class="nav-number">6.3.</span> <span class="nav-text">3、文件扩展名检测绕过:</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4、双文件上传绕过"><span class="nav-number">6.4.</span> <span class="nav-text">4、双文件上传绕过:</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5、文件包含"><span class="nav-number">6.5.</span> <span class="nav-text">5、文件包含</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6、文件内容检测绕过"><span class="nav-number">6.6.</span> <span class="nav-text">6、文件内容检测绕过:</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7、htaccess重写解析绕过"><span class="nav-number">6.7.</span> <span class="nav-text">7、htaccess重写解析绕过</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#8、修改文件上传路径-当前目录权限低"><span class="nav-number">6.8.</span> <span class="nav-text">8、修改文件上传路径(当前目录权限低):</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#比较攻击"><span class="nav-number">7.</span> <span class="nav-text">比较攻击</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#PHP-filter-封装协议"><span class="nav-number">8.</span> <span class="nav-text">PHP://filter 封装协议</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#PHP黑魔法"><span class="nav-number">9.</span> <span class="nav-text">PHP黑魔法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#MD5-、SHA1-绕过"><span class="nav-number">9.1.</span> <span class="nav-text">MD5()、SHA1()绕过</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#转换"><span class="nav-number">9.2.</span> <span class="nav-text">转换</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#intval"><span class="nav-number">9.3.</span> <span class="nav-text">intval()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#strcmp"><span class="nav-number">9.4.</span> <span class="nav-text">strcmp()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ereg-str1-str2"><span class="nav-number">9.5.</span> <span class="nav-text">ereg(str1,str2)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#is-numeric-a"><span class="nav-number">9.6.</span> <span class="nav-text">is_numeric($a)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#json-decode"><span class="nav-number">9.7.</span> <span class="nav-text">json_decode()</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#SQL约束攻击"><span class="nav-number">10.</span> <span class="nav-text">SQL约束攻击</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#反序列化"><span class="nav-number">11.</span> <span class="nav-text">反序列化</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#HTTP请求方法"><span class="nav-number">1.</span> <span class="nav-text">HTTP请求方法</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#HTTP消息报头"><span class="nav-number">2.</span> <span class="nav-text">HTTP消息报头</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#HTTP状态码"><span class="nav-number">3.</span> <span class="nav-text">HTTP状态码</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Mysql数据库"><span class="nav-number">4.</span> <span class="nav-text">Mysql数据库</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#数据库、数据表、字段还有记录-列"><span class="nav-number">4.1.</span> <span class="nav-text">数据库、数据表、字段还有记录(列)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#MYSQL语句"><span class="nav-number">4.2.</span> <span class="nav-text">MYSQL语句</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#搭建测试环境"><span class="nav-number">4.3.</span> <span class="nav-text">搭建测试环境</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#注入攻击"><span class="nav-number">5.</span> <span class="nav-text">注入攻击</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#万能密码"><span class="nav-number">5.1.</span> <span class="nav-text">万能密码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#联合查询"><span class="nav-number">5.2.</span> <span class="nav-text">联合查询</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#异或注入"><span class="nav-number">5.3.</span> <span class="nav-text">异或注入</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#MYSQL注入语句"><span class="nav-number">5.4.</span> <span class="nav-text">MYSQL注入语句</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#上传漏洞"><span class="nav-number">6.</span> <span class="nav-text">上传漏洞</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1、javascript检测绕过"><span class="nav-number">6.1.</span> <span class="nav-text">1、javascript检测绕过:</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2、MIME类型检测绕过"><span class="nav-number">6.2.</span> <span class="nav-text">2、MIME类型检测绕过:</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3、文件扩展名检测绕过"><span class="nav-number">6.3.</span> <span class="nav-text">3、文件扩展名检测绕过:</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4、双文件上传绕过"><span class="nav-number">6.4.</span> <span class="nav-text">4、双文件上传绕过:</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5、文件包含"><span class="nav-number">6.5.</span> <span class="nav-text">5、文件包含</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6、文件内容检测绕过"><span class="nav-number">6.6.</span> <span class="nav-text">6、文件内容检测绕过:</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7、htaccess重写解析绕过"><span class="nav-number">6.7.</span> <span class="nav-text">7、htaccess重写解析绕过</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#8、修改文件上传路径-当前目录权限低"><span class="nav-number">6.8.</span> <span class="nav-text">8、修改文件上传路径(当前目录权限低):</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#弱类型比较"><span class="nav-number">7.</span> <span class="nav-text">弱类型比较</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#PHP-filter-封装协议"><span class="nav-number">8.</span> <span class="nav-text">PHP://filter 封装协议</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#PHP黑魔法"><span class="nav-number">9.</span> <span class="nav-text">PHP黑魔法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#MD5-、SHA1-绕过"><span class="nav-number">9.1.</span> <span class="nav-text">MD5()、SHA1()绕过</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#转换"><span class="nav-number">9.2.</span> <span class="nav-text">转换</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#intval"><span class="nav-number">9.3.</span> <span class="nav-text">intval()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#strcmp"><span class="nav-number">9.4.</span> <span class="nav-text">strcmp()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ereg-str1-str2"><span class="nav-number">9.5.</span> <span class="nav-text">ereg(str1,str2)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#is-numeric-a"><span class="nav-number">9.6.</span> <span class="nav-text">is_numeric($a)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#json-decode"><span class="nav-number">9.7.</span> <span class="nav-text">json_decode()</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#SQL约束攻击"><span class="nav-number">10.</span> <span class="nav-text">SQL约束攻击</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#反序列化"><span class="nav-number">11.</span> <span class="nav-text">反序列化</span></a></li></ol></div>
             
 
           </div>
@@ -882,7 +870,7 @@
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共11.3k字</span>
+  <span class="post-count">博客全站共11.9k字</span>
 </div>
 
 
