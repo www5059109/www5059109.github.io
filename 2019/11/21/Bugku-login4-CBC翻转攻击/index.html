@@ -1,0 +1,827 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Lobster Two:300,300italic,400,400italic,700,700italic|Roboto Mono:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="分析原本网站目录下存在 index.php.swp 但是我做的时候已经不在了。附上源码 123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172737475767778798081&amp;lt">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Bugku--login4--CBC翻转攻击">
+<meta property="og:url" content="https://www5059109.github.io/2019/11/21/Bugku-login4-CBC翻转攻击/index.html">
+<meta property="og:site_name" content="筑梦千里">
+<meta property="og:description" content="分析原本网站目录下存在 index.php.swp 但是我做的时候已经不在了。附上源码 123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172737475767778798081&amp;lt">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://www5059109.github.io/2019/11/21/Bugku-login4-CBC翻转攻击/cbcencrypt.png">
+<meta property="og:image" content="https://www5059109.github.io/2019/11/21/Bugku-login4-CBC翻转攻击/cbcdecrypt.png">
+<meta property="og:updated_time" content="2019-11-21T09:19:32.521Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Bugku--login4--CBC翻转攻击">
+<meta name="twitter:description" content="分析原本网站目录下存在 index.php.swp 但是我做的时候已经不在了。附上源码 123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172737475767778798081&amp;lt">
+<meta name="twitter:image" content="https://www5059109.github.io/2019/11/21/Bugku-login4-CBC翻转攻击/cbcencrypt.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://www5059109.github.io/2019/11/21/Bugku-login4-CBC翻转攻击/">
+
+
+
+
+
+  <title>Bugku--login4--CBC翻转攻击 | 筑梦千里</title>
+  
+
+
+
+
+
+
+
+
+  <script type="text/javascript" src="/js/src/copy.js"></script>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">筑梦千里</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://www5059109.github.io/2019/11/21/Bugku-login4-CBC翻转攻击/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Tanker">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="筑梦千里">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Bugku--login4--CBC翻转攻击</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-11-21T12:37:33+08:00">
+                2019-11-21
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2019-11-21T17:19:32+08:00">
+                2019-11-21
+              </time>
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h1><p>原本网站目录下存在 index.php.swp 但是我做的时候已经不在了。附上源码</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">define(<span class="string">"SECRET_KEY"</span>, file_get_contents(<span class="string">'/root/key'</span>));</span><br><span class="line">define(<span class="string">"METHOD"</span>, <span class="string">"aes-128-cbc"</span>);</span><br><span class="line">session_start();</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">get_random_iv</span><span class="params">()</span></span>&#123;	<span class="comment">//随机生成16位iv</span></span><br><span class="line">    $random_iv=<span class="string">''</span>;</span><br><span class="line">    <span class="keyword">for</span>($i=<span class="number">0</span>;$i&lt;<span class="number">16</span>;$i++)&#123;</span><br><span class="line">        $random_iv.=chr(rand(<span class="number">1</span>,<span class="number">255</span>));</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> $random_iv;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">login</span><span class="params">($info)</span></span>&#123;</span><br><span class="line">    $iv = get_random_iv();</span><br><span class="line">    $plain = serialize($info);	<span class="comment">//明文序列化</span></span><br><span class="line">    $cipher = openssl_encrypt($plain, METHOD, SECRET_KEY, OPENSSL_RAW_DATA, $iv);	<span class="comment">//AES-128-CBC加密</span></span><br><span class="line">	<span class="comment">//OPENSSL_RAW_DATA=1</span></span><br><span class="line">    $_SESSION[<span class="string">'username'</span>] = $info[<span class="string">'username'</span>];	<span class="comment">//注册SESSION全局变量</span></span><br><span class="line">	<span class="comment">//以下两行设置cookie</span></span><br><span class="line">    setcookie(<span class="string">"iv"</span>, base64_encode($iv));</span><br><span class="line">    setcookie(<span class="string">"cipher"</span>, base64_encode($cipher));</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">check_login</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(<span class="keyword">isset</span>($_COOKIE[<span class="string">'cipher'</span>]) &amp;&amp; <span class="keyword">isset</span>($_COOKIE[<span class="string">'iv'</span>]))&#123;</span><br><span class="line">        $cipher = base64_decode($_COOKIE[<span class="string">'cipher'</span>]);</span><br><span class="line">        $iv = base64_decode($_COOKIE[<span class="string">"iv"</span>]);</span><br><span class="line">        <span class="keyword">if</span>($plain = openssl_decrypt($cipher, METHOD, SECRET_KEY, OPENSSL_RAW_DATA, $iv))&#123;</span><br><span class="line">            $info = unserialize($plain) <span class="keyword">or</span> <span class="keyword">die</span>(<span class="string">"&lt;p&gt;base64_decode('"</span>.base64_encode($plain).<span class="string">"') can't unserialize&lt;/p&gt;"</span>);</span><br><span class="line">            <span class="comment">//若这里解序列失败，会把明文以base64编码形式传给用户。</span></span><br><span class="line">            $_SESSION[<span class="string">'username'</span>] = $info[<span class="string">'username'</span>];</span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">            <span class="keyword">die</span>(<span class="string">"ERROR!"</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">#第二个执行，检测用户名为admin时，打印flag</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">show_homepage</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span> ($_SESSION[<span class="string">"username"</span>]===<span class="string">'admin'</span>)&#123;</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">'&lt;p&gt;Hello admin&lt;/p&gt;'</span>;</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">'&lt;p&gt;Flag is $flag&lt;/p&gt;'</span>;</span><br><span class="line">    &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">'&lt;p&gt;hello '</span>.$_SESSION[<span class="string">'username'</span>].<span class="string">'&lt;/p&gt;'</span>;</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">'&lt;p&gt;Only admin can see flag&lt;/p&gt;'</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">echo</span> <span class="string">'&lt;p&gt;&lt;a href="loginout.php"&gt;Log out&lt;/a&gt;&lt;/p&gt;'</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span>(<span class="keyword">isset</span>($_POST[<span class="string">'username'</span>]) &amp;&amp; <span class="keyword">isset</span>($_POST[<span class="string">'password'</span>]))&#123;</span><br><span class="line">    $username = (string)$_POST[<span class="string">'username'</span>];</span><br><span class="line">    $password = (string)$_POST[<span class="string">'password'</span>];</span><br><span class="line">    <span class="keyword">if</span>($username === <span class="string">'admin'</span>)&#123;</span><br><span class="line">        <span class="keyword">exit</span>(<span class="string">'&lt;p&gt;admin are not allowed to login&lt;/p&gt;'</span>);</span><br><span class="line">    &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">        $info = <span class="keyword">array</span>(<span class="string">'username'</span>=&gt;$username,<span class="string">'password'</span>=&gt;$password);</span><br><span class="line">        login($info);</span><br><span class="line">        show_homepage();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(<span class="keyword">isset</span>($_SESSION[<span class="string">"username"</span>]))&#123;</span><br><span class="line">        check_login();</span><br><span class="line">        show_homepage();</span><br><span class="line">    &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">'&lt;body class="login-body"&gt;</span></span><br><span class="line"><span class="string">                &lt;div id="wrapper"&gt;</span></span><br><span class="line"><span class="string">                    &lt;div class="user-icon"&gt;&lt;/div&gt;</span></span><br><span class="line"><span class="string">                    &lt;div class="pass-icon"&gt;&lt;/div&gt;</span></span><br><span class="line"><span class="string">                    &lt;form name="login-form" class="login-form" action="" method="post"&gt;</span></span><br><span class="line"><span class="string">                        &lt;div class="header"&gt;</span></span><br><span class="line"><span class="string">                        &lt;h1&gt;Login Form&lt;/h1&gt;</span></span><br><span class="line"><span class="string">                        &lt;span&gt;Fill out the form below to login to my super awesome imaginary control panel.&lt;/span&gt;</span></span><br><span class="line"><span class="string">                        &lt;/div&gt;</span></span><br><span class="line"><span class="string">                        &lt;div class="content"&gt;</span></span><br><span class="line"><span class="string">                        &lt;input name="username" type="text" class="input username" value="Username" onfocus="this.value=\'\'" /&gt;</span></span><br><span class="line"><span class="string">                        &lt;input name="password" type="password" class="input password" value="Password" onfocus="this.value=\'\'" /&gt;</span></span><br><span class="line"><span class="string">                        &lt;/div&gt;</span></span><br><span class="line"><span class="string">             '</span></span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>大概过程: </p>
+<p>先由POST正文提交username(不能是admin)和password，进login函数获取iv和cipher到cookie中，然后攻击时重新发送构造好的iv和cipher，此时得把POST正文去掉，否则会又进入获取iv和cipher的过程中。</p>
+<h1 id="前导"><a href="#前导" class="headerlink" title="前导"></a>前导</h1><h2 id="CBC加密解密过程"><a href="#CBC加密解密过程" class="headerlink" title="CBC加密解密过程:"></a>CBC加密解密过程:</h2><p><img src="/2019/11/21/Bugku-login4-CBC翻转攻击/cbcencrypt.png" alt="cbcencrypt"></p>
+<p><img src="/2019/11/21/Bugku-login4-CBC翻转攻击/cbcdecrypt.png" alt="cbcdecrypt"></p>
+<p>加密过程: ①先将明文分组，②生成随机iv，③将随机iv与第一组明文异或运算，④将异或后的结果进行带key值加密运算，⑤将加密密文与下一轮次的明文异或运算。⑥循环。</p>
+<p>解密过程: 第一轮: ①将密文进行带key值解密运算，②将解密结果与随机iv异或运算得到第一组明文。第二轮: ①将密文进行带key值解密运算，②将解密结果与第一组密文异或运算得到第二组明文。 其余轮次与第二轮相同。</p>
+<p>重点: 不管加密解密，除了第一组过程用的是随机iv进行异或，其他组使用前一组的数据进行加(解)密。</p>
+<h2 id="使用异或运算修改iv和cipher"><a href="#使用异或运算修改iv和cipher" class="headerlink" title="使用异或运算修改iv和cipher()"></a>使用异或运算修改iv和cipher()</h2><p>修改cipher方法: </p>
+<p><code>cipher[n] = chr(ord(cipher[n])^ord(&#39;明文要修改前的字符&#39;)^ord(&#39;明文修改后的字符&#39;))</code></p>
+<p>推导:  </p>
+<pre><code>* 假设目的是控制第二组明文</code></pre><ul>
+<li><p>假设第二组明文内容为C，第一组密文为A，第二组密文解密运算后为B[还未与前一组密文异或]。</p>
+</li>
+<li><p>则修改后的第一组密文为 <code>A&#39;=A^C^D</code>。</p>
+<ul>
+<li>根据解密过程可以得到 </li>
+</ul>
+<ol>
+<li><code>C = A^B</code></li>
+<li>根据1 可得到<code>A^B^C=0</code></li>
+<li>假设D为修改后的内容，则 <code>A^B^C^D=D</code></li>
+<li>由于<code>C=A^B</code> 所以将第一组密文A改为A’。<code>A‘=A^C^D</code></li>
+<li>这样当解第二组明文时 <code>C=A&#39;^B=A^C^D^B=D</code> 这里的异或B在后端CBC解密时进行。</li>
+</ol>
+</li>
+</ul>
+<p>修改iv方法: </p>
+<p><code>iv[i] += chr(ord(iv[i])^ord(right_plaint[i])^ord(error_plaint[i]))</code></p>
+<p>推导:</p>
+<ul>
+<li>假设第一组错误明文为A，第一组密文解密运算后为B，随机iv为C，则<code>A=B^C</code></li>
+<li>假设修改后正确的iv是C‘，第一组正确明文为A’，则<code>A&#39;=B^C&#39;</code></li>
+<li>由于B未知，根据上一条可得<code>A&#39;=A^C^C&#39;</code></li>
+<li>所以最后求得 <code>C’=A&#39;^A^C</code> </li>
+</ul>
+<h2 id="模拟CBC加解密过程"><a href="#模拟CBC加解密过程" class="headerlink" title="模拟CBC加解密过程"></a>模拟CBC加解密过程</h2><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span> </span><br><span class="line">	define(<span class="string">"SECRET_KEY"</span>, <span class="string">"12345678"</span>);</span><br><span class="line">	define(<span class="string">"METHOD"</span>, <span class="string">"aes-128-cbc"</span>);</span><br><span class="line">	<span class="function"><span class="keyword">function</span> <span class="title">get_random_iv</span><span class="params">()</span></span>&#123;	<span class="comment">//随机生成16位初始化向量</span></span><br><span class="line">		$random_iv=<span class="string">''</span>;</span><br><span class="line">		<span class="keyword">for</span>($i=<span class="number">0</span>;$i&lt;<span class="number">16</span>;$i++)&#123;</span><br><span class="line">			$random_iv.=chr(rand(<span class="number">1</span>,<span class="number">255</span>));</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> $random_iv;</span><br><span class="line">	&#125;</span><br><span class="line">	$iv = get_random_iv();</span><br><span class="line">	<span class="function"><span class="keyword">function</span> <span class="title">encrypt</span><span class="params">($plain,$iv)</span></span>&#123;</span><br><span class="line">		<span class="comment">#plain未经base64编码</span></span><br><span class="line">		$cipher = openssl_encrypt($plain, METHOD, SECRET_KEY, <span class="number">1</span>, $iv);</span><br><span class="line">		<span class="comment">#print (base64_encode($iv));</span></span><br><span class="line">		<span class="comment">#print('-------------');</span></span><br><span class="line">		<span class="comment">#print (base64_encode($cipher)); #密文base64编码</span></span><br><span class="line">		<span class="comment">#print('-------------');</span></span><br><span class="line">		<span class="keyword">return</span> $cipher;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">function</span> <span class="title">decrypt</span><span class="params">($cipher,$iv)</span></span>&#123;</span><br><span class="line">		$cipher=base64_decode($cipher);</span><br><span class="line">		$iv = base64_decode($iv);</span><br><span class="line">		$plaintext=openssl_decrypt($cipher, METHOD, SECRET_KEY, <span class="number">1</span>, $iv);</span><br><span class="line">		var_dump($plaintext);</span><br><span class="line">        <span class="comment">#print(base64_encode($plaintext));</span></span><br><span class="line">	&#125;</span><br><span class="line">	$iv = <span class="string">"qgDEMbvT9ZynXxZYrYBv6Q=="</span>;</span><br><span class="line">	$cipher = <span class="string">"dZP96fpIaLwFnN+KxixPy+ueECi1UrivQ6BBE3fZPrdvXmHMlHelL0oZvub6//WOnGLO5TOqL14t9XEq1DpU1w=="</span>;</span><br><span class="line">	decrypt($cipher,$iv);</span><br><span class="line">	</span><br><span class="line"><span class="meta">?&gt;</span></span><br><span class="line">    <span class="comment">//可以借助这代码理解异或修改iv和cipher</span></span><br></pre></td></tr></table></figure>
+
+<h1 id="构造"><a href="#构造" class="headerlink" title="构造"></a>构造</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> urllib.parse <span class="keyword">as</span> parse </span><br><span class="line"><span class="comment">#如果是python3的话，不会自动引入子模块。</span></span><br><span class="line"><span class="comment">#import urllib</span></span><br><span class="line"><span class="comment">#urllib.unquote类似会报错</span></span><br><span class="line"><span class="comment">#AttributeError: module 'urllib' has no attribute 'unquote'</span></span><br><span class="line"><span class="keyword">import</span> base64</span><br><span class="line"></span><br><span class="line">iv = <span class="string">"o4wsexr24ZVVnZ98g0bdDA%3D%3D"</span> <span class="comment">#Cookie中的随机iv</span></span><br><span class="line">iv = parse.unquote(iv) </span><br><span class="line"><span class="comment">#对字符串进行url解码 urllib.parse.unquote 将类似%xx的URL编码转换为字符</span></span><br><span class="line">cipher = <span class="string">"RgnRVGVfCccaotuAY0nRauKQyGNovFJh0rWr%2FBLOxvp67DVu1fx0nHIFiYmKsi9hIxE3DVR3JZC3sgKbS768SA%3D%3D"</span></span><br><span class="line">cipher = parse.unquote(cipher)</span><br><span class="line"></span><br><span class="line"><span class="comment">#明文每16B分为一组:</span></span><br><span class="line"><span class="comment">#a:2:&#123;s:8:"userna</span></span><br><span class="line"><span class="comment">#me";s:5:"Admin";</span></span><br><span class="line"><span class="comment">#s:8:"password";s</span></span><br><span class="line"><span class="comment">#:4:"1234";&#125;</span></span><br><span class="line"><span class="comment">#base64加密:</span></span><br><span class="line"><span class="comment">#rqLTzbVXl+cFW49R0uEjdm1lIjtzOjU6ImFkbWluIjtzOjg6InBhc3N3b3JkIjtzOjQ6IjEyMzQiO30=</span></span><br><span class="line"><span class="comment">#改前一段的密文导致后一段的明文可控。</span></span><br><span class="line">cipher = base64.b64decode(cipher).decode(<span class="string">"latin-1"</span>)</span><br><span class="line"><span class="comment">#ISO Latin-1定义了256字符,前128个字符与Ascii相同，编码范围0x00-0xFF。根据提示can't decode byte 0xf5 选择latin-1。</span></span><br><span class="line">cipher = cipher[<span class="number">0</span>:<span class="number">9</span>]+chr(ord(cipher[<span class="number">9</span>])^ord(<span class="string">'A'</span>)^ord(<span class="string">'a'</span>))+cipher[<span class="number">10</span>:]</span><br><span class="line"><span class="comment">#cipher = cipher[0:9]+chr(0^ord('a'))+cipher[10:]</span></span><br><span class="line">cipher = base64.b64encode(cipher.encode(<span class="string">"latin-1"</span>)) <span class="comment">#生成翻转的密文</span></span><br><span class="line">cipher = parse.quote(cipher)</span><br><span class="line">print(cipher)</span><br><span class="line"><span class="comment">#获取翻转后的cipher</span></span><br><span class="line"></span><br><span class="line">iv = base64.b64decode(iv).decode(<span class="string">'latin-1'</span>)</span><br><span class="line">righ_plaint = <span class="string">'a:2:&#123;s:8:"userna'</span></span><br><span class="line">error_plaint = <span class="string">"Oq5ifrS81bit/PpbRnbwyW1lIjtzOjU6ImFkbWluIjtzOjg6InBhc3N3b3JkIjtzOjU6IjEyMzQ1Ijt9"</span></span><br><span class="line"><span class="comment">#错误明文从服务器回显取得&lt;p&gt;base64_decode('SWugD+4ZRz/0fWsO86U3+m1lIjtzOjU6ImFkbWluIjtzOjg6InBhc3N3b3JkIjtzOjU6IjEyMzQ1Ijt9') can't unserialize&lt;/p&gt;</span></span><br><span class="line">error_plaint =base64.b64decode(error_plaint).decode(<span class="string">'latin-1'</span>) <span class="comment">#明文base64编码形式</span></span><br><span class="line">new_iv = <span class="string">''</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">16</span>):</span><br><span class="line">    new_iv+=chr(ord(righ_plaint[i])^ord(error_plaint[i])^ord(iv[i]))</span><br><span class="line">new_iv = base64.b64encode(new_iv.encode(<span class="string">'latin-1'</span>))</span><br><span class="line">new_iv = parse.quote(new_iv) <span class="comment">#以URL编码传给burpsuite 不然会导致CBC解密失败返回ERROR！</span></span><br><span class="line">print(new_iv)</span><br><span class="line"><span class="comment">#获取修改后的iv</span></span><br></pre></td></tr></table></figure>
+
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>CBC翻转攻击可以用来 绕过注入检测、直接提升权限等。。</p>
+<p>这一题用到了翻转字节，CBC攻击还有个字节填充。</p>
+
+      
+    </div>
+    
+    
+    
+	
+	<div>
+      
+        
+<div class="my_post_copyright">
+  <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+  
+  <!-- JS库 sweetalert 可修改路径 -->
+  <script src="https://cdn.bootcss.com/jquery/2.0.0/jquery.min.js"></script>
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+  <p><span>本文标题:</span><a href="/2019/11/21/Bugku-login4-CBC翻转攻击/">Bugku--login4--CBC翻转攻击</a></p>
+  <p><span>文章作者:</span><a href="/" title="访问 Tanker 的个人博客">Tanker</a></p>
+  <p><span>发布时间:</span>2019年11月21日 - 12:37</p>
+  <p><span>最后更新:</span>2019年11月21日 - 17:19</p>
+  <p><span>原始链接:</span><a href="/2019/11/21/Bugku-login4-CBC翻转攻击/" title="Bugku--login4--CBC翻转攻击">https://www5059109.github.io/2019/11/21/Bugku-login4-CBC翻转攻击/</a>
+    <span class="copy-path" title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="https://www5059109.github.io/2019/11/21/Bugku-login4-CBC翻转攻击/" aria-label="复制成功！"></i></span>
+  </p>
+  <p><span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" title="Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)">署名-非商业性使用-禁止演绎 4.0 国际</a> 转载请保留原文链接及作者。</p>  
+</div>
+<script> 
+    var clipboard = new Clipboard('.fa-clipboard');
+    $(".fa-clipboard").click(function(){
+      clipboard.on('success', function(){
+        swal({   
+          title: "",   
+          text: '复制成功',
+          icon: "success", 
+          showConfirmButton: true
+          });
+    });
+    });  
+</script>
+
+      
+	</div>
+	
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/11/15/百越杯-phpbaby-反序列化/" rel="next" title="百越杯 phpbaby--反序列化">
+                <i class="fa fa-chevron-left"></i> 百越杯 phpbaby--反序列化
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Tanker</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://baidu.com/" title="Baidu" target="_blank">Baidu</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#分析"><span class="nav-number">1.</span> <span class="nav-text">分析</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#前导"><span class="nav-number">2.</span> <span class="nav-text">前导</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#CBC加密解密过程"><span class="nav-number">2.1.</span> <span class="nav-text">CBC加密解密过程:</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用异或运算修改iv和cipher"><span class="nav-number">2.2.</span> <span class="nav-text">使用异或运算修改iv和cipher()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#模拟CBC加解密过程"><span class="nav-number">2.3.</span> <span class="nav-text">模拟CBC加解密过程</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#构造"><span class="nav-number">3.</span> <span class="nav-text">构造</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#总结"><span class="nav-number">4.</span> <span class="nav-text">总结</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Tanker</span>
+
+  
+</div>
+
+<!-- 
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+ 
+-->
+
+
+
+<div class="theme-info">
+  <div class="powered-by"></div>
+  <span class="post-count">博客全站共11.3k字</span>
+</div>
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+  <script type="text/javascript" src="/js/src/clipboard.min.js"></script> 
+  <script type="text/javascript" src="/js/src/clipboard-use.js"></script>
+  <script type="text/javascript" src="/js/click.js"></script>
+  
+</body>
+</html>
