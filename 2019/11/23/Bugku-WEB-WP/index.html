@@ -135,7 +135,7 @@
 <meta property="og:image" content="https://www5059109.github.io/2019/11/23/Bugku-WEB-WP/Bugku-WEB-WP/http-ip.png">
 <meta property="og:image" content="https://www5059109.github.io/2019/11/23/Bugku-WEB-WP/login-intruder.png">
 <meta property="og:image" content="https://www5059109.github.io/2019/11/23/Bugku-WEB-WP/burpsuite-intruder.png">
-<meta property="og:updated_time" content="2019-11-23T15:11:22.882Z">
+<meta property="og:updated_time" content="2019-12-18T13:11:40.648Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Bugku--WEB--WP">
 <meta name="twitter:description" content="Case1、HTML编码题目: web3  可以看到有一串html编码被注释起来。 12345678910&amp;lt;!--HTML编码特点 &amp;amp;#  --&amp;gt;&amp;lt;html&amp;gt;&amp;lt;head&amp;gt;&amp;lt;body&amp;gt;&amp;lt;p&amp;gt; &amp;amp;#75;&amp;amp;#69;&amp;amp;#89;&amp;amp;#123;&amp;amp;#74;&amp;amp;#50;&amp;amp;#115;&amp;amp;#">
@@ -328,8 +328,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2019-11-23T23:11:22+08:00">
-                2019-11-23
+              <time title="更新于" itemprop="dateModified" datetime="2019-12-18T21:11:40+08:00">
+                2019-12-18
               </time>
             
           </span>
@@ -396,7 +396,41 @@
 </ul>
 <p><img src="/2019/11/23/Bugku-WEB-WP/burpsuite-intruder.png" alt="burpsuite-intruder"></p>
 <p>由于不知道提示的test123是账号还是密码，所以需要爆破两次。依次将test123放在username和password。</p>
+<hr>
+<p>题目:<a href="http://123.206.87.240:8002/baopo/" target="_blank" rel="noopener">输入密码查看flag</a></p>
+<p>目的: 生成密码字典</p>
+<p>工具: crunch</p>
+<p>命令: crunch &lt;minimum length&gt; &lt;maximum length&gt; [character set] [option] </p>
+<ul>
+<li>option : -o 保存字典 -b 指定最大字节数 -t 设置使用的特殊格式 <pre><code>* -t [@,%^] : @ 插入小写字母 | , 插入大写字母 | % 插入数字 | ^ 插入特殊符号</code></pre></li>
+</ul>
+<p>例子:</p>
+<p>​    <code>crunch 5 5 -t %%%%% -o num.txt //生成5位数字密码</code></p>
+<p>​    <code>crunch 4 4 + + 123 + -t %%@^ //生成2个数字(从123中选)+1个小写字母+1个常见符号</code></p>
+<p>​    <code>crunch 3 3 abc + 123 @#! -t @%^ //生成1个小写字母(从abc选)+1个数字(从123选)+1个常见符号(从@#!选)</code></p>
+<h1 id="Case4、javascript"><a href="#Case4、javascript" class="headerlink" title="Case4、javascript"></a>Case4、javascript</h1><p>题目: <a href="http://123.206.87.240:8002/web4/" target="_blank" rel="noopener">web4</a></p>
+<p>F12查看源代码:</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span><span class="tag">&lt;<span class="name">head</span>&gt;</span><span class="tag">&lt;<span class="name">title</span>&gt;</span>BKCTF-WEB4<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">style</span>=<span class="string">"display:none;"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">form</span> <span class="attr">action</span>=<span class="string">"index.php"</span> <span class="attr">method</span>=<span class="string">"post"</span>&gt;</span></span><br><span class="line">看看源代码？<span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span></span><br><span class="line">var p1 = '%66%75%6e%63%74%69%6f%6e%20%63%68%65%63%6b%53%75%62%6d%69%74%28%29%7b%76%61%72%20%61%3d%64%6f%63%75%6d%65%6e%74%2e%67%65%74%45%6c%65%6d%65%6e%74%42%79%49%64%28%22%70%61%73%73%77%6f%72%64%22%29%3b%69%66%28%22%75%6e%64%65%66%69%6e%65%64%22%21%3d%74%79%70%65%6f%66%20%61%29%7b%69%66%28%22%36%37%64%37%30%39%62%32%62';</span><br><span class="line">var p2 = '%61%61%36%34%38%63%66%36%65%38%37%61%37%31%31%34%66%31%22%3d%3d%61%2e%76%61%6c%75%65%29%72%65%74%75%72%6e%21%30%3b%61%6c%65%72%74%28%22%45%72%72%6f%72%22%29%3b%61%2e%66%6f%63%75%73%28%29%3b%72%65%74%75%72%6e%21%31%7d%7d%64%6f%63%75%6d%65%6e%74%2e%67%65%74%45%6c%65%6d%65%6e%74%42%79%49%64%28%22%6c%65%76%65%6c%51%75%65%73%74%22%29%2e%6f%6e%73%75%62%6d%69%74%3d%63%68%65%63%6b%53%75%62%6d%69%74%3b';</span><br><span class="line">eval(unescape(p1) + unescape('%35%34%61%61%32' + p2));</span><br><span class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"input"</span> <span class="attr">name</span>=<span class="string">"flag"</span> <span class="attr">id</span>=<span class="string">"flag"</span>&gt;</span> </span><br><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"submit"</span> <span class="attr">name</span>=<span class="string">"submit"</span> <span class="attr">value</span>=<span class="string">"Submit"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">form</span>&gt;</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
+<p>将&lt;script&gt;标签内的代码处理经过URL解码、格式化之后</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">checkSubmit</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">var</span> a=<span class="built_in">document</span>.getElementById(<span class="string">"password"</span>); <span class="comment">//取元素ID为password的标签</span></span><br><span class="line">	<span class="keyword">if</span>(<span class="string">"undefined"</span>!=<span class="keyword">typeof</span> a) <span class="comment">// 未定义时 undefined。已定义时 object</span></span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">if</span>(<span class="string">"67d709b2b54aa2aa648cf6e87a7114f1"</span>==a.value) <span class="comment">// 看这里要把password的值设为这一串MD5码</span></span><br><span class="line">			<span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">		alert(<span class="string">"Error"</span>);</span><br><span class="line">		a.focus();</span><br><span class="line">		<span class="keyword">return</span> <span class="number">0</span></span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line">	<span class="built_in">document</span>.getElementById(<span class="string">"levelQuest"</span>).onsubmit=checkSubmit;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>getElementById() : 返回对拥有指定ID的第一个对象的引用。</li>
+</ul>
+<p>分析代码:</p>
+<p>​    取ID为password的第一个对象。若存在则判断 value属性，若不存在则报错。</p>
+<p>目的:</p>
+<p>​    要向服务器提交一个 id=”password” value=”67d709b2b54aa2aa648cf6e87a7114f1” 的表单。</p>
+<p>方法一:</p>
+<p>​    修改源码中的 <code>&lt;input type=&quot;input&quot; name=&quot;flag&quot; id=&quot;flag&quot;&gt;</code> id改为 password。将</p>
+<p>67d709b2b54aa2aa648cf6e87a7114f1输入文本框中点submit。</p>
+<p>方法二:</p>
+<p>​    修改源码中的 <code>&lt;input type=&quot;input&quot; name=&quot;flag&quot; id=&quot;flag&quot;&gt;</code>  为 <code>&lt;input type=&quot;input&quot; name=&quot;flag&quot; id=&quot;password&quot; value=&quot;67d709b2b54aa2aa648cf6e87a7114f1&quot; &gt;</code></p>
+<p>补充 :  javascript输出方式</p>
+<pre><code>* alert() 弹窗输出
+* document.write()  在页面上输出
+* console.log() 在控制台窗口输出</code></pre>
       
     </div>
     
@@ -415,7 +449,7 @@
   <p><span>本文标题:</span><a href="/2019/11/23/Bugku-WEB-WP/">Bugku--WEB--WP</a></p>
   <p><span>文章作者:</span><a href="/" title="访问 Tanker 的个人博客">Tanker</a></p>
   <p><span>发布时间:</span>2019年11月23日 - 16:41</p>
-  <p><span>最后更新:</span>2019年11月23日 - 23:11</p>
+  <p><span>最后更新:</span>2019年12月18日 - 21:11</p>
   <p><span>原始链接:</span><a href="/2019/11/23/Bugku-WEB-WP/" title="Bugku--WEB--WP">https://www5059109.github.io/2019/11/23/Bugku-WEB-WP/</a>
     <span class="copy-path" title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="https://www5059109.github.io/2019/11/23/Bugku-WEB-WP/" aria-label="复制成功！"></i></span>
   </p>
@@ -591,7 +625,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Case1、HTML编码"><span class="nav-number">1.</span> <span class="nav-text">Case1、HTML编码</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Case2、HTTP报头"><span class="nav-number">2.</span> <span class="nav-text">Case2、HTTP报头</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Case3、登录爆破"><span class="nav-number">3.</span> <span class="nav-text">Case3、登录爆破</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Case1、HTML编码"><span class="nav-number">1.</span> <span class="nav-text">Case1、HTML编码</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Case2、HTTP报头"><span class="nav-number">2.</span> <span class="nav-text">Case2、HTTP报头</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Case3、登录爆破"><span class="nav-number">3.</span> <span class="nav-text">Case3、登录爆破</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Case4、javascript"><span class="nav-number">4.</span> <span class="nav-text">Case4、javascript</span></a></li></ol></div>
             
 
           </div>
@@ -637,7 +671,7 @@
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共11.9k字</span>
+  <span class="post-count">博客全站共12.6k字</span>
 </div>
 
 
