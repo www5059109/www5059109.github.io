@@ -145,7 +145,7 @@
 <meta property="og:image" content="https://www5059109.github.io/2019/11/03/web/sql.png">
 <meta property="og:image" content="https://www5059109.github.io/2019/11/03/web/sql1.png">
 <meta property="og:image" content="https://www5059109.github.io/2019/11/03/web/sql2.png">
-<meta property="og:updated_time" content="2020-01-03T02:33:27.644Z">
+<meta property="og:updated_time" content="2020-01-04T02:23:30.755Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="web">
 <meta name="twitter:description" content="HTTP请求方法 GET : 提交内容明文显示在URL中，请求页面信息并返回实体。 POST : 请求内容隐藏在请求正文中，请求页面信息并返回实体。 HEAD : 类似于GET，用于测试网页服务，返回无具体内容。 OPTIONS : 用于获取当前网站所允许的请求方法 TRACE : 回显服务器收到的请求，用于测试网站。 PUT : 向服务器上传文件 DELETE : 请求服务器删除文件 MOVE">
@@ -338,8 +338,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2020-01-03T10:33:27+08:00">
-                2020-01-03
+              <time title="更新于" itemprop="dateModified" datetime="2020-01-04T10:23:30+08:00">
+                2020-01-04
               </time>
             
           </span>
@@ -395,7 +395,13 @@
 </li>
 <li>Cookie : 浏览器将该域名下的Cookie发送给服务器</li>
 <li>Content-Length : 请求内容长度。构造POST数据包。</li>
-<li>content-type: 请求内容类型。最常见:  <code>application/x-www-form-urlencoded</code>用于构造POST数据包</li>
+<li>content-type: 请求内容类型。最常见:  <code>application/x-www-form-urlencoded</code>用于构造POST数据包。<ul>
+<li>enctype规定在提交表单时的编码方式，有3种</li>
+<li>application/x-www-form-urlencoded : 默认。</li>
+<li>multipart/form-data : 指定传输数据类型为 二进制类型。类似图片、MP3。。</li>
+<li>text/plain : 纯文本传输，即以ASCII编码传输。空格转换为+。</li>
+</ul>
+</li>
 <li>Host : 请求服务器的域名(IP)和端口号(默认8080可省略)。</li>
 <li>Referer : 标识从哪个页面跳转过来的</li>
 <li>User-Agent : 用户信息(系统版本 浏览器版本等)</li>
@@ -479,7 +485,12 @@
 <h2 id="联合查询"><a href="#联合查询" class="headerlink" title="联合查询"></a>联合查询</h2><p>简介: Union联合查询用于合并多个select语句结果</p>
 <p>注意: Union内部select语句的列数要与外部select相同。</p>
 <p>例<img src="/2019/11/03/web/mysql1.png" alt="mysql1"></p>
-<h2 id="异或注入"><a href="#异或注入" class="headerlink" title="异或注入"></a>异或注入</h2><h2 id="MYSQL注入语句"><a href="#MYSQL注入语句" class="headerlink" title="MYSQL注入语句"></a>MYSQL注入语句</h2><h1 id="上传漏洞"><a href="#上传漏洞" class="headerlink" title="上传漏洞"></a>上传漏洞</h1><p>常见五种上传检测方式:</p>
+<h2 id="异或注入"><a href="#异或注入" class="headerlink" title="异或注入"></a>异或注入</h2><h2 id="MYSQL注入语句"><a href="#MYSQL注入语句" class="headerlink" title="MYSQL注入语句"></a>MYSQL注入语句</h2><ul>
+<li><code>select group_concat(table_name) from information_schema.tables where table_schema=database()</code> //查询当前数据库的所有表</li>
+<li><code>select group_concat(column_name) from information_schema.columns where table_schema.columns=TABLE_NAME</code> //查看当前表中的字段</li>
+<li><code>select group_concat(COLUMN_NAME)  from TABLE_NAME</code> //查看字段中的记录</li>
+</ul>
+<h1 id="上传漏洞"><a href="#上传漏洞" class="headerlink" title="上传漏洞"></a>上传漏洞</h1><p>常见五种上传检测方式:</p>
 <p>1、客户端javascript检测</p>
 <p>2、服务端MIME类型检测(数据包中content-type内容)</p>
 <p>3、服务端目录路径检测(检测 path 参数)</p>
@@ -648,7 +659,7 @@
   <p><span>本文标题:</span><a href="/2019/11/03/web/">web</a></p>
   <p><span>文章作者:</span><a href="/" title="访问 Tanker 的个人博客">Tanker</a></p>
   <p><span>发布时间:</span>2019年11月03日 - 09:55</p>
-  <p><span>最后更新:</span>2020年01月03日 - 10:33</p>
+  <p><span>最后更新:</span>2020年01月04日 - 10:23</p>
   <p><span>原始链接:</span><a href="/2019/11/03/web/" title="web">https://www5059109.github.io/2019/11/03/web/</a>
     <span class="copy-path" title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="https://www5059109.github.io/2019/11/03/web/" aria-label="复制成功！"></i></span>
   </p>
@@ -874,7 +885,7 @@
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共16.5k字</span>
+  <span class="post-count">博客全站共18.6k字</span>
 </div>
 
 
